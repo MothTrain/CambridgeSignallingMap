@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout>
+                <LevelPatternSelector defaultPattern = "%date [%t] %-5level %class{36} - %msg%n%throwable">
+                    <PatternMatch key="INFO" pattern="%date{HH:mm:ss}: %msg%n"/>
+                </LevelPatternSelector>
+            </PatternLayout>
+        </Console>
+        <File name="FileAppender" fileName="EventLogs.log" immediateFlush="false" append="true">
+            <PatternLayout>
+                <LevelPatternSelector defaultPattern = "%date %-5level %class{36} - %msg%n%throwable">
+                    <PatternMatch key="INFO" pattern="%date{HH:mm:ss}: %msg%n"/>
+                </LevelPatternSelector>
+            </PatternLayout>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
