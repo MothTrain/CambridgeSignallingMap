@@ -8,7 +8,7 @@ from time import sleep
 import stomp
 
 # Internal
-from Communications import trust, td
+import td
 
 
 class Listener(stomp.ConnectionListener):

@@ -35,4 +35,4 @@ build/
 .DS_Store
 /EventLogs.log
 /.idea/
-/src/main/java/aradnezami/cambridgesignallingmap/NR_feed_client/secrets.json
+/src/main/java/aradnezami/cambridgesignallingmap/NRFeedClient/PythonCommunications/secrets.json
