@@ -51,10 +51,8 @@ class Listener(stomp.ConnectionListener):
         sys.stdout.flush()
 
 if __name__ == "__main__":
-    with open("secrets.json") as f:
+    with open("src/main/java/aradnezami/cambridgesignallingmap/NRFeedClient/PythonCommunications/secrets.json") as f:
         feed_username, feed_password = json.load(f)
-        print(feed_password)
-        print(feed_username)
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--durable", action='store_true',
