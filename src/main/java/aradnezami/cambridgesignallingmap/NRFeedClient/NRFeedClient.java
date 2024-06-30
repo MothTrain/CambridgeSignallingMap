@@ -41,7 +41,13 @@ public interface NRFeedClient {
      * class messages from the feed. The method must block until the next message is received<br>
      * If the underlying client fails (while or before the method was called), the method will return
      * null and the instance should be considered dead (see the {@link NRFeedClient class documentation}
-     * on death).
+     * on death). <br>
+     * Messages are delineated by commas. S-Class messages come in the format {@code S,ADDRESS,BYTE}
+     * for example: {@code "S,A3,0D"}. Address and byte are in hexadecimal and are always 2 characters.
+     * C-Class messages come in the format {@code C,FROM_BERTH,TO_BERTH,DESCRIBER} for example:
+     * {@code "C,0193,0195,1K76"}. A berth code is always a 4 character string. If either a to_berth
+     * or from_berth is not provided, which will happen if the message is a berth cancel or interpose
+     * respectively, the missing berth will be replaced with {@code "NONE"}
      *
      * @return The next message or null if the client fails while polling
      * @throws IllegalStateException If the client is dead when called.
