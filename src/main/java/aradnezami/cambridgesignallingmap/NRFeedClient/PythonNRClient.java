@@ -43,19 +43,7 @@ public class PythonNRClient implements NRFeedClient {
     private Process pythonClientProcess;
     
     private final Thread exitHook = new Thread(() -> pythonClientProcess.destroy());
-    private final Thread processWaiter = new Thread(() -> {
-        try {
-            pythonClientProcess.waitFor();
-        } catch (InterruptedException e) {
-            logger.debug("Python process waiter interrupted", e);
-            isAlive = false;
-            return;
-        }
-        logger.debug("Python process ended");
-        disconnect();
-        
-        isAlive = false;
-    });
+    private Thread processWaiter = null;
     
     
     /**
@@ -65,10 +53,11 @@ public class PythonNRClient implements NRFeedClient {
      */
     public PythonNRClient() throws IOException {
         pythonClientProcess = createPythonClientProcess();
-        stdIn = new Scanner(pythonClientProcess.getInputStream());
+        stdIn = createScanner(pythonClientProcess.getInputStream());
         errIn = pythonClientProcess.getErrorStream();
         
         Runtime.getRuntime().addShutdownHook(exitHook);
+        processWaiter = createProcessWaiterThread();
         processWaiter.start();
         
         isAlive = true;
@@ -197,7 +186,7 @@ public class PythonNRClient implements NRFeedClient {
      * @return The python process
      * @throws IOException If an IO error occurs when the process is started
      */
-    private Process createPythonClientProcess() throws IOException {
+    protected Process createPythonClientProcess() throws IOException {
         ProcessBuilder processBuilder = new ProcessBuilder("Python", pythonScriptPath);
         
         return processBuilder.start();
@@ -209,7 +198,27 @@ public class PythonNRClient implements NRFeedClient {
      * @param inputStream InputStream to wrap
      * @return The InputStream wrapped in a Scanner
      */
-    private Scanner createScanner(InputStream inputStream) {
+    protected Scanner createScanner(InputStream inputStream) {
         return new Scanner(inputStream);
+    }
+    
+    protected Thread createProcessWaiterThread() {
+        return new Thread(() -> {
+            try {
+                pythonClientProcess.waitFor();
+            } catch (InterruptedException e) {
+                logger.debug("Python process waiter interrupted", e);
+                isAlive = false;
+                return;
+            }
+            logger.debug("Python process ended");
+            disconnect();
+            
+            isAlive = false;
+        });
+    }
+    
+    public static void main(String[] args) {
+    
     }
 }
