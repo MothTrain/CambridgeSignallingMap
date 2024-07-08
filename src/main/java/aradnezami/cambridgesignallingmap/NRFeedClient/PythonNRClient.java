@@ -218,7 +218,4 @@ public class PythonNRClient implements NRFeedClient {
         });
     }
     
-    public static void main(String[] args) {
-    
-    }
 }
