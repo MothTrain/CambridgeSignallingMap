@@ -1,3 +1,5 @@
+Note: Al
+
 ## Signalling map
 Signalling maps allow the programme to map the data signalling sent from the
 TD feed to the state of real equipment Eg: A signal aspect or track circuit indications.
