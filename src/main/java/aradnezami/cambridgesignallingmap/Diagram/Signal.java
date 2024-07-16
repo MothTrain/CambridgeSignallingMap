@@ -4,7 +4,7 @@ public class Signal {
     /**
      * Used to indicate the event type for a signal
      */
-    public static final int SIGNAL_TYPE = 0;
+    public static final int TYPE = 0;
 
     /**
      * Represents a signal showing a clear (green) aspect. Used when DGK = 1

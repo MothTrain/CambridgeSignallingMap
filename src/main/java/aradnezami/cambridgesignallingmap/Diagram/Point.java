@@ -4,7 +4,7 @@ public class Point {
     /**
      * Used to indicate the event type for a point
      */
-    public static final int POINT_TYPE = 1;
+    public static final int TYPE = 1;
     
     /**
      * Represents a point in the normal (straight) position

@@ -4,7 +4,7 @@ public class RouteIndicator {
     /**
      * Used to indicate the event type for a route button indicator
      */
-    public static final int ROUTE_INDICATOR_TYPE = 3;
+    public static final int TYPE = 3;
 
     /**
      * A signal who's has had a route set from it. The signaller has pressed this signal as an ENtry signal

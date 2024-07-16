@@ -4,7 +4,7 @@ public class TrackCircuit {
     /**
      * Used to indicate the event type
      */
-    public static final int TRACKCIRCUIT_TYPE = 2;
+    public static final int TYPE = 2;
     
     public static final int UNOCCUPIED = 0;
     public static final int OCCUPIED = 1;
