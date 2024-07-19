@@ -121,6 +121,7 @@ public class SignallingMapValidatorTest {
             assertEquals(mapping[ID], backreference[ID], lineErrorMessage("Backreferenced map must have same IDs", mapping));
             assertEquals(mapping[BACK_TYPE], backreference[TYPE], lineErrorMessage("Backreferenced map does not have the specified equipment type", mapping));
             assertTrue(contains(backreferenceableTypes, mapping[BACK_TYPE]), lineErrorMessage("Cannot backreference this type.", mapping));
+            assertNotEquals(mapping[BACK_TYPE], mapping[TYPE], lineErrorMessage("Backreference must not be of the same type as the mapping", mapping));
         }
     }
     
