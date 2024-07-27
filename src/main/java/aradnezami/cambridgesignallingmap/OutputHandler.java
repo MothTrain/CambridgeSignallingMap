@@ -23,4 +23,11 @@ public interface OutputHandler {
      * @param id The ID of the equipment
      */
     void SClassChange(int type, int state, String id);
+    
+    /**
+     * Called to output when a placeholder bit (see Mapping_Syntax.md in resources) becomes positive
+     * @param address address of the placeholder change
+     * @param bit bit index of the placeholder bit changed
+     */
+    void PlaceholderBitSet(int address, int bit);
 }
