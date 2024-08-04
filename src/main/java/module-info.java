@@ -5,6 +5,6 @@ module aradnezami.cambridgesignallingmap {
     requires org.apache.logging.log4j.core;
     
     
-    /*opens aradnezami.cambridgesignallingmap to javafx.fxml;
-    exports aradnezami.cambridgesignallingmap;*/
+    opens aradnezami.cambridgesignallingmap to javafx.fxml;
+    exports aradnezami.cambridgesignallingmap;
 }

@@ -36,3 +36,4 @@ build/
 /EventLogs.log
 /.idea/
 /src/main/java/aradnezami/cambridgesignallingmap/NRFeedClient/PythonCommunications/secrets.json
+/src/main/java/aradnezami/cambridgesignallingmap/Test.java
