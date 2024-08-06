@@ -100,7 +100,7 @@ public class SignallingMapValidatorTest {
     }
     
     private  void ensureBackreferencesValid(String[] mappings) {
-        final String[] backreferenceableTypes = {"NK", "RK", "DGK", "OFFK", "RGK"};
+        final String[] backreferenceableTypes = {"NK", "RK"};
         
         HashMap<String, String[]> map = new HashMap<>() {{
             
