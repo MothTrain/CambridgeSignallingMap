@@ -27,10 +27,11 @@ class Listener(stomp.ConnectionListener):
 
 
         else:
-            print("WARN Unknown destination: ", headers["destination"], flush=True)
+            print(f'MSG:-2:{headers["destination"]}', flush=True)
+
 
     def on_error(self, frame):
-        print('WARN Received an error {},{}'.format(frame.body,frame.headers), flush=True)
+        print(f'MSG:-3:{frame.headers["message"]}', flush=True)
 
     def on_disconnected(self):
-        print('INFO Disconnected', flush=True)
+        print(f'MSG:-4', flush=True)

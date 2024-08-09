@@ -1,0 +1,13 @@
+List of message numbers. These are info messages from the client. Negative values represent a problem
+or error. Positive values are general information.
+Messages come in the following format:
+MSG:[ERRORNUMBER]:[MESSAGE (optional)]
+All messages start with MSG
+
+1: Signalling refresh started
+2: Signalling refresh finished
+
+-1: Could not connect to Server (on connection initialisation)
+-2: Server provided a message that is not from the TD topic
+-3: The server send a Stomp error frame. Has MESSAGE: the error message from the server
+-4: The client disconnected

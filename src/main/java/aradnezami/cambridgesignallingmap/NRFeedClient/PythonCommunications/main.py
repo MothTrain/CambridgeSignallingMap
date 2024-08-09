@@ -43,7 +43,7 @@ if __name__ == "__main__":
     try:
         connection.connect(**connect_headers)
     except ConnectFailedException:
-        print("INFO Could not connect")
+        print("MSG:-1", flush=True)
         exit(1)
 
     # Determine topic to subscribe
