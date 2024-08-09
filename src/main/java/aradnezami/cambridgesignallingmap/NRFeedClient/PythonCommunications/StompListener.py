@@ -25,7 +25,6 @@ class Listener(stomp.ConnectionListener):
             for message in messages:
                 print(message, flush=True)
 
-
         else:
             print(f'MSG:-2:{headers["destination"]}', flush=True)
 

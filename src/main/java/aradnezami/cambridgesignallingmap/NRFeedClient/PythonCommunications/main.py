@@ -3,6 +3,7 @@
 # Standard
 import argparse
 import json
+import atexit
 from time import sleep
 
 # Third party
@@ -11,6 +12,10 @@ from stomp.exception import ConnectFailedException
 
 # Internal
 from StompListener import Listener
+
+
+def cleanup(connection):
+    connection.disconnect()
 
 
 if __name__ == "__main__":
@@ -42,6 +47,7 @@ if __name__ == "__main__":
 
     try:
         connection.connect(**connect_headers)
+        atexit.register(cleanup, connection)
     except ConnectFailedException:
         print("MSG:-1", flush=True)
         exit(1)
