@@ -1,72 +1,34 @@
+#!/usr/bin/env python3
+
 # Standard
 import argparse
 import json
-import sys
 from time import sleep
 
 # Third party
 import stomp
+from stomp.exception import ConnectFailedException
 
 # Internal
-import td
+from StompListener import Listener
 
-
-class Listener(stomp.ConnectionListener):
-    _mq: stomp.Connection
-
-
-
-    def __init__(self, mq: stomp.Connection, durable=False):
-        self._mq = mq
-        self.is_durable = durable
-
-
-    def on_message(self, frame):
-
-        headers, message_raw = frame.headers, frame.body
-        parsed_body = json.loads(message_raw)
-        if self.is_durable:
-            # Acknowledging messages is important in client-individual mode
-            self._mq.ack(id=headers["ack"], subscription=headers["subscription"])
-
-
-
-        messages = td.get_td_frame(parsed_body)
-        if len(messages) == 0 or messages is None:
-            return
-
-        for message in messages:
-            print(message)
-            sys.stdout.flush()
-
-
-
-
-
-    def on_error(self, frame):
-        print('INFO received an error {}'.format(frame.body))
-        sys.stdout.flush()
-    def on_disconnected(self):
-        print('INFO disconnected')
-        sys.stdout.flush()
 
 if __name__ == "__main__":
     with open("src/main/java/aradnezami/cambridgesignallingmap/NRFeedClient/PythonCommunications/secrets.json") as f:
-        feed_username, feed_password = json.load(f)
+        feed_username, feed_password, hostName = json.load(f)
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--durable", action='store_true',
                         help="Request a durable subscription. Note README before trying this.")
     action = parser.add_mutually_exclusive_group(required=False)
     action.add_argument('--td', action='store_true', help='Show messages from TD feed', default=True)
-    action.add_argument('--trust', action='store_true', help='Show messages from TRUST feed')
 
     args = parser.parse_args()
 
     # https://stomp.github.io/stomp-specification-1.2.html#Heart-beating
     # We're committing to sending and accepting heartbeats every 5000ms
-    connection = stomp.Connection([('publicdatafeeds.networkrail.co.uk', 61618)], keepalive=True, heartbeats=(50000, 50000))
-    connection.set_listener('', Listener(connection))
+    connection = stomp.Connection([('publicdatafeeds.networkrail.co.uk', 61618)], keepalive=True, heartbeats=(5000, 5000))
+    connection.set_listener('', Listener(connection, args.durable))
 
     # Connect to feed
     connect_headers = {
@@ -78,13 +40,15 @@ if __name__ == "__main__":
         # The client-id header is part of the durable subscription - it should be unique to your account
         connect_headers["client-id"] = feed_username
 
+    try:
+        connection.connect(**connect_headers)
+    except ConnectFailedException:
+        print("INFO Could not connect")
+        exit(1)
+
     # Determine topic to subscribe
     topic = None
-    connection.connect(**connect_headers)
-
-    if args.trust:
-        topic = "/topic/TRAIN_MVT_ALL_TOC"
-    elif args.td:
+    if args.td:
         topic = "/topic/TD_ALL_SIG_AREA"
 
     # Subscription
@@ -95,7 +59,7 @@ if __name__ == "__main__":
     if args.durable:
         # Note that the subscription name should be unique both per connection and per queue
         subscribe_headers.update({
-            "activemq.subscriptionName": feed_username + topic,
+            "activemq.subscriptionName": hostName + topic,
             "ack": "client-individual"
         })
     else:
@@ -103,7 +67,6 @@ if __name__ == "__main__":
 
     connection.subscribe(**subscribe_headers)
 
-
     while connection.is_connected():
-
         sleep(1)
+
