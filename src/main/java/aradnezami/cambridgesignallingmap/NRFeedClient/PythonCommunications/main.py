@@ -26,8 +26,6 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--durable", action='store_true',
                         help="Request a durable subscription. Note README before trying this.")
     action = parser.add_mutually_exclusive_group(required=False)
-    action.add_argument('--td', action='store_true', help='Show messages from TD feed', default=True)
-
     args = parser.parse_args()
 
     # https://stomp.github.io/stomp-specification-1.2.html#Heart-beating
@@ -52,12 +50,8 @@ if __name__ == "__main__":
         print("MSG:-1", flush=True)
         exit(1)
 
-    # Determine topic to subscribe
-    topic = None
-    if args.td:
-        topic = "/topic/TD_ALL_SIG_AREA"
-
     # Subscription
+    topic = "/topic/TD_ALL_SIG_AREA"
     subscribe_headers = {
         "destination": topic,
         "id": 1,
