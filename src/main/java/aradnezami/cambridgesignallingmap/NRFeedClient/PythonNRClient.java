@@ -2,6 +2,7 @@ package aradnezami.cambridgesignallingmap.NRFeedClient;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,26 +12,13 @@ import java.util.Scanner;
 
 /**
  * The PythonNRClient wraps a python process that receives data from the Network Rail
- * <a href="https://wiki.openraildata.com/index.php?title=TD">TD feed</a><br>. This implementation does
- * not request a durable subscription, so {@link #disconnectedAt()} is not useful. It is still ,however,
- * implemented
- * <br>
- * <h3>Death of PythonNRClients</h3>
- * An instance of an PythonNRClient dying can be caused by: A connection error with the NR servers or
+ * <a href="https://wiki.openraildata.com/index.php?title=TD">TD feed</a>.
+ *
+ * <h3>Death of PythonNRClient</h3>
+ * An instance of an NRFeedClient dying can be caused by: A connection error with the NR servers or
  * a call to {@link #disconnect()}. In any case of a death, all resources associated with the connection
- * should be released. <br>
+ * are released, and any subsequent calls to {@link #pollNREvent()} will throw {@link NRFeedException}.<br>
  * <br>
- * If {@link #disconnect()} is called, a call to {@link #isAlive()} returns false, or a previous poll
- * returned null: all subsequent polls will throw {@link IllegalStateException} as the client is dead.
- * However, if the client died before or during a poll and none of
- * the above conditions were satisfied beforehand, then null will be returned. All subsequent polls
- * will throw {@link IllegalStateException} <br>
- * The convoluted conditions of the client death means that if {@link #disconnect()} is called,
- * a call to {@link #isAlive()} returns false, or a previous poll returned null, are the only
- * signals a user needs to know that the client is dead. <b>A client that handles the NRFeedClient as
- * specified should never encounter an illegalStateException</b>
- * <br>
- * Note that {@link #checkError()} is included when reference is made to "polling"
  */
 public class PythonNRClient implements NRFeedClient {
     private final Logger logger = LogManager.getLogger();
@@ -47,9 +35,7 @@ public class PythonNRClient implements NRFeedClient {
     
     
     /**
-     * Creates a connected PythonNRClient. No further setup is required to poll the client
-     * @throws IOException If an IOException occurs while starting the python process
-     * ({@link ProcessBuilder#start()})
+     * Creates a connected PythonNRClient, which is ready to be polled
      */
     public PythonNRClient() throws IOException {
         pythonClientProcess = createPythonClientProcess();
@@ -67,9 +53,7 @@ public class PythonNRClient implements NRFeedClient {
      * Returns the next <a href="https://wiki.openraildata.com/index.php?title=TD">TD</a>
      * event received from the NR Feed. These include both C (Berth) and S (Signalling)
      * class messages from the feed. The method must block until the next message is received<br>
-     * If the underlying client fails (while or before the method was called), the method will return
-     * null and the instance should be considered dead (see the {@link NRFeedClient interface documentation}
-     * on death).<br>
+     *
      * <h3>Message Format</h3>
      * Messages are delineated by commas. S-Class messages come in the format {@code S,ADDRESS,BYTE}
      * for example: {@code "S,A3,0D"}. Address and byte are in hexadecimal and are always 2 characters.
@@ -79,30 +63,39 @@ public class PythonNRClient implements NRFeedClient {
      * respectively, the missing berth will be replaced with {@code "NONE"}
      *
      * @return The next message or null if the client fails while polling
-     * @throws IllegalStateException If the client is dead when called.
-     *                               (see the {@link NRFeedClient interface documentation})
+     * @throws NRFeedException If a connection error occurs between the client and python script
+     * or if the client was already dead when called
      */
     @Override
-    public String pollNREvent() throws IllegalStateException {
+    public @NotNull String pollNREvent() {
         if (!isAlive) {
-            throw new IllegalStateException("The PythonNRClient has died");
+            throw new NRFeedException("The PythonNRClient is already dead. Method should not be" +
+                    " called when client is dead",
+                    "An internal error occurred. This should not happen. Please report this" +
+                    " as a bug, along with the contents of \"More info\"");
         }
-        
+
         try {
             return stdIn.nextLine();
         } catch (NoSuchElementException e) {
             disconnect();
-            return null;
+            throw new NRFeedException("Error whilst polling for event",
+                    e,
+                    "A connection error occurred whilst waiting for a message from the data feed. \n" +
+                            "Ensure that you have an internet connection and that your authentication" +
+                            " details are correct.");
         }
     }
     
     /**
      * Returns the full contents of the python client's error stream. If no content is available
-     * the method will not block and will immediately return an empty string. If the client has
-     * failed then the method will return null and the instance should be considered dead
+     * the method will not block and will immediately return an empty string.
+     *
      * @return The contents of the python client's error stream
-     * @throws IllegalStateException If the PythonNRClient is dead
+     * @throws NRFeedException If a connection error occurs between the client and python script
+     * or if the client was already dead when called
      */
+    @NotNull
     public String checkError() throws IllegalStateException {
         if (!isAlive) {
             throw new IllegalStateException("The PythonNRClient has died");
@@ -115,15 +108,19 @@ public class PythonNRClient implements NRFeedClient {
             }
         } catch (IOException e) {
             disconnect();
-            return null;
+            throw new NRFeedException("Error whilst polling on the python client's error stream",
+                    e,
+                    "A connection error occurred whilst waiting for error messages from the data feed. \n" +
+                            "Ensure that you have an internet connection and that your authentication" +
+                            " details are correct.");
         }
         
         return sb.toString();
     }
     
     /**
-     * Disconnects the PythonNRClient from the NR servers. The PythonNRClient is now dead and therefore,
-     * subsequent calls to {@link #pollNREvent()} with throw {@link IllegalStateException}.
+     * Disconnects the PythonNRClient. The PythonNRClient is now dead and therefore,
+     * subsequent calls to {@link #pollNREvent()} with throw {@link NRFeedException}.
      * Calling this method when the instance is dead has no effect.
      */
     @Override
@@ -146,7 +143,7 @@ public class PythonNRClient implements NRFeedClient {
             logger.debug("disconnect() interrupted while waiting for process waiter to terminate",e);
         }
     }
-    
+
     /**
      * Returns the approximate time at which the PythonNRClient died (disconnected) in
      * millis since the unix epoch. This is approximate and system-dependant should
@@ -154,24 +151,22 @@ public class PythonNRClient implements NRFeedClient {
      * This is method is implemented but not useful, as it is intended for users to
      * determine if they will retrieve their messages if they reconnect within 5 minutes.
      * This is only possible with a <a href="https://wiki.openraildata.com/index.php?title=Durable_Subscription">
-     * , which this implementation does not make.
      *
      * @return The approximate time in millis that the PythonNRClient died
      * @throws IllegalStateException If the instance is still alive
      * @see System#currentTimeMillis()
      */
-    @Override
     public long disconnectedAt() throws IllegalStateException {
         if (isAlive) {throw new IllegalStateException("Cannot get disconnect time if the instance is alive");}
         
         return disconnectTime;
     }
-    
+
     /**
-     * Checks the alive state of the PythonNRClient. If this returns false: all
-     * subsequent calls to {@link #pollNREvent()} will throw {@link IllegalStateException}
+     * Checks if the client is dead or alive. If this returns false: all
+     * subsequent calls to {@link #pollNREvent()} will throw {@link NRFeedException}
      *
-     * @return True if the instance is alive and false if it is dead
+     * @return True if the instance is alive and false if dead
      */
     @Override
     public boolean isAlive() {
