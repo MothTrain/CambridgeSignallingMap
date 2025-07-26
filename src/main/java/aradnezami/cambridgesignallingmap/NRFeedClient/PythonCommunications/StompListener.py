@@ -25,12 +25,10 @@ class Listener(stomp.ConnectionListener):
             for message in messages:
                 print(message, flush=True)
 
-        else:
-            print(f'MSG:-2:{headers["destination"]}', flush=True)
 
 
     def on_error(self, frame):
-        print(f'MSG:-3:{frame.headers["message"]}', flush=True)
+        exit(1)
 
     def on_disconnected(self):
-        print(f'MSG:-4', flush=True)
+        exit(0)

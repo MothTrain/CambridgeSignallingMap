@@ -45,11 +45,6 @@ def getMessages(parsed_body):
             bytesRaw = message.get("data")
             bytesSplit = splitSigRefresh(bytesRaw, address)
 
-            if address == 0:
-                messages.append("MSG:1")
-            elif message_type == S_SIGNALLING_REFRESH_FINISHED:
-                messages.append("MSG:2")
-
             for separateMsg in bytesSplit:
                 messages.append(f"S,{timestamp},{separateMsg[0]},{separateMsg[1]}")
 

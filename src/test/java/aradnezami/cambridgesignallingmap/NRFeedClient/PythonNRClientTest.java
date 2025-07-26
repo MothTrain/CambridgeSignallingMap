@@ -8,216 +8,77 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class PythonNRClientTest {
-    @Spy
     private PythonNRClient pythonNRClient;
-    
+
     @Mock
-    private InputStream stdInMock;
+    private BufferedReader stdInMock;
     @Mock
-    private Scanner scannerMock;
-    @Mock
-    private InputStream errInMock;
-    
+    private BufferedReader stdErrMock;
+
     @Mock
     private Process processMock;
-    @Mock
-    private Thread processWaiterMock;
-    
-    private static final Logger logger = LogManager.getLogger(PythonNRClient.class);
-    
+
+    private static final Logger logger = LogManager.getLogger(PythonNRClientTest.class);
+
     @BeforeEach
-    void setupPythonNRClient() throws IOException {
+    void setupPythonNRClient() {
         MockitoAnnotations.openMocks(this);
-        
-        when(processMock.getErrorStream()).thenReturn(errInMock);
-        when(processMock.getInputStream()).thenReturn(stdInMock);
-        
+
+        when(processMock.inputReader()).thenReturn(stdInMock);
+        when(processMock.errorReader()).thenReturn(stdErrMock);
+
+        pythonNRClient = new PythonNRClient(processMock);
+
         Configurator.setLevel(logger.getName(), org.apache.logging.log4j.Level.OFF);
     }
-    
-    
-    
-    @DisplayName("PollNREvent: Normal Conditions")
+
+
+
+    @DisplayName("pollNREvent(): Normal Conditions")
     @Test
     void pollNREvent1() throws IOException {
-        AssignClientWithEmptyProcessWaiter();
-        
-        when(scannerMock.nextLine()).thenReturn("A", "B", "C");
-        assertEquals(pythonNRClient.pollNREvent(), "A");
-        assertEquals(pythonNRClient.pollNREvent(), "B");
-        assertEquals(pythonNRClient.pollNREvent(), "C");
-        verify(scannerMock, times(3)).nextLine();
+        when(stdInMock.readLine()).thenReturn("A","B");
+
+        assertEquals("A", pythonNRClient.pollNREvent());
+        assertEquals("B", pythonNRClient.pollNREvent());
+
+        verify(stdInMock, times(2)).readLine();
     }
-    
-    @DisplayName("PollNREvent: IOException return null")
-    @Test
-    void pollNREvent2() throws IOException {
-        AssignClientWithEmptyProcessWaiter();
-        
-        when(scannerMock.nextLine()).thenReturn("A").thenThrow(new NoSuchElementException());
-        assertEquals(pythonNRClient.pollNREvent(), "A");
-        assertNull(pythonNRClient.pollNREvent());
-        verify(scannerMock, times(2)).nextLine();
+
+    @DisplayName("pollNREvent(): IOException thrown")
+    @Test()
+    void pollNREvent2() {
+        when(stdInMock).thenAnswer(invocationOnMock -> {throw new IOException();});
+
+        assertThrows(NRFeedException.class, () -> pythonNRClient.pollNREvent());
+        assertFalse(processMock.isAlive());
+
     }
-    
-    @DisplayName("PollNREvent: IOException return null + IllegalStateException")
+
+
+    @DisplayName("disconnect()")
     @Test
-    void pollNREvent3() throws IOException {
-        AssignClientWithEmptyProcessWaiter();
-        
-        when(scannerMock.nextLine()).thenThrow(new NoSuchElementException());
-        assertNull(pythonNRClient.pollNREvent());
-        assertThrows(IllegalStateException.class, () -> pythonNRClient.pollNREvent());
-        verify(scannerMock, times(1)).nextLine();
-    }
-    
-    @DisplayName("PollNREvent: IllegalStateException after disconnect")
-    @Test
-    void pollNREvent4() throws IOException {
-        AssignClientWithEmptyProcessWaiter();
-        
-        when(scannerMock.nextLine()).thenReturn("A");
+    void disconnect() {
         pythonNRClient.disconnect();
-        assertThrows(IllegalStateException.class, () -> pythonNRClient.pollNREvent());
-        verify(scannerMock, never()).nextLine();
-    }
-    
-    
-    
-    
-    
-    @DisplayName("checkError: Normal Conditions")
-    @Test
-    void checkError1() throws IOException {
-        AssignClientWithEmptyProcessWaiter();
-        
-        when(errInMock.available()).thenReturn(2);
-        
-        when(errInMock.read()).thenAnswer(invocationOnMock -> {
-            when(errInMock.available()).thenReturn(1);
-            return (int) 'A';
-        }).thenAnswer(invocationOnMock -> {
-            when(errInMock.available()).thenReturn(0);
-            return (int) 'B';
-        });
-        assertEquals("AB", pythonNRClient.checkError());
-        verify(errInMock, times(2)).read();
-        verify(errInMock, times(3)).available();
-    }
-    
-    @DisplayName("checkError: IOException on .available() return null + IllegalStateException")
-    @Test
-    void checkError2() throws IOException {
-        AssignClientWithEmptyProcessWaiter();
-        
-        when(errInMock.available()).thenReturn(1);
-        
-        when(errInMock.read()).thenAnswer(invocationOnMock -> {
-            when(errInMock.available()).thenReturn(0);
-            return (int) 'A';
-        });
-        
-        assertEquals("A", pythonNRClient.checkError());
-        
-        when(errInMock.available()).thenThrow(new IOException());
-        assertNull(pythonNRClient.checkError());
-        assertThrows(IllegalStateException.class, () -> pythonNRClient.checkError());
-        
-        verify(errInMock, times(1)).read();
-        
-    }
-    
-    @DisplayName("checkError: IOException on .read() return null + IllegalStateException")
-    @Test
-    void checkError3() throws IOException {
-        AssignClientWithEmptyProcessWaiter();
-        
-        when(errInMock.available()).thenReturn(1);
-        
-        when(errInMock.read()).thenThrow(new IOException());
-        assertNull(pythonNRClient.checkError());
-        assertThrows(IllegalStateException.class, () -> {pythonNRClient.checkError();});
-        
-        verify(errInMock, times(1)).read();
-    }
-    
-    
-    
-    @DisplayName("Disconnect causes isAlive return false")
-    @Test
-    void disconnect1() throws IOException {
-        AssignClientWithEmptyProcessWaiter();
-        
-        pythonNRClient.disconnect();
+
         assertFalse(pythonNRClient.isAlive());
+        assertThrows(NRFeedException.class, () -> {pythonNRClient.pollNREvent();});
     }
-    
-    @DisplayName("Disconnect() interrupts processWaiter")
-    @Test
-    void disconnect2() throws IOException {
-        AssignClientWithEmptyProcessWaiter();
-        
-        pythonNRClient.disconnect();
-        
-        verify(processWaiterMock, times(1)).interrupt();
-    }
-    
-    @DisplayName("Disconnected At returns reasonable time")
-    @Test
-    void disconnectedAt() throws IOException {
-        AssignClientWithEmptyProcessWaiter();
-        
-        long realTime = System.currentTimeMillis();
-        pythonNRClient.disconnect();
-        
-        long returnedTime = pythonNRClient.disconnectedAt();
-        
-        assertTrue(returnedTime >= realTime);
-        assertTrue(returnedTime-realTime < 1000);
-    }
-    
+
+
+
     @DisplayName("IsAlive(): returns true")
     @Test
-    void isAlive1() throws IOException {
-        AssignClientWithEmptyProcessWaiter();
-        
+    void isAlive() throws IOException {
         assertTrue(pythonNRClient.isAlive());
     }
-    
-    @DisplayName("IsAlive(): returns false after disconnect()")
-    @Test
-    void isAlive() throws IOException {
-        AssignClientWithEmptyProcessWaiter();
-        
-        pythonNRClient.disconnect();
-        assertFalse(pythonNRClient.isAlive());
-    }
-    
-    private void AssignClientWithEmptyProcessWaiter() throws IOException {
-        pythonNRClient = new PythonNRClient() {
-            @Override
-            protected Process createPythonClientProcess() throws IOException {
-                return processMock;
-            }
-            @Override
-            protected Scanner createScanner(InputStream inputStream) {
-                return scannerMock;
-            }
-            @Override
-            protected Thread createProcessWaiterThread() {
-                return processWaiterMock;
-            }
-        };
-    }
+
 }
