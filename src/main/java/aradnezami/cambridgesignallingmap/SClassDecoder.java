@@ -9,11 +9,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class SClassHandler {
-    private final HashMap<Integer, String[]> equipmentMap;
-    private final OutputHandler out;
-    
-    private final short[] equipmentBytes;
+public class SClassDecoder {
+    private final HashMap<MappingReference, String[]> equipmentMap;
+
+    private final int[] equipmentBytes;
     private final boolean[] isByteUpdated;
     
     private final int ADDRESS = 0;
@@ -25,40 +24,19 @@ public class SClassHandler {
     private final int BACK_BIT = 6;
     
     /**
-     * Creates an instance of SClass handler, with the specified output handler to forward
-     * events to. A map is created from the default map
-     * @param out The output handler
-     * @throws FileNotFoundException If {@code SignallingEquipmentMap.csv} cannot be accessed
+     * Creates an instance of SClass handler from the provided file path
+     * @throws FileNotFoundException If the file cannot be accessed
      */
-    SClassHandler(OutputHandler out) throws FileNotFoundException {
-        equipmentMap = loadEquipmentMap();
-        this.out = out;
+    SClassDecoder(String path) throws FileNotFoundException {
+        equipmentMap = loadEquipmentMap(path);
         
-        equipmentBytes = new short[201];
-        isByteUpdated = new boolean[201];
+        equipmentBytes = new int[256];
+        isByteUpdated = new boolean[256];
     }
-    
-    
-    /**
-     * Creates an instance of SClass handler, with the specified output handler to forward
-     * events to. A map is created from the default map and the initial equipment state bytes
-     * and whether those bytes have been updated are inputted by {@code initState} and {@code initUpdated}
-     * respectively
-     * @param out The output handler
-     * @param initState The state of signalling equipment bytes to initialise with
-     * @param initUpdated Whether the respective bytes have been updated
-     * @throws FileNotFoundException If {@code SignallingEquipmentMap.csv} cannot be accessed
-     */
-    SClassHandler(OutputHandler out, short[] initState, boolean[] initUpdated) throws FileNotFoundException {
-        equipmentMap = loadEquipmentMap();
-        this.out = out;
-        
-        equipmentBytes = initState;
-        isByteUpdated = initUpdated;
-    }
-    
-    public void SClassChange(short address, short newByte) {
-        short originalByte = equipmentBytes[address];
+
+
+    public Event[] SClassChange(long timestamp, int address, int newByte) {
+        int originalByte = equipmentBytes[address];
         equipmentBytes[address] = newByte;
         
         int[] changes = getBitChanges(originalByte, newByte);
@@ -67,35 +45,28 @@ public class SClassHandler {
             isByteUpdated[address] = true;
         }
         
-        
+        ArrayList<Event> events = new ArrayList<>();
         for (int changedBit : changes) {
-            
-            Integer key = Arrays.hashCode(new short[]{address, (short) changedBit});
+            MappingReference key = new MappingReference(address, changedBit);
             String[] mapping = equipmentMap.get(key);
-            if (mapping == null) {return;}
+            if (mapping == null) { continue; }
             
             boolean bitState = getBitFromByte(newByte, changedBit);
             
-            if (mapping.length <= 2) {
-                continue;
-            } // unmapped
-            else if (mapping.length == 3 && mapping[TYPE].equals("PLACEHOLD") && bitState) {
-                out.PlaceholderBitSet(address, changedBit);
-            } else if (mapping.length == 3 && mapping[TYPE].equals("PLACEHOLD")) {
-                continue;
-            } else {
-                try {
-                    delegateChange(mapping, bitState);
-                } catch (IllegalArgumentException e) {
-                    continue;
-                }
-            }
+            if (mapping.length <= 2) { continue; } // unmapped
+
+            try {
+                Event event = decodeChange(mapping, bitState);
+                //noinspection DataFlowIssue
+                events.add(new Event(timestamp, event.S_Type, event.S_State, event.S_Id));
+            } catch (IllegalArgumentException ignored) {} // A backreference hasn't been updated yet
         }
-        
+
+        return events.toArray(new Event[]{});
     }
 
     
-    private void delegateChange(String[] mapping, boolean bitState) {
+    private Event decodeChange(String[] mapping, boolean bitState) {
         int equipmentType;
         int state;
         
@@ -138,7 +109,7 @@ public class SClassHandler {
             default: throw new IllegalMapFormatException("A Valid type was not used");
         }
         
-        out.SClassChange(equipmentType, state, mapping[ID]);
+        return new Event(-1L, equipmentType, state, mapping[ID]);
     }
     
     
@@ -146,9 +117,12 @@ public class SClassHandler {
     
       
     private int pointChange(String[] mapping, boolean bitState) {
-        
+        final int IMPLICITLY_BACKREFERENCED_LEN = 4;
+        final int UNMAPPED_LEN = 5;
+        final int EXPLICITLY_BACKREFERENCED_LEN = 7;
+
         // Implicitly back-referenced
-        if (mapping.length == 4 && mapping[TYPE].equals("NK")) {
+        if (mapping.length == IMPLICITLY_BACKREFERENCED_LEN && mapping[TYPE].equals("NK")) {
             int backAddress = Integer.parseInt(mapping[ADDRESS]);
             int backBit = Integer.parseInt(mapping[BIT]) + 1; // We imply that the RK is in the next bit (+1)
             
@@ -156,7 +130,7 @@ public class SClassHandler {
             
             return decodePoint(bitState, backReference);
             
-        } else if (mapping.length == 4 && mapping[TYPE].equals("RK")) {
+        } else if (mapping.length == IMPLICITLY_BACKREFERENCED_LEN && mapping[TYPE].equals("RK")) {
             int backAddress = Integer.parseInt(mapping[ADDRESS]);
             int backBit = Integer.parseInt(mapping[BIT]) - 1; // We imply that the RK is in the next bit (-1)
             
@@ -165,15 +139,15 @@ public class SClassHandler {
             return decodePoint(backReference, bitState);
             
             
-        } else if (mapping.length == 5 && mapping[TYPE].equals("NK") && mapping[BACK_TYPE].equals("UNMAPPED")) { // Unmapped
+        } else if (mapping.length == UNMAPPED_LEN && mapping[TYPE].equals("NK") && mapping[BACK_TYPE].equals("UNMAPPED")) { // Unmapped
             return decodePoint(bitState, null);
             
-        } else if (mapping.length == 5 && mapping[TYPE].equals("RK") && mapping[BACK_TYPE].equals("UNMAPPED")) {
+        } else if (mapping.length == UNMAPPED_LEN && mapping[TYPE].equals("RK") && mapping[BACK_TYPE].equals("UNMAPPED")) {
             return decodePoint(null, bitState);
             
             
             // Explicitly Back-referenced
-        } else if (mapping.length == 7 && mapping[TYPE].equals("NK")) {
+        } else if (mapping.length == EXPLICITLY_BACKREFERENCED_LEN && mapping[TYPE].equals("NK")) {
             int backAddress = Integer.parseInt(mapping[BACK_ADDRESS]);
             int backBit = Integer.parseInt(mapping[BACK_BIT]);
             
@@ -181,7 +155,7 @@ public class SClassHandler {
             
             return decodePoint(bitState, backReference);
             
-        } else if (mapping.length == 7 && mapping[TYPE].equals("RK")) {
+        } else if (mapping.length == EXPLICITLY_BACKREFERENCED_LEN && mapping[TYPE].equals("RK")) {
             int backAddress = Integer.parseInt(mapping[BACK_ADDRESS]);
             int backBit = Integer.parseInt(mapping[BACK_BIT]);
             
@@ -206,18 +180,19 @@ public class SClassHandler {
                     ((RK) ? Point.REVERSE : Point.NEITHER);
         }
     }
-    
+
+
     
     private int signalChange(String[] mapping, boolean bitState) {
         if (mapping[TYPE].equals("DGK")) {
             return (bitState) ? Signal.CLEAR : Signal.RESTRICTIVE;
-            
+
         } else if (mapping[TYPE].equals("OFFK")) {
             return (bitState) ? Signal.OFF : Signal.DANGER;
-            
+
         } else if (mapping[TYPE].equals("RGK")) {
             return (bitState) ? Signal.DANGER : Signal.OFF;
-            
+
         } else {
             throw new IllegalMapFormatException("Invalid map: " + Arrays.toString(mapping));
         }
@@ -247,19 +222,32 @@ public class SClassHandler {
      */
     private boolean backreference(int address, int bit) {
         if (!isByteUpdated[address]) {throw new IllegalArgumentException("Not updated byte");}
-        short Byte = equipmentBytes[address];
+        int Byte = equipmentBytes[address];
         
         return getBitFromByte(Byte, bit);
     }
-    
+
+
+    /**
+     * Gets the bit from a byte at a specified index. 0 = LSB, 7 = MSB
+     * @param Byte A value between 0-255 inclusive
+     * @param bitIndex The index of the bit to retrieve
+     * @return False if bit is 0, True otherwise
+     */
     private boolean getBitFromByte(int Byte, int bitIndex) {
         return ((Byte >> (bitIndex)) & 1) == 1;
     }
-    
-    
-    private static int[] getBitChanges(short original, short updated) {
-        short change = (short) (original ^ updated); // XOR, changed bit will be 1
-        
+
+
+    /**
+     * Returns the index of bits that differ between the 2 provided bytes
+     * @param original A value between 0-255 inclusive
+     * @param updated A value between 0-255 inclusive
+     * @return The index of bits that are different. 0 = LSB, 7 = MSB
+     */
+    private static int[] getBitChanges(int original, int updated) {
+        int change = (original ^ updated); // XOR, changed bits will be 1
+
         ArrayList<Integer> changedBitsList = new ArrayList<>();
         for (int i = 0; i <= 7 ; i++) { // Get indexes of changed bits
             if (((change >> (i)) & 1) == 1) {changedBitsList.add(i);}
@@ -272,35 +260,47 @@ public class SClassHandler {
         
         return changedBits;
     }
-    
-    
-    
-    
-    protected HashMap<Integer, String[]> loadEquipmentMap() throws FileNotFoundException {
+
+
+    /**
+     * Loads the map from the preset file
+     * @return A HashMap where the value is a string array, each array element representing one
+     * column in the mapping
+     * @throws FileNotFoundException If the preset file is not found
+     */
+    private HashMap<MappingReference, String[]> loadEquipmentMap(String path) throws FileNotFoundException {
         ClassLoader classLoader = getClass().getClassLoader();
-        
-        InputStream mapStream = classLoader.getResourceAsStream("SignallingEquipmentMap.csv");
+        InputStream mapStream = classLoader.getResourceAsStream(path);
         if (mapStream == null) {
-            throw new FileNotFoundException("Could not find signalling equipment map. Path: " + "SignallingEquipmentMap.csv");
+            throw new FileNotFoundException("Could not find signalling equipment map. Path: " + path);
         }
         Scanner scanner = new Scanner(mapStream);
-        scanner.nextLine();
-        
-        HashMap<Integer, String[]> equipmentMap = new HashMap<>();
+        scanner.nextLine(); // Skip headers
+
+
+        HashMap<MappingReference, String[]> equipmentMap = new HashMap<>();
         while (scanner.hasNextLine()) {
             String[] line = scanner.nextLine().split(",");
-            
-            short[] locator = new short[2];
+
+            int address, bit;
             try {
-                locator[0] = Short.parseShort(line[ADDRESS]);
-                locator[1] = Short.parseShort(line[BIT]);
+                address = Integer.parseInt(line[ADDRESS]);
+                bit = Integer.parseInt(line[BIT]);
             } catch (NumberFormatException e) {
-                throw new IllegalMapFormatException("The map address or bit is not a parsable number");
+                scanner.close();
+                throw new IllegalMapFormatException("A map address or bit is not a parsable number");
             }
-            
-            equipmentMap.put(Arrays.hashCode(locator), line);
+
+            equipmentMap.put(new MappingReference(address, bit), line);
         }
-        
+
+        scanner.close();
         return equipmentMap;
     }
+
+
+    /**
+     * Used to represent the position of a mapping in one variable, to use as a key in hashmaps
+     */
+    private record MappingReference(int address, int bit) {}
 }

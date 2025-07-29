@@ -2,7 +2,7 @@ package aradnezami.cambridgesignallingmap;
 
 /**
  * Thrown when a map cannot be loaded because of invalid formatting.
- * @see SClassHandler
+ * @see SClassDecoder
  */
 public class IllegalMapFormatException extends RuntimeException {
     

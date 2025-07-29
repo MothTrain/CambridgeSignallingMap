@@ -1,0 +1,12 @@
+Address,Bit,Type,ID,Type(2),Address(2),Bit(2)
+0,0,T,TrackCircuit,,,
+0,1,B,RouteIndicator,,,
+0,2,DGK,DGsignal,,,
+0,3,OFFK,OFFsignal,,,
+0,4,RGK,RGsignal,,,
+0,5,NK,Point1,,,
+0,6,RK,Point1,,,
+0,7,NK,Point2,,1,0
+1,0,RK,Point2,,0,7
+1,1,NK,Point3,UNMAPPED,,
+1,2,RK,Point4,UNMAPPED,,
