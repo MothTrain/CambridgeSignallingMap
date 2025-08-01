@@ -21,12 +21,12 @@ import java.util.concurrent.TimeUnit;
  * data, may cause the PythonNRClient to output incorrectly formatted data (i.e: Garbage in:
  * Garbage out) <br>
  * Messages are terminated by a new line (any new line format accepted by {@link Reader}
- * is acceptable). Messages should delineated by commas. S-Class messages are in the format {@code S,ADDRESS,BYTE}
- * for example: {@code "S,A3,0D"}. Address and byte are in hexadecimal and are always 2 characters.
- * C-Class messages come in the format {@code C,FROM_BERTH,TO_BERTH,DESCRIBER} for example:
- * {@code "C,0193,0195,1K76"}. A berth code is always a 4 character string. If either a to_berth
- * or from_berth is not provided, which will happen if the message is a berth cancel or interpose
- * respectively, the missing berth should be replaced with {@code "NONE"}
+ * is acceptable). Messages should delineated by commas. S-Class messages are in the format
+ * {@code S,TIMESTAMP,ADDRESS,BYTE} for example: {@code "S,12345678,A3,0D"}. Address and byte are in hexadecimal
+ * and are always 2 characters. C-Class messages come in the format {@code C,TIMESTAMP,FROM_BERTH,TO_BERTH,DESCRIBER}
+ * for example: {@code "C,12345678,0193,0195,1K76"}. A berth code is always a 4 character string. If either
+ * a to_berth or from_berth is not provided, which will happen if the message is a berth cancel
+ * or interpose respectively, the missing berth should be replaced with {@code "NONE"}
  *
  * <h3>Death of PythonNRClient</h3>
  * An instance of an NRFeedClient dying can be caused by: A connection error with the NR servers or
@@ -55,6 +55,7 @@ public class PythonNRClient implements NRFeedClient {
         
         isAlive = true;
     }
+
     
     /**
      * Returns the next <a href="https://wiki.openraildata.com/index.php?title=TD">TD</a>
@@ -62,10 +63,10 @@ public class PythonNRClient implements NRFeedClient {
      * class messages from the feed. The method must block until the next message is received<br>
      *
      * <h3>Message Format</h3>
-     * Messages are delineated by commas. S-Class messages come in the format {@code S,ADDRESS,BYTE}
-     * for example: {@code "S,A3,0D"}. Address and byte are in hexadecimal and are always 2 characters.
-     * C-Class messages come in the format {@code C,FROM_BERTH,TO_BERTH,DESCRIBER} for example:
-     * {@code "C,0193,0195,1K76"}. A berth code is always a 4 character string. If either a to_berth
+     * Messages are delineated by commas. S-Class messages come in the format {@code S,TIMESTAMP,ADDRESS,BYTE}
+     * for example: {@code "S,12345678,A3,0D"}. Address and byte are in hexadecimal and are always 2 characters.
+     * C-Class messages come in the format {@code C,TIMESTAMP,FROM_BERTH,TO_BERTH,DESCRIBER} for example:
+     * {@code "C,12345678,0193,0195,1K76"}. A berth code is always a 4 character string. If either a to_berth
      * or from_berth is not provided, which will happen if the message is a berth cancel or interpose
      * respectively, the missing berth will be replaced with {@code "NONE"}
      *
@@ -133,4 +134,22 @@ public class PythonNRClient implements NRFeedClient {
         return isAlive;
     }
 
+
+    /**
+     * Creates a python process that can be submitted to the constructor using the path
+     * provided. The user should then <b>promptly</b> submit this to a constructor
+     * @param path The path to the python file
+     * @return A an executing process of the file given
+     */
+    public static Process createPythonProcess(String path) {
+        ProcessBuilder pb = new ProcessBuilder("python", path);
+
+        try {
+            return pb.start();
+        } catch (IOException e) {
+            throw new NRFeedException("Error whilst starting client. Check the path is correct",
+                    e,
+                    "An internal error occurred while trying to connect. This should not happen. Please report this as a bug, along with the contents of \"More info\"");
+        }
+    }
 }

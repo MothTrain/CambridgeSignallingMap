@@ -29,10 +29,10 @@ public interface NRFeedClient {
      * class messages from the feed. If not message is available, the method blocks until
      * the next message is received<br>
      *
-     * Messages are delineated by commas. S-Class messages come in the format {@code S,ADDRESS,BYTE}
-     * for example: {@code "S,A3,0D"}. Address and byte are in hexadecimal and are always 2 characters.
-     * C-Class messages come in the format {@code C,FROM_BERTH,TO_BERTH,DESCRIBER} for example:
-     * {@code "C,0193,0195,1K76"}. A berth code is always a 4 character string. If either a to_berth
+     * Messages are delineated by commas. S-Class messages come in the format {@code S,TIMESTAMP,ADDRESS,BYTE}
+     * for example: {@code "S,12345678,A3,0D"}. Address and byte are in hexadecimal and are always 2 characters.
+     * C-Class messages come in the format {@code C,TIMESTAMP,FROM_BERTH,TO_BERTH,DESCRIBER} for example:
+     * {@code "C,12345678,0193,0195,1K76"}. A berth code is always a 4 character string. If either a to_berth
      * or from_berth is not provided, which will happen if the message is a berth cancel or interpose
      * respectively, the missing berth will be replaced with {@code "NONE"}
      *
