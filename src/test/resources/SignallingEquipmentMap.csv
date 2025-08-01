@@ -10,3 +10,10 @@ Address,Bit,Type,ID,Type(2),Address(2),Bit(2)
 1,0,RK,Point2,,0,7
 1,1,NK,Point3,UNMAPPED,,
 1,2,RK,Point4,UNMAPPED,,
+1,3,RM,MainRoute,,,
+1,4,RS,ShuntRoute,,,
+1,5,RC,CallOnRoute,,,
+1,6,DGK,CompoundSig1,SOFFK,1,7
+1,7,SOFFK,CompoundSig1,DGK,1,6
+2,0,OFFK,CompoundSig2,RM,2,1
+2,1,RM,CompoundSig2,,,

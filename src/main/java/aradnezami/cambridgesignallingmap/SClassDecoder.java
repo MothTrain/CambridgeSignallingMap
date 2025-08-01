@@ -9,6 +9,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * The SClassDecoder is used to convert S-Class messages from the NR feed (encoded in the byte and
+ * address) into {@link Event}s, which describe the message's information on the real signalling
+ * functions (signals, points, ect). The messages are mapped to their Event through a map file.
+ * The map format is specified in Mapping_Syntax.md in the Resources directory. This class complies
+ * with Mapping_Syntax.md
+ */
 public class SClassDecoder {
     private final HashMap<MappingReference, String[]> equipmentMap;
 
@@ -18,14 +25,19 @@ public class SClassDecoder {
     private final int ADDRESS = 0;
     private final int BIT= 1;
     private final int TYPE = 2;
+    @SuppressWarnings("FieldCanBeLocal")
     private final int ID = 3;
     private final int BACK_TYPE = 4;
     private final int BACK_ADDRESS = 5;
     private final int BACK_BIT = 6;
-    
+
+
+
     /**
      * Creates an instance of SClass handler from the provided file path
+     * @param path Map file path
      * @throws FileNotFoundException If the file cannot be accessed
+     * @see ClassLoader#getResourceAsStream(String path) 
      */
     SClassDecoder(String path) throws FileNotFoundException {
         equipmentMap = loadEquipmentMap(path);
@@ -34,7 +46,17 @@ public class SClassDecoder {
         isByteUpdated = new boolean[256];
     }
 
-
+    /**
+     * Applies the S-Class message to the instance, updating its state and returning an
+     * array of any {@link Event}s created by the change. If no changes occur, an empty
+     * array is returned
+     *
+     * @param timestamp The timestamp of the message provided by the feed or -1L if none
+     *                 is to be given
+     * @param address The address of the byte being updated. Range 0-255
+     * @param newByte The value of the updated byte. Range 0-255
+     * @return An array of any events caused by the change
+     */
     public Event[] SClassChange(long timestamp, int address, int newByte) {
         int originalByte = equipmentBytes[address];
         equipmentBytes[address] = newByte;
@@ -65,6 +87,30 @@ public class SClassDecoder {
         return events.toArray(new Event[]{});
     }
 
+
+    /**
+     * The events represented by applying an {@link #SClassChange(long, int, int)} sequentially
+     * on each byte stored by this instance. Essentially flushing out the state stored by this
+     * instance. Note that the state created by applying the returned events is only valid if
+     * <b>all</b> the events are applied in the <b>given order</b>.
+     * @return A list of all events stored
+     */
+    public Event[] allEvents() {
+        ArrayList<Event> events = new ArrayList<>();
+        for (int address=0; address<isByteUpdated.length; address++) {
+            for (int bit=0; bit<=7; bit++) {
+                MappingReference key = new MappingReference(address, bit);
+                String[] mapping = equipmentMap.get(key);
+                if (mapping == null) { continue; }
+
+                boolean bitState = getBitFromByte(equipmentBytes[address], bit);
+                events.add(decodeChange(mapping, bitState));
+            }
+        }
+
+        return events.toArray(new Event[]{});
+    }
+
     
     private Event decodeChange(String[] mapping, boolean bitState) {
         int equipmentType;
@@ -76,7 +122,7 @@ public class SClassDecoder {
                 equipmentType = Point.TYPE;
                 break;
             }
-            case "DGK", "RGK", "OFFK": {
+            case "DGK", "RGK", "OFFK", "SOFFK": {
                 state = signalChange(mapping, bitState);
                 equipmentType = Signal.TYPE;
                 break;
@@ -106,7 +152,7 @@ public class SClassDecoder {
                 equipmentType = Route.CALL_ON_TYPE;
                 break;
             }
-            default: throw new IllegalMapFormatException("A Valid type was not used");
+            default: throw new IllegalMapFormatException(mapping[TYPE] + " is not a valid type");
         }
         
         return new Event(-1L, equipmentType, state, mapping[ID]);
@@ -184,18 +230,61 @@ public class SClassDecoder {
 
     
     private int signalChange(String[] mapping, boolean bitState) {
-        if (mapping[TYPE].equals("DGK")) {
-            return (bitState) ? Signal.CLEAR : Signal.RESTRICTIVE;
+        final int BACKREFERENCED_LEN = 7;
+
+        if (mapping.length==BACKREFERENCED_LEN
+                && mapping[TYPE].equals("DGK")) { // Compound signal backreferencing soffk
+
+            int backAddress = Integer.parseInt(mapping[BACK_ADDRESS]);
+            int backBit = Integer.parseInt(mapping[BACK_BIT]);
+            boolean soffk = backreference(backAddress, backBit);
+            return decodeCompoundSignal(bitState, soffk);
+
+
+        } else if (mapping.length==BACKREFERENCED_LEN
+                && mapping[TYPE].equals("SOFFK")) { // Compound signal backreferencing dgk
+
+            int backAddress = Integer.parseInt(mapping[BACK_ADDRESS]);
+            int backBit = Integer.parseInt(mapping[BACK_BIT]);
+            boolean dgk = backreference(backAddress, backBit);
+            return decodeCompoundSignal(dgk, bitState);
+
+
+        } else if (mapping.length==BACKREFERENCED_LEN
+                && mapping[TYPE].equals("OFFK")
+                && mapping[BACK_TYPE].equals("RM")) { // Compound signal backreferencing main route
+
+            int backAddress = Integer.parseInt(mapping[BACK_ADDRESS]);
+            int backBit = Integer.parseInt(mapping[BACK_BIT]);
+            boolean route = backreference(backAddress, backBit);
+            return decodeOffkCompoundSignal(bitState, route);
 
         } else if (mapping[TYPE].equals("OFFK")) {
-            return (bitState) ? Signal.OFF : Signal.DANGER;
+            return (bitState) ? Signal.MAIN_OFF : Signal.ON;
+
+        } else if (mapping[TYPE].equals("SOFFK")) {
+            return (bitState) ? Signal.SHUNT_OFF : Signal.ON;
 
         } else if (mapping[TYPE].equals("RGK")) {
-            return (bitState) ? Signal.DANGER : Signal.OFF;
+            return (bitState) ? Signal.ON : Signal.MAIN_OFF;
+
+        } else if (mapping[TYPE].equals("DGK")) {
+            return (bitState) ? Signal.MAIN_OFF : Signal.ON;
 
         } else {
             throw new IllegalMapFormatException("Invalid map: " + Arrays.toString(mapping));
         }
+    }
+
+    private int decodeCompoundSignal(boolean dgk, boolean sOffk) {
+        return (dgk) ?
+                ((sOffk) ? Signal.BOTH_OFF : Signal.MAIN_OFF):
+                ((sOffk) ? Signal.SHUNT_OFF : Signal.ON);
+    }
+    private int decodeOffkCompoundSignal(boolean offk, boolean mainRoute) {
+        return (offk) ?
+                ((mainRoute) ? Signal.MAIN_OFF : Signal.SHUNT_OFF):
+                Signal.ON;
     }
     
     
@@ -210,6 +299,8 @@ public class SClassDecoder {
     private int routeChange(boolean bitState) {
         return (bitState) ? Route.SET : Route.NOTSET;
     }
+
+
     
     
     /**
@@ -263,10 +354,10 @@ public class SClassDecoder {
 
 
     /**
-     * Loads the map from the preset file
+     * Loads the map from the given file
      * @return A HashMap where the value is a string array, each array element representing one
      * column in the mapping
-     * @throws FileNotFoundException If the preset file is not found
+     * @throws FileNotFoundException If the given file is not found
      */
     private HashMap<MappingReference, String[]> loadEquipmentMap(String path) throws FileNotFoundException {
         ClassLoader classLoader = getClass().getClassLoader();
