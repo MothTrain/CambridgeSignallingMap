@@ -1,4 +1,4 @@
-package aradnezami.cambridgesignallingmap;
+package aradnezami.cambridgesignallingmap.NRFeed;
 
 import aradnezami.cambridgesignallingmap.Diagram.*;
 

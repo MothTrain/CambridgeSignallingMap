@@ -1,4 +1,4 @@
-package aradnezami.cambridgesignallingmap.NRFeedClient;
+package aradnezami.cambridgesignallingmap.NRFeed;
 
 /**
  * NRFeedException represents exceptions thrown, when a <b>fatal</b> connection error occurs

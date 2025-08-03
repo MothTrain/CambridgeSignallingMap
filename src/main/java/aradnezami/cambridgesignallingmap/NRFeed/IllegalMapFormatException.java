@@ -1,4 +1,4 @@
-package aradnezami.cambridgesignallingmap;
+package aradnezami.cambridgesignallingmap.NRFeed;
 
 /**
  * Thrown when a map cannot be loaded because of invalid formatting.

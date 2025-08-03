@@ -1,4 +1,4 @@
-package aradnezami.cambridgesignallingmap.NRFeedClient;
+package aradnezami.cambridgesignallingmap.NRFeed;
 
 import org.jetbrains.annotations.NotNull;
 
