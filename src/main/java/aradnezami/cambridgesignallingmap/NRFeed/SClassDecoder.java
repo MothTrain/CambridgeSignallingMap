@@ -1,6 +1,6 @@
 package aradnezami.cambridgesignallingmap.NRFeed;
 
-import aradnezami.cambridgesignallingmap.Diagram.*;
+import aradnezami.cambridgesignallingmap.DiagramElements.*;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;

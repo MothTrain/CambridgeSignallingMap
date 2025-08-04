@@ -1,4 +1,4 @@
-package aradnezami.cambridgesignallingmap.Diagram;
+package aradnezami.cambridgesignallingmap.DiagramElements;
 
 public class Route {
     public static final int MAIN_TYPE = 4;

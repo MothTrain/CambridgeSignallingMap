@@ -1,4 +1,4 @@
-package aradnezami.cambridgesignallingmap.Diagram;
+package aradnezami.cambridgesignallingmap.DiagramElements;
 
 public class RouteIndicator {
     /**
