@@ -318,4 +318,20 @@ class SClassDecoderTest {
 
         return total;
     }
+
+    @Test
+    void reset() {
+        try {
+            sClassDecoder = new SClassDecoder("SignallingEquipmentMap.csv"); // We want an instance with nothing updated
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        int expected = sClassDecoder.SClassChange(-1L, 0, toByte("1111 1111")).length;
+        sClassDecoder.reset();
+
+        int actual = sClassDecoder.SClassChange(-1L, 0, toByte("1111 1111")).length;
+
+        assertEquals(expected, actual);
+    }
 }

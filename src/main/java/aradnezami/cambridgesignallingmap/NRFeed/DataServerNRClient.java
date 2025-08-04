@@ -32,8 +32,10 @@ public class DataServerNRClient implements NRFeedClient {
      */
     public DataServerNRClient(Socket socket) throws NRFeedException {
         this.socket = socket;
+
         try {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            socket.getOutputStream().write(1); // Forwarding connection type is 1
         } catch (IOException e) {
             throw new NRFeedException("Error whilst starting client.",
                     e,

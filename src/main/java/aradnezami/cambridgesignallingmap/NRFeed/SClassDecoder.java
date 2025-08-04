@@ -39,11 +39,23 @@ public class SClassDecoder {
      * @throws FileNotFoundException If the file cannot be accessed
      * @see ClassLoader#getResourceAsStream(String path) 
      */
-    SClassDecoder(String path) throws FileNotFoundException {
+    public SClassDecoder(String path) throws FileNotFoundException {
         equipmentMap = loadEquipmentMap(path);
         
         equipmentBytes = new int[256];
         isByteUpdated = new boolean[256];
+    }
+
+
+    /**
+     * Resets all SClass state in the instance. The instance will behave as though
+     * it has just been constructed with no knowledge of any state
+     */
+    public void reset() {
+        for (int i = 0; i < equipmentBytes.length; i++) {
+            equipmentBytes[i] = 0;
+            isByteUpdated[i] = false;
+        }
     }
 
     /**
