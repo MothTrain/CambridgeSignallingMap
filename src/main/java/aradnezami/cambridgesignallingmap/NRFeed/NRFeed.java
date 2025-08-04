@@ -1,6 +1,8 @@
 package aradnezami.cambridgesignallingmap.NRFeed;
 
-import java.io.FileNotFoundException;
+import aradnezami.cambridgesignallingmap.NRFeed.Client.NRFeedClient;
+import aradnezami.cambridgesignallingmap.NRFeed.Client.NRFeedException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -10,23 +12,6 @@ import java.util.Arrays;
  * {@link Event}s in a decoded form.
  */
 public class NRFeed {
-    public static void main(String[] args) {
-        NRFeedClient nrFeedClient = new DataServerNRClient(DataServerNRClient.getSocket("Cam-PSB-Server",65432));
-        SClassDecoder sClassDecoder;
-        try {
-            sClassDecoder = new SClassDecoder("SignallingEquipmentMap.csv");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        NRFeed feed = new NRFeed(nrFeedClient, sClassDecoder);
-
-        while (feed.isAlive()) {
-            System.out.println(feed.nextEvent());
-        }
-    }
-
-
     private final SClassDecoder decoder;
     private final NRFeedClient client;
 

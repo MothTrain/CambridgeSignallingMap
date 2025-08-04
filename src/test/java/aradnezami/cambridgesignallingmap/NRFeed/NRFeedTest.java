@@ -2,6 +2,8 @@ package aradnezami.cambridgesignallingmap.NRFeed;
 
 import aradnezami.cambridgesignallingmap.Diagram.Point;
 import aradnezami.cambridgesignallingmap.Diagram.Signal;
+import aradnezami.cambridgesignallingmap.NRFeed.Client.NRFeedClient;
+import aradnezami.cambridgesignallingmap.NRFeed.Client.NRFeedException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

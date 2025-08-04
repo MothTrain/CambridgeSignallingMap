@@ -1,4 +1,4 @@
-package aradnezami.cambridgesignallingmap.NRFeed;
+package aradnezami.cambridgesignallingmap.NRFeed.Client;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

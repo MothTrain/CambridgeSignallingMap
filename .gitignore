@@ -35,5 +35,5 @@ build/
 .DS_Store
 /EventLogs.log
 /.idea/
-/src/main/java/aradnezami/cambridgesignallingmap/NRFeed/PythonCommunications/secrets.json
+/src/main/java/aradnezami/cambridgesignallingmap/NRFeed/Client/PythonCommunications/secrets.json
 /src/main/java/aradnezami/cambridgesignallingmap/Test.java

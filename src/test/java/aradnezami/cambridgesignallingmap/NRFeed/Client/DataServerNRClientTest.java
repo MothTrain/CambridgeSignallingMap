@@ -1,4 +1,4 @@
-package aradnezami.cambridgesignallingmap.NRFeed;
+package aradnezami.cambridgesignallingmap.NRFeed.Client;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
