@@ -64,7 +64,7 @@ public class Track {
     @NotNull
     public String name;
     @NotNull
-    public String datumName;
+    public DatumPoint datumPoint;
     @Nullable
     public String trackCircuit;
 
@@ -127,7 +127,7 @@ public class Track {
      * {@link #VERTICAL_END}.
      *
      * @param name The unique name of this track
-     * @param datumName The name of the datum point used
+     * @param datumPoint The datum point of the track
      * @param trackCircuit The name of the track's track circuit
      * @param A_x X-coordinate of the 'A' point
      * @param A_y Y-coordinate of the 'A' point
@@ -141,7 +141,7 @@ public class Track {
      * @throws IllegalArgumentException If a validation rule was broken. Rules are stated above
      */
     public Track(@NotNull String name,
-                 @NotNull String datumName,
+                 @NotNull DatumPoint datumPoint,
                  @Nullable String trackCircuit,
                  int A_x,
                  int A_y,
@@ -174,7 +174,7 @@ public class Track {
         }
 
         this.name = name;
-        this.datumName = datumName;
+        this.datumPoint = datumPoint;
         this.trackCircuit = trackCircuit;
 
         //noinspection MagicConstant . Always -1,0,1 given the above if statement
@@ -217,6 +217,7 @@ public class Track {
 
         applyBreaks(points, A_Break, B_Break);
         applyOffset(points, A_Offset, B_Offset, gradient);
+        applyDatum(points, datumPoint);
         scale(points, SCALE);
 
         if (isOccupied) {
@@ -428,4 +429,13 @@ public class Track {
         return points;
     }
 
+
+    private static java.awt.Point[] applyDatum(java.awt.Point[] points, DatumPoint datumPoint) {
+        for (java.awt.Point point : points) {
+            point.x += datumPoint.x;
+            point.y += datumPoint.y;
+        }
+
+        return points;
+    }
 }
