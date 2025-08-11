@@ -124,10 +124,10 @@ public class Event {
         } else {
             //noinspection DataFlowIssue
             return "Event S-Class "  + switch (S_Type) {
-                case (Signal.TYPE) -> "Signal: " + S_Id + " State: " + Signal.translateState(S_State);
+                case (Signal.ASPECT_TYPE) -> "Signal: " + S_Id + " State: " + Signal.translateAspectState(S_State);
                 case (Point.TYPE) -> "Point: " + S_Id + " State: " + Point.translateState(S_State);
                 case (TrackCircuit.TYPE) -> "Track Circuit: " + S_Id + " State: " + TrackCircuit.translateState(S_State);
-                case (RouteIndicator.TYPE) -> "Route Indicator: " + S_Id + " State: " + RouteIndicator.translateState(S_State);
+                case (Signal.ROUTED_TYPE) -> "Signal Route: " + S_Id + " State: " + Signal.translateRoutedState(S_State);
                 case (Route.MAIN_TYPE) -> "Main Route: " + S_Id + " State: " + Route.translateState(S_State);
                 case (Route.SHUNT_TYPE) -> "Shunt Route: " + S_Id + " State: " + Route.translateState(S_State);
                 case (Route.CALL_ON_TYPE) -> "Call-On Route: " + S_Id + " State: " + Route.translateState(S_State);

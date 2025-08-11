@@ -9,7 +9,8 @@ public abstract class Signal {
     /**
      * Used to indicate the event type for a signal
      */
-    public static final int TYPE = 0;
+    public static final int ASPECT_TYPE = 0;
+    public static final int ROUTED_TYPE = 7;
 
     // Aspect states
     public static final int ON = 0;
@@ -96,13 +97,21 @@ public abstract class Signal {
      * @param state constant representing the signal state
      * @return string representation of equipment state
      */
-    public static String translateState(int state) {
+    public static String translateAspectState(int state) {
         return switch (state) {
             case ON -> "On";
             case MAIN_OFF -> "Main off";
             case SHUNT_OFF -> "Shunt off";
             case BOTH_OFF -> "Both off";
             default -> throw new IllegalArgumentException(state + " is not a valid Signal state");
+        };
+    }
+
+    public static String translateRoutedState(int state) {
+        return switch (state) {
+            case ROUTE_SET -> "Set";
+            case ROUTE_NOT_SET -> "Not Set";
+            default -> throw new IllegalArgumentException(state + " is not a valid Route indicator state");
         };
     }
 }

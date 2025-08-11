@@ -136,7 +136,7 @@ public class SClassDecoder {
             }
             case "DGK", "RGK", "OFFK", "SOFFK": {
                 state = signalChange(mapping, bitState);
-                equipmentType = Signal.TYPE;
+                equipmentType = Signal.ASPECT_TYPE;
                 break;
             }
             case "T": {
@@ -146,7 +146,7 @@ public class SClassDecoder {
             }
             case "B": {
                 state = routeIndicatorChange(bitState);
-                equipmentType = RouteIndicator.TYPE;
+                equipmentType = Signal.ROUTED_TYPE;
                 break;
             }
             case "RM": {
@@ -305,7 +305,7 @@ public class SClassDecoder {
     }
     
     private int routeIndicatorChange(boolean bitState) {
-        return (bitState) ? RouteIndicator.PRESSED : RouteIndicator.RELEASED;
+        return (bitState) ? Signal.ROUTE_SET : Signal.ROUTE_NOT_SET;
     }
     
     private int routeChange(boolean bitState) {

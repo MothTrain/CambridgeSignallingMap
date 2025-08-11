@@ -33,8 +33,8 @@ class NRFeedTest {
     @Test
     @DisplayName("nextEvent(): one SClass Event decoded")
     void nextEvent1() {
-        Event expected1 = new Event(-1L, Signal.TYPE, Signal.MAIN_OFF, "123");
-        Event expected2 = new Event(-1L, Signal.TYPE, Signal.MAIN_OFF, "456");
+        Event expected1 = new Event(-1L, Signal.ASPECT_TYPE, Signal.MAIN_OFF, "123");
+        Event expected2 = new Event(-1L, Signal.ASPECT_TYPE, Signal.MAIN_OFF, "456");
         when(client.pollNREvent()).thenReturn("s,1,2,3,4,5"); // Value doesn't matter
         when(decoder.SClassChange(anyLong(), anyInt(), anyInt()))
                 .thenReturn(new Event[]{expected1})
@@ -50,8 +50,8 @@ class NRFeedTest {
     @DisplayName("nextEvent(): multiple SClass events decoded")
     void nextEvent2() {
 
-        Event expected1 = new Event(-1L, Signal.TYPE, Signal.MAIN_OFF, "123");
-        Event expected2 = new Event(-1L, Signal.TYPE, Signal.MAIN_OFF, "456");
+        Event expected1 = new Event(-1L, Signal.ASPECT_TYPE, Signal.MAIN_OFF, "123");
+        Event expected2 = new Event(-1L, Signal.ASPECT_TYPE, Signal.MAIN_OFF, "456");
         Event expected3 = new Event(-1L, Point.TYPE, Point.REVERSE, "4567");
 
         when(client.pollNREvent()).thenReturn("s,1,2,3,4,5"); // Value doesn't matter
@@ -70,7 +70,7 @@ class NRFeedTest {
     @Test
     @DisplayName("nextEvent(): no SClass Event decoded")
     void nextEvent3() {
-        Event expected = new Event(-1L, Signal.TYPE, Signal.MAIN_OFF, "123");
+        Event expected = new Event(-1L, Signal.ASPECT_TYPE, Signal.MAIN_OFF, "123");
         when(client.pollNREvent()).thenReturn("s,1,2,3,4,5"); // Value doesn't matter
         when(decoder.SClassChange(anyLong(), anyInt(), anyInt()))
                 .thenReturn(new Event[]{}) // No event decoded

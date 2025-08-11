@@ -1,7 +1,6 @@
 package aradnezami.cambridgesignallingmap.NRFeed;
 
 import aradnezami.cambridgesignallingmap.DiagramElements.Point;
-import aradnezami.cambridgesignallingmap.DiagramElements.RouteIndicator;
 import aradnezami.cambridgesignallingmap.DiagramElements.Signal;
 import aradnezami.cambridgesignallingmap.DiagramElements.TrackCircuit;
 import org.junit.jupiter.api.BeforeEach;
@@ -51,14 +50,14 @@ class SClassDecoderTest {
     void RouteIndicator() {
         Event[] actual = sClassDecoder.SClassChange(-1L, 0, toByte("0100 0000"));
         assertEquals(
-                new Event(-1L, RouteIndicator.TYPE, RouteIndicator.PRESSED, "RouteIndicator"),
+                new Event(-1L, Signal.ROUTED_TYPE, Signal.ROUTE_SET, "RouteIndicator"),
                 actual[0]
         );
         assertEquals(1, actual.length);
 
         actual = sClassDecoder.SClassChange(-1L, 0, toByte("0000 0000"));
         assertEquals(
-                new Event(-1L, RouteIndicator.TYPE, RouteIndicator.RELEASED, "RouteIndicator"),
+                new Event(-1L, Signal.ROUTED_TYPE, Signal.ROUTE_NOT_SET, "RouteIndicator"),
                 actual[0]
         );
         assertEquals(1, actual.length);
@@ -70,7 +69,7 @@ class SClassDecoderTest {
     void Signal1() {
         Event[] actual = sClassDecoder.SClassChange(-1L, 0, toByte("0010 0000"));
         assertEquals(
-                new Event(-1L, Signal.TYPE, Signal.MAIN_OFF, "DGsignal"),
+                new Event(-1L, Signal.ASPECT_TYPE, Signal.MAIN_OFF, "DGsignal"),
                 actual[0]
         );
         assertEquals(1, actual.length);
@@ -78,7 +77,7 @@ class SClassDecoderTest {
 
         actual = sClassDecoder.SClassChange(-1L, 0, toByte("0000 0000"));
         assertEquals(
-                new Event(-1L, Signal.TYPE, Signal.ON, "DGsignal"),
+                new Event(-1L, Signal.ASPECT_TYPE, Signal.ON, "DGsignal"),
                 actual[0]
         );
         assertEquals(1, actual.length);
@@ -89,7 +88,7 @@ class SClassDecoderTest {
     void Signal2() {
         Event[] actual = sClassDecoder.SClassChange(-1L, 0, toByte("0001 0000"));
         assertEquals(
-                new Event(-1L, Signal.TYPE, Signal.MAIN_OFF, "OFFsignal"),
+                new Event(-1L, Signal.ASPECT_TYPE, Signal.MAIN_OFF, "OFFsignal"),
                 actual[0]
         );
         assertEquals(1, actual.length);
@@ -97,7 +96,7 @@ class SClassDecoderTest {
 
         actual = sClassDecoder.SClassChange(-1L, 0, toByte("0000 0000"));
         assertEquals(
-                new Event(-1L, Signal.TYPE, Signal.ON, "OFFsignal"),
+                new Event(-1L, Signal.ASPECT_TYPE, Signal.ON, "OFFsignal"),
                 actual[0]
         );
         assertEquals(1, actual.length);
@@ -108,7 +107,7 @@ class SClassDecoderTest {
     void Signal3() {
         Event[] actual = sClassDecoder.SClassChange(-1L, 0, toByte("0000 1000"));
         assertEquals(
-                new Event(-1L, Signal.TYPE, Signal.ON, "RGsignal"),
+                new Event(-1L, Signal.ASPECT_TYPE, Signal.ON, "RGsignal"),
                 actual[0]
         );
         assertEquals(1, actual.length);
@@ -116,7 +115,7 @@ class SClassDecoderTest {
 
         actual = sClassDecoder.SClassChange(-1L, 0, toByte("0000 0000"));
         assertEquals(
-                new Event(-1L, Signal.TYPE, Signal.MAIN_OFF, "RGsignal"),
+                new Event(-1L, Signal.ASPECT_TYPE, Signal.MAIN_OFF, "RGsignal"),
                 actual[0]
         );
         assertEquals(1, actual.length);
@@ -235,28 +234,28 @@ class SClassDecoderTest {
     void CompoundSignal1() {
         Event[] actual = sClassDecoder.SClassChange(-1L, 1, toByte("0000 0010"));
         assertEquals(
-                new Event(-1L, Signal.TYPE, Signal.MAIN_OFF, "CompoundSig1"),
+                new Event(-1L, Signal.ASPECT_TYPE, Signal.MAIN_OFF, "CompoundSig1"),
                 actual[0]
         );
         assertEquals(1, actual.length);
 
         actual = sClassDecoder.SClassChange(-1L, 1, toByte("0000 0011"));
         assertEquals(
-                new Event(-1L, Signal.TYPE, Signal.BOTH_OFF, "CompoundSig1"),
+                new Event(-1L, Signal.ASPECT_TYPE, Signal.BOTH_OFF, "CompoundSig1"),
                 actual[0]
         );
         assertEquals(1, actual.length);
 
         actual = sClassDecoder.SClassChange(-1L, 1, toByte("0000 0001"));
         assertEquals(
-                new Event(-1L, Signal.TYPE, Signal.SHUNT_OFF, "CompoundSig1"),
+                new Event(-1L, Signal.ASPECT_TYPE, Signal.SHUNT_OFF, "CompoundSig1"),
                 actual[0]
         );
         assertEquals(1, actual.length);
 
         actual = sClassDecoder.SClassChange(-1L, 1, toByte("0000 0000"));
         assertEquals(
-                new Event(-1L, Signal.TYPE, Signal.ON, "CompoundSig1"),
+                new Event(-1L, Signal.ASPECT_TYPE, Signal.ON, "CompoundSig1"),
                 actual[0]
         );
         assertEquals(1, actual.length);
@@ -268,7 +267,7 @@ class SClassDecoderTest {
     void CompoundSignal2() {
         Event[] actual = sClassDecoder.SClassChange(-1L, 2, toByte("1000 0000"));
         assertEquals(
-                new Event(-1L, Signal.TYPE, Signal.SHUNT_OFF, "CompoundSig2"),
+                new Event(-1L, Signal.ASPECT_TYPE, Signal.SHUNT_OFF, "CompoundSig2"),
                 actual[0]
         );
         assertEquals(1, actual.length);
@@ -277,14 +276,14 @@ class SClassDecoderTest {
 
         actual = sClassDecoder.SClassChange(-1L, 2, toByte("1100 0000"));
         assertEquals(
-                new Event(-1L, Signal.TYPE, Signal.MAIN_OFF, "CompoundSig2"),
+                new Event(-1L, Signal.ASPECT_TYPE, Signal.MAIN_OFF, "CompoundSig2"),
                 actual[0]
         );
         assertEquals(1, actual.length);
 
         actual = sClassDecoder.SClassChange(-1L, 2, toByte("0100 0000"));
         assertEquals(
-                new Event(-1L, Signal.TYPE, Signal.ON, "CompoundSig2"),
+                new Event(-1L, Signal.ASPECT_TYPE, Signal.ON, "CompoundSig2"),
                 actual[0]
         );
         assertEquals(1, actual.length);
