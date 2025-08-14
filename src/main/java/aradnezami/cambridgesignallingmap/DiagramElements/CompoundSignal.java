@@ -58,10 +58,6 @@ public class CompoundSignal extends Signal {
         applyOffset(shuntSignalHead, offset);
         applyOffset(mainSignalHead, offset);
 
-        applyDatum(shuntSignalHead, datumPoint.x, datumPoint.y);
-        applyDatum(signalPost, datumPoint.x, datumPoint.y);
-        applyDatum(mainSignalHead, datumPoint.x, datumPoint.y);
-
         scale(shuntSignalHead, 1.5);
         scale(signalPost, 1.5);
         scale(mainSignalHead, 1.5);
@@ -100,7 +96,7 @@ public class CompoundSignal extends Signal {
      * @throws IllegalArgumentException If offset is not {@link #NO_OFFSET}, {@link #OFFSET_UP} or {@link #OFFSET_DOWN}
      *                                  or if orientation is not {@link #LEFT} or {@link #RIGHT}
      */
-    public CompoundSignal(@NotNull String name, @NotNull DatumPoint datumPoint, int x, int y, int offset, int orientation) {
-        super(name, datumPoint, x, y, offset, orientation);
+    public CompoundSignal(@NotNull String name, int x, int y, int offset, int orientation) {
+        super(name, x, y, offset, orientation);
     }
 }

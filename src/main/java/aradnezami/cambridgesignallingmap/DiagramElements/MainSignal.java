@@ -26,13 +26,12 @@ public class MainSignal extends Signal {
      * or if orientation is not {@link #LEFT} or {@link #RIGHT}
      */
     public MainSignal(@NotNull String name,
-                      @NotNull DatumPoint datumPoint,
                       int x,
                       int y,
                       @MagicConstant(intValues = {NO_OFFSET, OFFSET_UP, OFFSET_DOWN}) int offset,
                       @MagicConstant(intValues = {LEFT, RIGHT}) int orientation) {
 
-        super(name, datumPoint, x, y, offset ,orientation);
+        super(name, x, y, offset ,orientation);
     }
 
 
@@ -63,9 +62,6 @@ public class MainSignal extends Signal {
 
         applyOffset(signalPost, offset);
         applyOffset(signalHead, offset);
-
-        applyDatum(signalHead, datumPoint.x, datumPoint.y);
-        applyDatum(signalPost, datumPoint.x, datumPoint.y);
 
         scale(signalHead, 1.5);
         scale(signalPost, 1.5);

@@ -59,17 +59,14 @@ public abstract class Signal {
 
 
     @NotNull
-    public String name;
-    @NotNull
-    public DatumPoint datumPoint;
+    public final String name;
 
-
-    public int x;
-    public int y;
+    protected final int x;
+    protected final int y;
     @MagicConstant(intValues = {LEFT, RIGHT})
-    protected int orientation;
+    protected final int orientation;
     @MagicConstant(intValues = {NO_OFFSET, OFFSET_UP, OFFSET_DOWN})
-    protected int offset;
+    protected final int offset;
 
 
     protected int aspectState;
@@ -98,23 +95,6 @@ public abstract class Signal {
     }
 
 
-    /**
-     * Sets the orientation of the signal
-     * @param orientation The orientation
-     * @throws IllegalArgumentException If the orientation is not {@link #LEFT} or {@link #RIGHT}
-     */
-    public void setOrientation(@MagicConstant(intValues = {LEFT, RIGHT}) int orientation) {
-        if (orientation != LEFT && orientation != RIGHT) {
-            throw new IllegalArgumentException(orientation + " is not a valid orientation. Route="+name);
-        }
-
-        this.orientation = orientation;
-    }
-
-    public int getOrientation() {
-        return orientation;
-    }
-
 
 
     /**
@@ -130,14 +110,12 @@ public abstract class Signal {
      * or if orientation is not {@link #LEFT} or {@link #RIGHT}
      */
     public Signal(@NotNull String name,
-                  @NotNull DatumPoint datumPoint,
                   int x,
                   int y,
                   @MagicConstant(intValues = {NO_OFFSET, OFFSET_UP, OFFSET_DOWN}) int offset,
                   @MagicConstant(intValues = {LEFT, RIGHT}) int orientation) {
 
         this.name = name;
-        this.datumPoint = datumPoint;
         this.x = x;
         this.y = y;
 
@@ -227,7 +205,6 @@ public abstract class Signal {
     }
 
 
-
     protected static Point[] scale(Point[] points, @MagicConstant double scale) {
         for (Point point : points) {
             point.x = (int) Math.ceil(point.x * scale);
@@ -237,13 +214,6 @@ public abstract class Signal {
         return points;
     }
 
-    protected static Point[] applyDatum(Point[] points, int x, int y) {
-        for (Point point : points) {
-            point.x += x;
-            point.y += y;
-        }
-        return points;
-    }
 
     protected static Point[] applyOffset(Point[] points, int offsetType) {
         for (Point point: points) {

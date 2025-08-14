@@ -22,19 +22,17 @@ public class Text {
     private static boolean areFontsInitialized = false;
 
 
-    public Color fontColour;
-    public int fontSize;
+    private final Color fontColour;
+    private int fontSize;
     @MagicConstant(intValues = {HEADCODE_FONT, GENERAL_FONT})
-    public final int font;
+    private final int font;
 
-    public String name;
+    public final String name;
     @NotNull
     public String text;
-    @NotNull
-    public DatumPoint datumPoint;
 
-    public int x;
-    public int y;
+    private final int x;
+    private final int y;
 
     /**
      * Creates a text object with the following properties. No name is specified. Instead the text
@@ -51,7 +49,6 @@ public class Text {
      */
     public Text(
             @NotNull String text,
-            @NotNull DatumPoint datumPoint,
             int x,
             int y,
             Color colour,
@@ -64,7 +61,6 @@ public class Text {
         this.fontSize = fontSize;
         this.name = text;
         this.text = text;
-        this.datumPoint = datumPoint;
         if (fontType != HEADCODE_FONT && fontType != GENERAL_FONT) {
             throw new IllegalArgumentException("Invalid font type: " + fontType + " text="+text);
         }
@@ -90,7 +86,6 @@ public class Text {
     public Text(
             @NotNull String name,
             @NotNull String text,
-            @NotNull DatumPoint datumPoint,
             int x,
             int y,
             Color colour,
@@ -103,7 +98,6 @@ public class Text {
         this.fontSize = fontSize;
         this.name = name;
         this.text = text;
-        this.datumPoint = datumPoint;
         if (fontType != HEADCODE_FONT && fontType != GENERAL_FONT) {
             throw new IllegalArgumentException("Invalid font type: " + fontType + " text="+text);
         }
@@ -157,10 +151,11 @@ public class Text {
         for (String line : lines) {
             g2d.drawString(
                     line,
-                    (int) Math.ceil((x + datumPoint.x) * scale),
-                    (int) Math.ceil((y + lineY + datumPoint.y) * scale)
+                    (int) Math.ceil((x) * scale),
+                    (int) Math.ceil((y + lineY) * scale)
             );
             lineY += fontSize;
         }
     }
+
 }

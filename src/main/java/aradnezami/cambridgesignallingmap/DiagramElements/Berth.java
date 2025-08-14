@@ -21,23 +21,24 @@ public class Berth {
 
 
     @NotNull
-    private String name;
-    @NotNull
-    public DatumPoint datumPoint;
+    public final String name;
 
     private final Text describer;
 
-    public int x;
-    public int y;
+    private final int x;
+    private final int y;
 
 
     /**
      * Creates an instance of the berth class with the given properties
+     * @param name The name of the berth. Should be 4 characters
+     * @param x The x coordinate of the the left of the describer
+     * @param y The y coordinate of the <b>middle</b> of the describer
+     * @throws IllegalArgumentException If the name was not 4 characters
      * @throws IOException If there was an IO error retrieving a font file
      * @throws FontFormatException If the font file was incorrectly formatted
      */
     public Berth(@NotNull String name,
-                 @NotNull DatumPoint datumPoint,
                  int x,
                  int y) throws IOException, FontFormatException {
 
@@ -46,13 +47,11 @@ public class Berth {
         }
 
         this.name = name;
-        this.datumPoint = datumPoint;
         this.x = x;
         this.y = y;
 
         describer = new Text(
                 "",
-                datumPoint,
                 x,
                 y+offsetText,
                 headcodeColour,
@@ -72,8 +71,8 @@ public class Berth {
         if (describer.text.isEmpty()) {return;}
 
         g2d.setColor(Color.black);
-        g2d.fillRect((int) ((x+datumPoint.x-1)*1.5),
-                (int) ((y+datumPoint.y-((double) fontSize/2))*1.5),
+        g2d.fillRect((int) ((x-1)*1.5),
+                (int) ((y-((double) fontSize/2))*1.5),
                 (int) (BACKER_WIDTH *1.5),
                 (int) (fontSize*1.5));
 

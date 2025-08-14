@@ -13,25 +13,20 @@ import java.util.Set;
 
 /**
  * Instances of the Track class are used to conveniently draw track representations on a diagram, using
- * a provided {@link Graphics2D} object, relating to the context being drawn on. Some properties of the track
- * may be altered after construction, however only to the extent that would be required by a live diagram
- * (eg: offsetting and track occupation). All properties may be altered by a diagram editor however.
+ * a provided {@link Graphics2D} object, relating to the context being drawn on.
  * <h2>Geometry</h2>
  * <h3>Co-ordinates</h3>
- * The coordinates of the Track ends should not be modified post construction, unless it is by a diagram
- * editing program. The track has 2 coordinates associated
+ * The track has 2 coordinates associated
  * with it. The A coordinate and the B coordinate. <b>The 'A' coordinate must always be on the left side</b>
  * Coordinates must also positioned so that the gradient of a line connecting the coordinates
  * is 0, -1 or 1.<br>
  * <h3>Breaks</h3>
  * The end of a track can be moved away from the specified coordinate using a break. A {@link #TC_BREAK}
  * (Track Circuit break) is the only currently supported break currently. For no break, use {@link #NO_BREAK}.
- * Breaks should not be changed post construction, unless it is by a diagram editing program.
  * <h3>Ends</h3>
  * If <b>(and only if)</b> a track's gradient is not 0, the end may be horizontal or vertical. That is: the edge terminating
  * the track at each end can be vertical or horizontal. This is specified by {@link #HORIZONTAL_END} and
  * {@link #VERTICAL_END}. This is modified by{@link #setA_CurrentEnd(int)} and {@link #setB_CurrentEnd(int)}.
- * This can be modified post construction by any user.
  * <h3>Offset</h3>
  * On top of the offset caused by a break (if applicable), the track can be further offset. This is meant
  * to be used with negative values, however positive values will also function. This is modified by
@@ -62,11 +57,7 @@ public class Track {
     public static final int TC_BREAK = 3;
 
     @NotNull
-    public String name;
-    @NotNull
-    public DatumPoint datumPoint;
-    @Nullable
-    public String trackCircuit;
+    public final String name;
 
     //State
     private boolean isOccupied = false;
@@ -74,41 +65,41 @@ public class Track {
 
     //Geometry
     @MagicConstant(intValues = {-1,0,1})
-    private int gradient;
+    private final int gradient;
 
 
-    private int Ax;
-    private int Ay;
+    private final int Ax;
+    private final int Ay;
     private int A_Offset = 0;
     /**
      * Holds the default end orientation of this track. Should not be modified by a non diagram editor
      */
     @MagicConstant(intValues = {0,1})
-    private int A_DefaultEnd;
+    private final int A_DefaultEnd;
     /**
      * Holds the displayed current end orientation of this track. This may be modified by a non diagram editor
      */
     @MagicConstant(intValues = {0,1})
     private int A_CurrentEnd;
     @MagicConstant(intValues = {2,3})
-    private int A_Break;
+    private final int A_Break;
 
 
-    private int Bx;
-    private int By;
+    private final int Bx;
+    private final int By;
     private int B_Offset = 0;
     /**
      * Holds the default end orientation of this track. Should not be modified by a non diagram editor
      */
     @MagicConstant(intValues = {0,1})
-    private int B_DefaultEnd;
+    private final int B_DefaultEnd;
     /**
      * Holds the displayed current end orientation of this track. This may be modified by a non diagram editor
      */
     @MagicConstant(intValues = {0,1})
     private int B_CurrentEnd;
     @MagicConstant(intValues = {2,3})
-    private int  B_Break;
+    private final int B_Break;
 
 
     /**
@@ -127,7 +118,6 @@ public class Track {
      * {@link #VERTICAL_END}.
      *
      * @param name The unique name of this track
-     * @param datumPoint The datum point of the track
      * @param trackCircuit The name of the track's track circuit
      * @param A_x X-coordinate of the 'A' point
      * @param A_y Y-coordinate of the 'A' point
@@ -141,7 +131,6 @@ public class Track {
      * @throws IllegalArgumentException If a validation rule was broken. Rules are stated above
      */
     public Track(@NotNull String name,
-                 @NotNull DatumPoint datumPoint,
                  @Nullable String trackCircuit,
                  int A_x,
                  int A_y,
@@ -174,8 +163,6 @@ public class Track {
         }
 
         this.name = name;
-        this.datumPoint = datumPoint;
-        this.trackCircuit = trackCircuit;
 
         //noinspection MagicConstant . Always -1,0,1 given the above if statement
         this.gradient = (int) gradient;
@@ -217,7 +204,6 @@ public class Track {
 
         applyBreaks(points, A_Break, B_Break);
         applyOffset(points, A_Offset, B_Offset, gradient);
-        applyDatum(points, datumPoint);
         scale(points, SCALE);
 
         if (isOccupied) {
@@ -278,23 +264,10 @@ public class Track {
         }
         this.A_CurrentEnd = A_End;
     }
-    /**
-     * Sets the default end orientation. Not to be used by a non diagram editor
-     * @throws IllegalArgumentException If the end is {@link #HORIZONTAL_END} and the track is also horizontal
-     */
-    public void setA_DefaultEnd(int A_End) {
-        if (gradient==0 && A_End !=VERTICAL_END) {
-            throw new IllegalArgumentException("The default A end orientation must be vertical if the track is horizontal" +
-                    "Track name="+name);
-        }
-        this.A_DefaultEnd = A_End;
-    }
-    public void setA_Break(int A_Break) {this.A_Break = A_Break;}
 
     // A Getters
     public int getAy() {return Ay;}
     public int getAx() {return Ax;}
-    public int getA_Break() {return A_Break;}
     public int getA_DefaultEnd() {return A_DefaultEnd;}
     public int getA_CurrentEnd() {return A_CurrentEnd;}
 
@@ -314,57 +287,12 @@ public class Track {
 
         this.B_CurrentEnd = B_End;
     }
-    /**
-     * Sets the default end orientation. Not to be used by a non diagram editor
-     * @throws IllegalArgumentException If the end is {@link #HORIZONTAL_END} and the track is also horizontal
-     */
-    public void setB_DefaultEnd(int B_End) {
-        if (gradient==0 && B_End !=VERTICAL_END) {
-            throw new IllegalArgumentException("The B end orientation must be vertical if the track is horizontal" +
-                    "Track name="+name);
-        }
-        this.B_DefaultEnd = B_End;
-    }
-    public void setB_Break(int B_Break) {this.B_Break = B_Break;}
+
     // B getters
     public int getBx() {return Bx;}
     public int getBy() {return By;}
     public int getB_DefaultEnd() {return B_DefaultEnd;}
     public int getB_CurrentEnd() {return B_CurrentEnd;}
-    public int getB_Break() {return B_Break;}
-
-    /**
-     * Not to be used by a non diagram editor.
-     */
-    public void setCoordinates(int A_x, int A_y, int B_x, int B_y) {
-        if (A_x > B_x) {
-            throw new IllegalArgumentException("The x of the 'A' end must be less than the 'B' end: 'A' end must be on the left. " +
-                    "Track name="+name + "A_x="+A_x + ", B_x="+B_x);
-        }
-
-        double gradient = (double) (A_y - B_y) / (A_x - B_x);
-        if (gradient != -1 && gradient != 0 && gradient != 1) {
-            throw new IllegalArgumentException("The gradient of the track must be -1,0 or 1. Not: " + gradient +
-                    " Track name="+name + ". A_x="+A_x + " A_y="+A_y + " B_x="+B_x + " B_y="+B_y);
-        }
-
-        if (gradient==0 && A_CurrentEnd !=VERTICAL_END) {
-            throw new IllegalArgumentException("The A end orientation must be vertical if the track is horizontal" +
-                    "Track name="+name);
-        }
-        if (gradient==0 && B_CurrentEnd !=VERTICAL_END) {
-            throw new IllegalArgumentException("The B end orientation must be vertical if the track is horizontal" +
-                    "Track name="+name);
-        }
-
-        //noinspection MagicConstant
-        this.gradient = (int) gradient;
-
-        Ax = A_x;
-        Ay = A_y;
-        Bx = B_x;
-        By = B_y;
-    }
 
 
 
@@ -429,13 +357,4 @@ public class Track {
         return points;
     }
 
-
-    private static java.awt.Point[] applyDatum(java.awt.Point[] points, DatumPoint datumPoint) {
-        for (java.awt.Point point : points) {
-            point.x += datumPoint.x;
-            point.y += datumPoint.y;
-        }
-
-        return points;
-    }
 }
