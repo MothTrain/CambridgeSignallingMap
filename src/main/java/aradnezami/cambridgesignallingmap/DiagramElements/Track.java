@@ -2,7 +2,6 @@ package aradnezami.cambridgesignallingmap.DiagramElements;
 
 import org.intellij.lang.annotations.MagicConstant;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,6 +59,7 @@ public class Track {
     public final String name;
 
     //State
+    private final boolean hasTrackCircuit;
     private boolean isOccupied = false;
     private final Set<Route> routesSet = new HashSet<>();
 
@@ -118,7 +118,7 @@ public class Track {
      * {@link #VERTICAL_END}.
      *
      * @param name The unique name of this track
-     * @param trackCircuit The name of the track's track circuit
+     * @param hasTrackCircuit True if the track has a track circuit associated with it
      * @param A_x X-coordinate of the 'A' point
      * @param A_y Y-coordinate of the 'A' point
      * @param B_x X-coordinate of the 'B' point
@@ -131,7 +131,7 @@ public class Track {
      * @throws IllegalArgumentException If a validation rule was broken. Rules are stated above
      */
     public Track(@NotNull String name,
-                 @Nullable String trackCircuit,
+                 boolean hasTrackCircuit,
                  int A_x,
                  int A_y,
                  int B_x,
@@ -163,6 +163,7 @@ public class Track {
         }
 
         this.name = name;
+        this.hasTrackCircuit = hasTrackCircuit;
 
         //noinspection MagicConstant . Always -1,0,1 given the above if statement
         this.gradient = (int) gradient;
@@ -214,13 +215,18 @@ public class Track {
             g2d.setColor(DEFAULT_COLOUR);
         }
 
-        Path2D path = new Path2D.Double();
-        path.moveTo(points[0].x, points[0].y);
-        for (int i = 1; i < 4; i++) {
-            path.lineTo(points[i].x, points[i].y);
+        if (hasTrackCircuit) {
+            Path2D path = new Path2D.Double();
+            path.moveTo(points[0].x, points[0].y);
+            for (int i = 1; i < 4; i++) {
+                path.lineTo(points[i].x, points[i].y);
+            }
+            path.closePath();
+            g2d.fill(path);
+        } else {
+            g2d.drawLine(points[0].x, points[0].y, points[3].x, points[3].y);
+            g2d.drawLine(points[1].x, points[1].y, points[2].x, points[2].y);
         }
-        path.closePath();
-        g2d.fill(path);
     }
 
 
