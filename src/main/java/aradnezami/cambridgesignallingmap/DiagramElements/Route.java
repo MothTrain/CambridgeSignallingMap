@@ -21,8 +21,6 @@ public class Route {
 
     @NotNull
     public String name;
-    @NotNull
-    public String datumName;
 
     private Track[] tracks;
 
@@ -32,13 +30,10 @@ public class Route {
     /**
      * Creates a route with the following details
      * @param name Unique name of the route
-     * @param datumName The name of the datum point. Since a route has no location, the datum is
-     *                  just for organisation
      * @param tracks The tracks covered by the route
      */
-    public Route(@NotNull String name, @NotNull String datumName, Track[] tracks) {
+    public Route(@NotNull String name, Track[] tracks) {
         this.name = name;
-        this.datumName = datumName;
         this.tracks = tracks;
     }
 
