@@ -39,8 +39,6 @@ public class Point {
 
     @NotNull
     public String name;
-    @NotNull
-    public String datumName;
 
     @NotNull
     private Track normalTrack;
@@ -52,15 +50,12 @@ public class Point {
     /**
      * Creates a track with the following properties
      * @param name The name of the point
-     * @param datumName The name of the point's datum point. Note that since the point has no location,
-     *                  the datum point is only used for organisation
      * @param normalTrack The track that is connected when the point is normal
      * @param normalEnd The end of the track that is associated with the point ('A' or 'B')
      * @param reverseTrack The track that is connected when the point is reverse
      * @param reverseEnd The end of the track that is associated with the point ('A' or 'B')
      */
     public Point(@NotNull String name,
-                 @NotNull String datumName,
                  @NotNull Track normalTrack,
                  char normalEnd,
                  @NotNull Track reverseTrack,
@@ -104,7 +99,6 @@ public class Point {
         this.reverseTrack = reverseTrack;
 
         this.name = name;
-        this.datumName = datumName;
     }
 
 

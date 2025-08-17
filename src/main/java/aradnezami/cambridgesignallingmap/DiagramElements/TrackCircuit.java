@@ -21,8 +21,6 @@ public class TrackCircuit {
 
     @NotNull
     public String name;
-    @NotNull
-    public String datumName;
 
     @NotNull
     private Track[] tracks;
@@ -31,16 +29,12 @@ public class TrackCircuit {
     /**
      * Creates a track circuit with the following properties
      * @param name Unique name of the track circuit
-     * @param datumName Name of datum point. Since the track circuit has no location, the datum point is
-     *                  only for organisation
      * @param tracks The tracks covered by the track circuit
      */
     public TrackCircuit(@NotNull String name,
-                        @NotNull String datumName,
                         @NotNull Track[] tracks) {
 
         this.name = name;
-        this.datumName = datumName;
         this.tracks = tracks;
         isOccupied = false;
     }
