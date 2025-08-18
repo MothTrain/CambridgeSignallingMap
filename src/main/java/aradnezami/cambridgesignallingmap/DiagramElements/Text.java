@@ -4,7 +4,6 @@ import org.intellij.lang.annotations.MagicConstant;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -23,7 +22,7 @@ public class Text {
 
 
     private final Color fontColour;
-    private int fontSize;
+    private final int fontSize;
     @MagicConstant(intValues = {HEADCODE_FONT, GENERAL_FONT})
     private final int font;
 
@@ -44,8 +43,8 @@ public class Text {
      * @param colour The colour of the text
      * @param fontSize The font size
      * @param fontType The font to be used. Either {@link #GENERAL_FONT} or {@link #HEADCODE_FONT}
-     * @throws IOException If there was an error loading the font files
-     * @throws FontFormatException If there was a font format issue with the font files
+     * @throws FontLoadingException If the fonts could not be successfully loaded
+     * @throws IllegalArgumentException If the fontType is not {@link #HEADCODE_FONT} or {@link #GENERAL_FONT}
      */
     public Text(
             @NotNull String text,
@@ -53,7 +52,7 @@ public class Text {
             int y,
             Color colour,
             int fontSize,
-            @MagicConstant(intValues = {HEADCODE_FONT, GENERAL_FONT}) int fontType) throws IOException, FontFormatException {
+            @MagicConstant(intValues = {HEADCODE_FONT, GENERAL_FONT}) int fontType) {
 
         this.x = x;
         this.y = y;
@@ -80,8 +79,8 @@ public class Text {
      * @param colour The colour of the text
      * @param fontSize The font size
      * @param fontType The font to be used. Either {@link #GENERAL_FONT} or {@link #HEADCODE_FONT}
-     * @throws IOException If there was an error loading the font files
-     * @throws FontFormatException If there was a font format issue with the font files
+     * @throws FontLoadingException If the fonts could not be successfully loaded
+     * @throws IllegalArgumentException If the fontType is not {@link #HEADCODE_FONT} or {@link #GENERAL_FONT}
      */
     public Text(
             @NotNull String name,
@@ -90,7 +89,7 @@ public class Text {
             int y,
             Color colour,
             int fontSize,
-            @MagicConstant(intValues = {HEADCODE_FONT, GENERAL_FONT}) int fontType) throws IOException, FontFormatException {
+            @MagicConstant(intValues = {HEADCODE_FONT, GENERAL_FONT}) int fontType) {
 
         this.x = x;
         this.y = y;
@@ -108,7 +107,7 @@ public class Text {
 
 
 
-    private void initialiseFonts() throws FontFormatException, IOException {
+    private void initialiseFonts() throws FontLoadingException {
         if (areFontsInitialized) {
             return;
         }
@@ -119,17 +118,31 @@ public class Text {
 
         InputStream headcodeFontStream = classLoader.getResourceAsStream("PixeloidMono-d94EV.ttf");
         if (headcodeFontStream == null) {
-            throw new FileNotFoundException("Could not find headcode font file");
+            throw new FontLoadingException("Could not find headcode font file");
         }
-        Font headcodeFont = Font.createFont(Font.TRUETYPE_FONT, headcodeFontStream);
-        headcodeFontStream.close();
+        Font headcodeFont;
+        try {
+            headcodeFont = Font.createFont(Font.TRUETYPE_FONT, headcodeFontStream);
+        } catch (FontFormatException | IOException e) {
+            throw new FontLoadingException("Could not load headcode font", e);
+        }
+        try {
+            headcodeFontStream.close();
+        } catch (IOException e) {
+            throw new FontLoadingException("Could not close headcode font file loader", e);
+        }
         graphicsEnvironment.registerFont(headcodeFont);
 
         InputStream generalFontStream = classLoader.getResourceAsStream("HomeVideo-BLG6G.ttf");
         if (generalFontStream == null) {
-            throw new FileNotFoundException("Could not find general font file");
+            throw new FontLoadingException("Could not find general font file");
         }
-        Font font = Font.createFont(Font.TRUETYPE_FONT, generalFontStream);
+        Font font;
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, generalFontStream);
+        } catch (FontFormatException | IOException e) {
+            throw new FontLoadingException("Could not load general font", e);
+        }
         graphicsEnvironment.registerFont(font);
 
         areFontsInitialized = true;

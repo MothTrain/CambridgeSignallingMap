@@ -4,7 +4,6 @@ package aradnezami.cambridgesignallingmap.DiagramElements;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
-import java.io.IOException;
 
 /**
  * A berth is used to conveniently draw train headcodes, contained within a berth. This class
@@ -35,12 +34,11 @@ public class Berth {
      * @param x The x coordinate of the the left of the describer
      * @param y The y coordinate of the <b>middle</b> of the describer
      * @throws IllegalArgumentException If the name was not 4 characters
-     * @throws IOException If there was an IO error retrieving a font file
-     * @throws FontFormatException If the font file was incorrectly formatted
+     * @throws FontLoadingException If the text fonts could not be loaded
      */
     public Berth(@NotNull String name,
                  int x,
-                 int y) throws IOException, FontFormatException {
+                 int y) throws FontLoadingException {
 
         if (name.length() != 4) {
             throw new IllegalArgumentException("Berth name must contain exactly 4 characters. Name="+name);
