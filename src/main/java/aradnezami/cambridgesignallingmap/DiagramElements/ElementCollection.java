@@ -3,6 +3,7 @@ package aradnezami.cambridgesignallingmap.DiagramElements;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -42,23 +43,62 @@ public class ElementCollection {
     /**
      * Creates an element collection with the following Elements
      */
-    public ElementCollection(@NotNull HashMap<String, Track> tracks,
-                             @NotNull HashMap<String, Signal> signals,
-                             @NotNull HashMap<String, Berth> berths,
-                             @NotNull HashMap<String, Text> texts,
-                             @NotNull HashMap<String, Rectangle> rectangles,
-                             @NotNull HashMap<String, Point> points,
-                             @NotNull HashMap<String, Route> routes,
-                             @NotNull HashMap<String, TrackCircuit> trackCircuits) {
+    public ElementCollection(@NotNull ArrayList<Track> tracks,
+                             @NotNull ArrayList<Signal> signals,
+                             @NotNull ArrayList<Berth> berths,
+                             @NotNull ArrayList<Text> texts,
+                             @NotNull ArrayList<Rectangle> rectangles,
+                             @NotNull ArrayList<Point> points,
+                             @NotNull ArrayList<Route> routes,
+                             @NotNull ArrayList<TrackCircuit> trackCircuits) {
 
-        this.tracks = tracks;
-        this.signals = signals;
-        this.berths = berths;
-        this.texts = texts;
-        this.rectangles = rectangles;
-        this.points = points;
-        this.routes = routes;
-        this.trackCircuits = trackCircuits;
+        this.tracks = new HashMap<>() {{
+            for (Track track : tracks) {
+                put(track.name, track);
+            }
+        }};
+
+        this.signals = new HashMap<>() {{
+            for (Signal signal : signals) {
+                put(signal.name, signal);
+            }
+        }};
+
+        this.berths = new HashMap<>() {{
+            for (Berth berth : berths) {
+                put(berth.name, berth);
+            }
+        }};
+
+        this.texts = new HashMap<>() {{
+            for (Text text : texts) {
+                put(text.name, text);
+            }
+        }};
+
+        this.rectangles = new HashMap<>() {{
+            for (Rectangle rectangle : rectangles) {
+                put(rectangle.name, rectangle);
+            }
+        }};
+
+        this.points = new HashMap<>() {{
+            for (Point point : points) {
+                put(point.name, point);
+            }
+        }};
+
+        this.routes = new HashMap<>() {{
+            for (Route route : routes) {
+                put(route.name, route);
+            }
+        }};
+
+        this.trackCircuits = new HashMap<>() {{
+            for (TrackCircuit trackCircuit : trackCircuits) {
+                put(trackCircuit.name, trackCircuit);
+            }
+        }};
     }
 
 
