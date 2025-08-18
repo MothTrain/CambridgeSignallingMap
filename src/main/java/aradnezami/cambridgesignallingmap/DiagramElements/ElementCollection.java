@@ -118,6 +118,16 @@ public class ElementCollection {
      * @param g2d The graphics context to draw on
      */
     public void draw(Graphics2D g2d) {
+        g2d.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(
+                RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2d.setRenderingHint(
+                RenderingHints.KEY_FRACTIONALMETRICS,
+                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+
         for (Rectangle rectangle : rectangles.values()) {
             rectangle.draw(g2d);
         }
