@@ -192,15 +192,15 @@ public class Track {
             points[0] = new java.awt.Point(Ax, Ay+RELATIVE_TRACK_WIDTH);
             points[1] = new java.awt.Point(Ax, Ay-RELATIVE_TRACK_WIDTH);
         } else if (A_CurrentEnd == HORIZONTAL_END) {
-            points[0] = new java.awt.Point(Ax-RELATIVE_TRACK_WIDTH, Ay);
-            points[1] = new java.awt.Point(Ax+RELATIVE_TRACK_WIDTH, Ay);
+            points[0] = new java.awt.Point(Ax+RELATIVE_TRACK_WIDTH, Ay);
+            points[1] = new java.awt.Point(Ax-RELATIVE_TRACK_WIDTH, Ay);
         }
         if (B_CurrentEnd == VERTICAL_END) {
             points[2] = new java.awt.Point(Bx, By-RELATIVE_TRACK_WIDTH);
             points[3] = new java.awt.Point(Bx, By+RELATIVE_TRACK_WIDTH);
         } else if (B_CurrentEnd == HORIZONTAL_END) {
-            points[2] = new java.awt.Point(Bx+RELATIVE_TRACK_WIDTH, By);
-            points[3] = new java.awt.Point(Bx-RELATIVE_TRACK_WIDTH, By);
+            points[2] = new java.awt.Point(Bx-RELATIVE_TRACK_WIDTH, By);
+            points[3] = new java.awt.Point(Bx+RELATIVE_TRACK_WIDTH, By);
         }
 
         applyBreaks(points, A_Break, B_Break);
