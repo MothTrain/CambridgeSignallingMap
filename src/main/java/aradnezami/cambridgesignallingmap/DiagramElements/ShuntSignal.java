@@ -64,8 +64,8 @@ public class ShuntSignal extends Signal {
         applyOffset(signalPost, offset);
         applyOffset(signalHead, offset);
 
-        scale(signalHead, 1.5);
-        scale(signalPost, 1.5);
+        scale(signalHead, ElementCollection.scale);
+        scale(signalPost, ElementCollection.scale);
 
         switch (aspectState) {
             case ON: drawShape(signalHead, g2d, SOLOSHUNT_ON_COLOUR); break;

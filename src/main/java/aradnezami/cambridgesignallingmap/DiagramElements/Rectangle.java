@@ -58,9 +58,9 @@ public class Rectangle {
      */
     public void draw(Graphics2D g2d) {
         g2d.setColor(colour);
-        g2d.fillRect((int) Math.ceil(A_x*1.5),
-                (int) Math.ceil(A_y*1.5),
-                (int) ((B_x - A_x)*1.5),
-                (int) ((B_y - A_y)*1.5));
+        g2d.fillRect((int) Math.ceil(A_x*ElementCollection.scale),
+                (int) Math.ceil(A_y*ElementCollection.scale),
+                (int) ((B_x - A_x)*ElementCollection.scale),
+                (int) ((B_y - A_y)*ElementCollection.scale));
     }
 }

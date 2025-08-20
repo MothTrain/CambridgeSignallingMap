@@ -12,7 +12,6 @@ import java.io.InputStream;
  * using 2 fonts found in the resource folder. Lines are delimited by {@code \n} characters
  */
 public class Text {
-    private static final double scale = 1.5;
     public static final int HEADCODE_FONT = 0;
     public static final int GENERAL_FONT = 1;
 
@@ -156,7 +155,7 @@ public class Text {
     public void draw(Graphics2D g2d) {
         g2d.setColor(fontColour);
         String fontName = (font == HEADCODE_FONT) ? "Pixeloid Mono" : "Home Video";
-        g2d.setFont(new Font(fontName, Font.PLAIN, (int) Math.ceil(fontSize * scale)));
+        g2d.setFont(new Font(fontName, Font.PLAIN, (int) Math.ceil(fontSize * ElementCollection.scale)));
 
         String[] lines = text.split("\n");
 
@@ -164,8 +163,8 @@ public class Text {
         for (String line : lines) {
             g2d.drawString(
                     line,
-                    (int) Math.ceil((x) * scale),
-                    (int) Math.ceil((y + lineY) * scale)
+                    (int) Math.ceil((x) * ElementCollection.scale),
+                    (int) Math.ceil((y + lineY) * ElementCollection.scale)
             );
             lineY += fontSize;
         }

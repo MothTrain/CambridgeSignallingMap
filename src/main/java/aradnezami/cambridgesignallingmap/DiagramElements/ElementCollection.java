@@ -40,6 +40,8 @@ public class ElementCollection {
     private final @NotNull HashMap<String, Route> routes;
     private final @NotNull HashMap<String, TrackCircuit> trackCircuits;
 
+    public static double scale = 1;
+
     /**
      * Creates an element collection with the following Elements
      */

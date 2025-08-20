@@ -63,8 +63,8 @@ public class MainSignal extends Signal {
         applyOffset(signalPost, offset);
         applyOffset(signalHead, offset);
 
-        scale(signalHead, 1.5);
-        scale(signalPost, 1.5);
+        scale(signalHead, ElementCollection.scale);
+        scale(signalPost, ElementCollection.scale);
 
 
         switch (aspectState) {

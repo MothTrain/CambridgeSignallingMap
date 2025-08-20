@@ -69,10 +69,10 @@ public class Berth {
         if (describer.text.isEmpty()) {return;}
 
         g2d.setColor(Color.black);
-        g2d.fillRect((int) ((x-1)*1.5),
-                (int) ((y-((double) fontSize/2))*1.5),
-                (int) (BACKER_WIDTH *1.5),
-                (int) (fontSize*1.5));
+        g2d.fillRect((int) ((x-1)*ElementCollection.scale),
+                (int) ((y-((double) fontSize/2))*ElementCollection.scale),
+                (int) (BACKER_WIDTH *ElementCollection.scale),
+                (int) (fontSize*ElementCollection.scale));
 
         describer.draw(g2d);
 

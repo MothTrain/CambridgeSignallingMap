@@ -58,9 +58,9 @@ public class CompoundSignal extends Signal {
         applyOffset(shuntSignalHead, offset);
         applyOffset(mainSignalHead, offset);
 
-        scale(shuntSignalHead, 1.5);
-        scale(signalPost, 1.5);
-        scale(mainSignalHead, 1.5);
+        scale(shuntSignalHead, ElementCollection.scale);
+        scale(signalPost, ElementCollection.scale);
+        scale(mainSignalHead, ElementCollection.scale);
 
         switch (aspectState) {
             case ON:

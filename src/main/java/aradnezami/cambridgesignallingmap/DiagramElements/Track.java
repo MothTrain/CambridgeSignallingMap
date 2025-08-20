@@ -41,7 +41,6 @@ import java.util.Set;
  */
 public class Track {
     //Constants
-    private static final double SCALE = 1.5;
     private static final int RELATIVE_TRACK_WIDTH = 2;
     private static final int RELATIVE_TC_BREAK_WIDTH = 1;
 
@@ -205,7 +204,7 @@ public class Track {
 
         applyBreaks(points, A_Break, B_Break);
         applyOffset(points, A_Offset, B_Offset, gradient);
-        scale(points, SCALE);
+        scale(points, ElementCollection.scale);
 
         if (isOccupied) {
             g2d.setColor(OCCUPIED_COLOUR);
