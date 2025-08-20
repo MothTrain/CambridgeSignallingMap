@@ -246,4 +246,21 @@ public abstract class Signal {
             default -> throw new IllegalArgumentException(state + " is not a valid Route indicator state");
         };
     }
+
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getOffset() {
+        return offset;
+    }
+
+    public int getOrientation() {
+        return orientation;
+    }
 }
