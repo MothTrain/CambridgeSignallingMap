@@ -19,8 +19,8 @@ import java.util.HashMap;
  * <i>Highest Priority</i>
  * <li>{@link Signal}s</li>
  * <li>{@link Berth}s</li>
- * <li>{@link Track}s</li>
  * <li>{@link Text}</li>
+ * <li>{@link Track}s</li>
  * <li>{@link Rectangle}s</li>
  * <i>Lowest Priority</i> <br>
  *  <br>
@@ -28,17 +28,17 @@ import java.util.HashMap;
  */
 public class ElementCollection {
     // real elements
+
     private final @NotNull HashMap<String, Track> tracks;
     private final @NotNull HashMap<String, Signal> signals;
     private final @NotNull HashMap<String, Berth> berths;
     private final @NotNull HashMap<String, Text> texts;
     private final @NotNull HashMap<String, Rectangle> rectangles;
-
     // Undrawn elements
+
     private final @NotNull HashMap<String, Point> points;
     private final @NotNull HashMap<String, Route> routes;
     private final @NotNull HashMap<String, TrackCircuit> trackCircuits;
-
 
     /**
      * Creates an element collection with the following Elements
@@ -109,8 +109,8 @@ public class ElementCollection {
      * <i>Highest Priority</i>
      * <li>{@link Signal}s</li>
      * <li>{@link Berth}s</li>
-     * <li>{@link Track}s</li>
      * <li>{@link Text}</li>
+     * <li>{@link Track}s</li>
      * <li>{@link Rectangle}s</li>
      * <i>Lowest Priority</i> <br>
      *  <br>
@@ -132,12 +132,12 @@ public class ElementCollection {
             rectangle.draw(g2d);
         }
 
-        for (Text text : texts.values()) {
-            text.draw(g2d);
-        }
-
         for (Track track : tracks.values()) {
             track.draw(g2d);
+        }
+
+        for (Text text : texts.values()) {
+            text.draw(g2d);
         }
 
         for (Berth berth : berths.values()) {
@@ -153,6 +153,7 @@ public class ElementCollection {
     public Signal getSignal(String name) {
         return signals.get(name);
     }
+
     public Berth getBerth(String name) {
         return berths.get(name);
     }
@@ -164,5 +165,31 @@ public class ElementCollection {
     }
     public TrackCircuit getTrackCircuit(String name) {
         return trackCircuits.get(name);
+    }
+
+
+    public @NotNull HashMap<String, Track> getTracks() {
+        return tracks;
+    }
+    public @NotNull HashMap<String, Signal> getSignals() {
+        return signals;
+    }
+    public @NotNull HashMap<String, Berth> getBerths() {
+        return berths;
+    }
+    public @NotNull HashMap<String, Text> getTexts() {
+        return texts;
+    }
+    public @NotNull HashMap<String, Rectangle> getRectangles() {
+        return rectangles;
+    }
+    public @NotNull HashMap<String, Point> getPoints() {
+        return points;
+    }
+    public @NotNull HashMap<String, Route> getRoutes() {
+        return routes;
+    }
+    public @NotNull HashMap<String, TrackCircuit> getTrackCircuits() {
+        return trackCircuits;
     }
 }
