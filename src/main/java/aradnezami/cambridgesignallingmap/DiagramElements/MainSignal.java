@@ -55,8 +55,8 @@ public class MainSignal extends Signal {
      */
     @Override
     public void draw(Graphics2D g2d) {
-        int signalPostX = (orientation == LEFT) ? x+6 : x-1;
-        int signalHeadX = (orientation == LEFT) ? x : x+4;
+        int signalPostX = (orientation == LEFT) ? x+5 : x;
+        int signalHeadX = (orientation == LEFT) ? x-1 : x+5;
         Point[] signalPost = signalPost(signalPostX, y);
         Point[] signalHead = signalMainHead(signalHeadX, y);
 

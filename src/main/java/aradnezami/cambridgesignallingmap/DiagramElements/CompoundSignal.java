@@ -46,9 +46,9 @@ public class CompoundSignal extends Signal {
      */
     @Override
     public void draw(Graphics2D g2d) {
-        int signalPostX = (orientation == LEFT) ? x+12 : x-1;
-        int shuntSignalHeadX = (orientation == LEFT) ? x+6 : x+4;
-        int mainSignalHeadX = (orientation == LEFT) ? x : x+10;
+        int signalPostX = (orientation == LEFT) ? x+10 : x;
+        int shuntSignalHeadX = (orientation == LEFT) ? x+4 : x+5;
+        int mainSignalHeadX = (orientation == LEFT) ? x-2 : x+11;
 
         Point[] signalPost = signalPost(signalPostX, y);
         Point[] shuntSignalHead = signalShuntHead(shuntSignalHeadX, y, orientation);
