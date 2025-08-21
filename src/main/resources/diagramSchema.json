@@ -1,0 +1,131 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "DatumPoints Schema",
+    "type": "object",
+    "properties": {
+        "additionalProperties": false,
+        
+        "datumPoints": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string" },
+                    "x": { "type": "number" },
+                    "y": { "type": "number" },
+                    
+                    "tracks": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": { "type": "string" },
+                                "Ax": { "type": "number" },
+                                "Ay": { "type": "number" },
+                                "AOrientation": { "type": "string", "enum": ["H", "V"] },
+                                "ABreak": { "type": "string", "enum": ["NONE"] },
+                                "Bx": { "type": "number" },
+                                "By": { "type": "number" },
+                                "BOrientation": { "type": "string", "enum": ["H", "V"] },
+                                "BBreak": { "type": "string", "enum": ["NONE"] },
+                                "TC": { "type": "string", "enum": ["A", "B"] }
+                            },
+                            "required": ["name", "Ax", "Ay", "Bx", "By"]
+                        }
+                    },
+                    
+                    "signals": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": { "type": "string" },
+                                "form": { "type": "string", "enum": ["M", "S", "C"] },
+                                "x": { "type": "number" },
+                                "y": { "type": "number" },
+                                "orientation": { "type": "string", "enum": ["L", "R"] },
+                                "offset": { "type": "string", "enum": ["UP", "DN"] }
+                            },
+                            "required": ["name", "form", "x", "y", "orientation", "offset"]
+                        }
+                    },
+                    
+                    "points": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": { "type": "string" },
+                                "NTrack": { "type": "string" },
+                                "RTrack": { "type": "string" },
+                                "end": { "type": "string", "enum": ["A", "B"] }
+                            },
+                            "required": ["name", "NTrack", "RTrack", "end"]
+                        }
+                    },
+                    
+                    "routes": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": { "type": "string" },
+                                "tracks": {
+                                    "type": "array",
+                                    "items": { "type": "string" }
+                                }
+                            },
+                            "required": ["name", "tracks"]
+                        }
+                    },
+                    
+                    "berths": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": { "type": "string" },
+                                "x": { "type": "number" },
+                                "y": { "type": "number" }
+                            },
+                            "required": ["name", "x", "y"]
+                        }
+                    },
+                    
+                    "rectangles": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": { "type": "string" },
+                                "Ax": { "type": "number" },
+                                "Ay": { "type": "number" },
+                                "Bx": { "type": "number" },
+                                "By": { "type": "number" },
+                                "colour": { "type": "string" }
+                            },
+                            "required": ["name", "Ax", "Ay", "Bx", "By", "colour"]
+                        }
+                    },
+                    
+                    "texts": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "text": { "type": "string" },
+                                "x": { "type": "number" },
+                                "y": { "type": "number" },
+                                "size": { "type": "number" },
+                                "colour": { "type": "string" }
+                            },
+                            "required": ["text", "x", "y", "size", "colour"]
+                        }
+                    }
+                },
+                "required": ["name", "x", "y"]
+            }
+        }
+    },
+    "required": ["datumPoints"]
+}
