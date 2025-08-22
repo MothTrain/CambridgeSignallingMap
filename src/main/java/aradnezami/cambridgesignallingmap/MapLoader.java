@@ -68,7 +68,7 @@ public class MapLoader {
 
         HashMap<String, Track> trackMap = deriveTrackMap(pojoElements.tracks);
 
-        ArrayList<TrackCircuit> trackCircuits = deriveTrackCircuits(pojoElements.tracks);
+        ArrayList<TrackCircuit> trackCircuits = deriveTrackCircuits(pojoElements.tracks, trackMap);
         ArrayList<Point> points = derivePoints(pojoElements.points, trackMap);
         ArrayList<Route> routes = deriveRoutes(pojoElements.routes, trackMap);
         ArrayList<Signal> signals = readSignals(pojoElements.signals);
@@ -187,7 +187,6 @@ public class MapLoader {
         HashMap<String, Track> trackMap = new HashMap<>();
 
         for (POJOTrack POJOtrack: tracks) {
-
             boolean isTrackCircuited = !POJOtrack.TC.equals("NONE");
 
             int AOrientation = switch (POJOtrack.AOrientation) {
@@ -232,8 +231,8 @@ public class MapLoader {
     }
 
 
-    private static ArrayList<TrackCircuit> deriveTrackCircuits(ArrayList<POJOTrack> tracks) {
-        HashMap<String, Track> trackMap = deriveTrackMap(tracks);
+    private static ArrayList<TrackCircuit> deriveTrackCircuits(ArrayList<POJOTrack> tracks, HashMap<String, Track> trackMap) {
+
         HashMap<String, ArrayList<Track>> trackCircuitMap = new HashMap<>();
 
         for (POJOTrack pojoTrack : tracks) {
