@@ -18,10 +18,10 @@ public class Rectangle {
     @NotNull
     private final Color colour;
 
-    private final int A_x;
-    private final int A_y;
-    private final int B_x;
-    private final int B_y;
+    public final int A_x;
+    public final int A_y;
+    public final int B_x;
+    public final int B_y;
 
 
     /**

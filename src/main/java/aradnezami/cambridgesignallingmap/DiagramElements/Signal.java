@@ -61,12 +61,12 @@ public abstract class Signal {
     @NotNull
     public final String name;
 
-    protected final int x;
-    protected final int y;
+    public final int x;
+    public final int y;
     @MagicConstant(intValues = {LEFT, RIGHT})
-    protected final int orientation;
+    public final int orientation;
     @MagicConstant(intValues = {NO_OFFSET, OFFSET_UP, OFFSET_DOWN})
-    protected final int offset;
+    public final int offset;
 
 
     protected int aspectState;

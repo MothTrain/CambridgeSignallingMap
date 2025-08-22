@@ -29,8 +29,8 @@ public class Text {
     @NotNull
     public String text;
 
-    private final int x;
-    private final int y;
+    public final int x;
+    public final int y;
 
     /**
      * Creates a text object with the following properties. No name is specified. Instead the text

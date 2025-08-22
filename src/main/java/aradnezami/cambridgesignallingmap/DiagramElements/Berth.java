@@ -24,8 +24,8 @@ public class Berth {
 
     private final Text describer;
 
-    private final int x;
-    private final int y;
+    public final int x;
+    public final int y;
 
 
     /**
