@@ -60,6 +60,7 @@ public class Track {
     //State
     private final boolean hasTrackCircuit;
     private boolean isOccupied = false;
+    private boolean isTCStateKnown = false;
     private final Set<Route> routesSet = new HashSet<>();
 
     //Geometry
@@ -214,7 +215,7 @@ public class Track {
             g2d.setColor(DEFAULT_COLOUR);
         }
 
-        if (hasTrackCircuit) {
+        if (hasTrackCircuit && isTCStateKnown) {
             Path2D path = new Path2D.Double();
             path.moveTo(points[0].x, points[0].y);
             for (int i = 1; i < 4; i++) {
@@ -235,6 +236,7 @@ public class Track {
      */
     public void setOccupied(boolean occupied) {
         this.isOccupied = occupied;
+        this.isTCStateKnown = true;
     }
 
     /**
