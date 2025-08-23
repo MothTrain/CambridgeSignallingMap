@@ -32,8 +32,9 @@ public class ElementCollection {
     private final @NotNull HashMap<String, Track> tracks;
     private final @NotNull HashMap<String, Signal> signals;
     private final @NotNull HashMap<String, Berth> berths;
-    private final @NotNull HashMap<String, Text> texts;
+
     private final @NotNull HashMap<String, Rectangle> rectangles;
+    private final @NotNull ArrayList<Text> texts;
     // Undrawn elements
 
     private final @NotNull HashMap<String, Point> points;
@@ -72,11 +73,7 @@ public class ElementCollection {
             }
         }};
 
-        this.texts = new HashMap<>() {{
-            for (Text text : texts) {
-                put(text.name, text);
-            }
-        }};
+        this.texts = texts;
 
         this.rectangles = new HashMap<>() {{
             for (Rectangle rectangle : rectangles) {
@@ -138,7 +135,7 @@ public class ElementCollection {
             track.draw(g2d);
         }
 
-        for (Text text : texts.values()) {
+        for (Text text : texts) {
             text.draw(g2d);
         }
 
@@ -179,7 +176,7 @@ public class ElementCollection {
     public @NotNull HashMap<String, Berth> getBerths() {
         return berths;
     }
-    public @NotNull HashMap<String, Text> getTexts() {
+    public @NotNull ArrayList<Text> getTexts() {
         return texts;
     }
     public @NotNull HashMap<String, Rectangle> getRectangles() {
@@ -193,5 +190,73 @@ public class ElementCollection {
     }
     public @NotNull HashMap<String, TrackCircuit> getTrackCircuits() {
         return trackCircuits;
+    }
+
+
+    /**
+     * Creates a {@link Dimension} containing the maximum x and y value of any element in
+     * the collection. Note: this method does not account for parts of an element that may
+     * extent past its x or y value (eg: text)
+     * @return A dimension containing the preferred size of a panel displaying this element
+     * collection
+     */
+    public Dimension getSize() {
+        Dimension size = new Dimension();
+
+        for (Track track : tracks.values()) {
+            if (track.getBx() > size.width) {
+                size.width = track.getBx();
+            }
+            if (track.getAy() > size.height) {
+                size.height = track.getAy();
+            }
+            if (track.getBy() > size.height) {
+                size.height = track.getBy();
+            }
+        }
+
+        for (Signal signal : signals.values()) {
+            if (signal.x > size.width) {
+                size.width = signal.x;
+            }
+            if (signal.y > size.height) {
+                size.height = signal.y;
+            }
+        }
+
+        for (Rectangle rectangle : rectangles.values()) {
+            if (rectangle.B_x > size.width) {
+                size.width = rectangle.B_x;
+            }
+            if (rectangle.B_y > size.height) {
+                size.height = rectangle.B_y;
+            }
+        }
+
+        for (Berth berth : berths.values()) {
+            if (berth.x > size.width) {
+                size.width = berth.x;
+            }
+            if (berth.y > size.height) {
+                size.height = berth.y;
+            }
+        }
+
+        for (Text text : texts) {
+            if (text.x > size.width) {
+                size.width = text.x;
+            }
+            if (text.y > size.height) {
+                size.height = text.y;
+            }
+        }
+
+        size.height += 50;
+        size.width += 50;
+        size.height *= scale;
+        size.width *= scale;
+
+
+        return size;
     }
 }

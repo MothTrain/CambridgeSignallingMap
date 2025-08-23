@@ -14,6 +14,7 @@ import java.io.InputStream;
 public class Text {
     public static final int HEADCODE_FONT = 0;
     public static final int GENERAL_FONT = 1;
+    public static final int ARIAL_FONT = 2;
 
     public static final Color DEFAULT_COLOUR = new Color(100,100,100);
 
@@ -22,7 +23,7 @@ public class Text {
 
     private final Color fontColour;
     private final int fontSize;
-    @MagicConstant(intValues = {HEADCODE_FONT, GENERAL_FONT})
+    @MagicConstant(intValues = {HEADCODE_FONT, GENERAL_FONT, ARIAL_FONT})
     private final int font;
 
     public final String name;
@@ -51,7 +52,7 @@ public class Text {
             int y,
             Color colour,
             int fontSize,
-            @MagicConstant(intValues = {HEADCODE_FONT, GENERAL_FONT}) int fontType) {
+            @MagicConstant(intValues = {HEADCODE_FONT, GENERAL_FONT, ARIAL_FONT}) int fontType) {
 
         this.x = x;
         this.y = y;
@@ -59,47 +60,11 @@ public class Text {
         this.fontSize = fontSize;
         this.name = text;
         this.text = text;
-        if (fontType != HEADCODE_FONT && fontType != GENERAL_FONT) {
+        if (fontType != HEADCODE_FONT && fontType != GENERAL_FONT && fontType != ARIAL_FONT) {
             throw new IllegalArgumentException("Invalid font type: " + fontType + " text="+text);
         }
         this.font = fontType;
 
-
-        initialiseFonts();
-    }
-
-    /**
-     * Creates a text object with the following properties. A name is specified, so this constructor should
-     * be used if the text's content is not unique
-     * @param name The name of the object
-     * @param text The text to display
-     * @param x The x coordinate of the left of the text
-     * @param y The y coordinate of the top of the text
-     * @param colour The colour of the text
-     * @param fontSize The font size
-     * @param fontType The font to be used. Either {@link #GENERAL_FONT} or {@link #HEADCODE_FONT}
-     * @throws FontLoadingException If the fonts could not be successfully loaded
-     * @throws IllegalArgumentException If the fontType is not {@link #HEADCODE_FONT} or {@link #GENERAL_FONT}
-     */
-    public Text(
-            @NotNull String name,
-            @NotNull String text,
-            int x,
-            int y,
-            Color colour,
-            int fontSize,
-            @MagicConstant(intValues = {HEADCODE_FONT, GENERAL_FONT}) int fontType) {
-
-        this.x = x;
-        this.y = y;
-        this.fontColour = colour;
-        this.fontSize = fontSize;
-        this.name = name;
-        this.text = text;
-        if (fontType != HEADCODE_FONT && fontType != GENERAL_FONT) {
-            throw new IllegalArgumentException("Invalid font type: " + fontType + " text="+text);
-        }
-        this.font = fontType;
 
         initialiseFonts();
     }
@@ -154,7 +119,12 @@ public class Text {
      */
     public void draw(Graphics2D g2d) {
         g2d.setColor(fontColour);
-        String fontName = (font == HEADCODE_FONT) ? "Pixeloid Mono" : "Home Video";
+        String fontName = switch(font)  {
+            case HEADCODE_FONT -> "Pixeloid Mono";
+            case GENERAL_FONT-> "Home Video";
+            case ARIAL_FONT -> "Arial";
+            default -> "Arial";
+        };
         g2d.setFont(new Font(fontName, Font.PLAIN, (int) Math.ceil(fontSize * ElementCollection.scale)));
 
         String[] lines = text.split("\n");
