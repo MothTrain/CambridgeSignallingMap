@@ -63,6 +63,9 @@ public class Track {
     private boolean isTCStateKnown = false;
     private final Set<Route> routesSet = new HashSet<>();
 
+    /**
+     * Note that a positive gradient means the track is pointing down right (increasing x and y_
+     */
     //Geometry
     @MagicConstant(intValues = {-1,0,1})
     private final int gradient;
@@ -191,14 +194,21 @@ public class Track {
         if (A_CurrentEnd == VERTICAL_END) {
             points[0] = new java.awt.Point(Ax, Ay+RELATIVE_TRACK_WIDTH);
             points[1] = new java.awt.Point(Ax, Ay-RELATIVE_TRACK_WIDTH);
-        } else if (A_CurrentEnd == HORIZONTAL_END) {
+        } else if (gradient==1 && A_CurrentEnd==HORIZONTAL_END) {
+            points[0] = new java.awt.Point(Ax-RELATIVE_TRACK_WIDTH, Ay);
+            points[1] = new java.awt.Point(Ax+RELATIVE_TRACK_WIDTH, Ay);
+        } else if (gradient==-1 && A_CurrentEnd==HORIZONTAL_END) {
             points[0] = new java.awt.Point(Ax+RELATIVE_TRACK_WIDTH, Ay);
             points[1] = new java.awt.Point(Ax-RELATIVE_TRACK_WIDTH, Ay);
         }
+
         if (B_CurrentEnd == VERTICAL_END) {
             points[2] = new java.awt.Point(Bx, By-RELATIVE_TRACK_WIDTH);
             points[3] = new java.awt.Point(Bx, By+RELATIVE_TRACK_WIDTH);
-        } else if (B_CurrentEnd == HORIZONTAL_END) {
+        } else if (gradient== 1 && B_CurrentEnd == HORIZONTAL_END) {
+            points[2] = new java.awt.Point(Bx+RELATIVE_TRACK_WIDTH, By);
+            points[3] = new java.awt.Point(Bx-RELATIVE_TRACK_WIDTH, By);
+        } else if (gradient==-1 && B_CurrentEnd==HORIZONTAL_END) {
             points[2] = new java.awt.Point(Bx-RELATIVE_TRACK_WIDTH, By);
             points[3] = new java.awt.Point(Bx+RELATIVE_TRACK_WIDTH, By);
         }
