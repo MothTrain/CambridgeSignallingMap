@@ -58,7 +58,7 @@
                                 "name": { "type": "string" },
                                 "NTrack": { "type": "string" },
                                 "RTrack": { "type": "string" },
-                                "end": { "type": "string", "enum": ["A", "B"] }
+                                "end": { "type": "string" }
                             },
                             "required": ["name", "NTrack", "RTrack", "end"]
                         }
