@@ -40,3 +40,4 @@ build/
 /src/main/java/aradnezami/cambridgesignallingmap/NRFeed/Client/PythonCommunications/secrets.json
 /src/main/java/aradnezami/cambridgesignallingmap/Test.java
 src/main/resources/exampleDiagram.json
+/src/main/resources/SqlSecrets.txt
