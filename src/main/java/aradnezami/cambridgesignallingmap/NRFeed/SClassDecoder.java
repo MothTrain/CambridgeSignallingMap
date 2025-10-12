@@ -116,7 +116,8 @@ public class SClassDecoder {
                 if (mapping == null) { continue; }
 
                 boolean bitState = getBitFromByte(equipmentBytes[address], bit);
-                events.add(decodeChange(mapping, bitState));
+                try { events.add(decodeChange(mapping, bitState));}
+                catch (IllegalArgumentException ignored) {} // A backreference hasn't been updated yet
             }
         }
 
