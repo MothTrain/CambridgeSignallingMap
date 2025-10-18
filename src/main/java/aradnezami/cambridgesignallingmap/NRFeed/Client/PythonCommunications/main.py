@@ -19,7 +19,7 @@ def cleanup(connection):
 
 
 if __name__ == "__main__":
-    with open("src/main/java/aradnezami/cambridgesignallingmap/NRFeedClient/PythonCommunications/secrets.json") as f:
+    with open("src/main/java/aradnezami/cambridgesignallingmap/NRFeed/Client/PythonCommunications/secrets.json") as f:
         feed_username, feed_password, hostName = json.load(f)
 
     parser = argparse.ArgumentParser()
