@@ -28,7 +28,7 @@
                                 "By": { "type": "number" },
                                 "BOrientation": { "type": "string", "enum": ["H", "V"] },
                                 "BBreak": { "type": "string", "enum": ["NONE"] },
-                                "TC": { "type": "string", "enum": ["A", "B"] }
+                                "TC": { "type": "string"}
                             },
                             "required": ["name", "Ax", "Ay", "Bx", "By"]
                         }
