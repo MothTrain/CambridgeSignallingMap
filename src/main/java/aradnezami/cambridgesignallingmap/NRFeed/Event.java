@@ -1,10 +1,15 @@
 package aradnezami.cambridgesignallingmap.NRFeed;
 
-import aradnezami.cambridgesignallingmap.DiagramElements.*;
+import aradnezami.cambridgesignallingmap.DiagramElements.Point;
+import aradnezami.cambridgesignallingmap.DiagramElements.Route;
+import aradnezami.cambridgesignallingmap.DiagramElements.Signal;
+import aradnezami.cambridgesignallingmap.DiagramElements.TrackCircuit;
 import org.intellij.lang.annotations.MagicConstant;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -119,19 +124,24 @@ public class Event {
 
     @Override
     public String toString() {
+        Date date = new java.util.Date(timestamp);
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
+        String formattedTimestamp = sdf.format(date);
+
         if (type == 'C') {
-            return "Event C-Class From:" + C_FromBerth + " To:" + C_ToBerth + " Descr:" + C_Describer;
+            return formattedTimestamp + " Event C-Class   From:" + C_FromBerth + " To:" + C_ToBerth + " Descr:" + C_Describer;
         } else {
             //noinspection DataFlowIssue
-            return "Event S-Class "  + switch (S_Type) {
-                case (Signal.ASPECT_TYPE) -> "Signal: " + S_Id + " State: " + Signal.translateAspectState(S_State);
-                case (Point.TYPE) -> "Point: " + S_Id + " State: " + Point.translateState(S_State);
-                case (TrackCircuit.TYPE) -> "Track Circuit: " + S_Id + " State: " + TrackCircuit.translateState(S_State);
-                case (Signal.ROUTED_TYPE) -> "Signal Route: " + S_Id + " State: " + Signal.translateRoutedState(S_State);
-                case (Route.MAIN_TYPE) -> "Main Route: " + S_Id + " State: " + Route.translateState(S_State);
-                case (Route.SHUNT_TYPE) -> "Shunt Route: " + S_Id + " State: " + Route.translateState(S_State);
-                case (Route.CALL_ON_TYPE) -> "Call-On Route: " + S_Id + " State: " + Route.translateState(S_State);
-                default -> "Unknown Type: " + S_Type + " Id: " + S_Id + " State: " + S_State;
+            return formattedTimestamp + " Event S-Class   "  + switch (S_Type) {
+                case (Signal.ASPECT_TYPE) -> "Signal: " + S_Id + " " + Signal.translateAspectState(S_State);
+                case (Point.TYPE) -> "Point: " + S_Id + " " + Point.translateState(S_State);
+                case (TrackCircuit.TYPE) -> "Track Circuit: " + S_Id + " " + TrackCircuit.translateState(S_State);
+                case (Signal.ROUTED_TYPE) -> "Signal Route: " + S_Id + " " + Signal.translateRoutedState(S_State);
+                case (Route.MAIN_TYPE) -> "Main Route: " + S_Id + " " + Route.translateState(S_State);
+                case (Route.SHUNT_TYPE) -> "Shunt Route: " + S_Id + " " + Route.translateState(S_State);
+                case (Route.CALL_ON_TYPE) -> "Call-On Route: " + S_Id + " " + Route.translateState(S_State);
+                default -> "Unknown Type: " + S_Type + " Id: " + S_Id + " " + S_State;
             };
         }
     }
