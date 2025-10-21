@@ -258,25 +258,37 @@ public class MapLoader {
     }
 
 
-    private static ArrayList<Point> derivePoints(ArrayList<POJOPoint> pojoPoints, HashMap<String, Track> trackMap) {
-        ArrayList<Point> points = new ArrayList<>();
-        for (POJOPoint pojoPoint : pojoPoints) {
-            Track normalTrack = trackMap.get(pojoPoint.NTrack);
+    private static ArrayList<Point> derivePoints(ArrayList<POJOPointEnd> pojoPointEnds, HashMap<String, Track> trackMap) {
+        HashMap<String, ArrayList<Point.PointEnd>> pointMap = new HashMap<>();
+        for (POJOPointEnd pojoPointEnd : pojoPointEnds) {
+            Track normalTrack = trackMap.get(pojoPointEnd.NTrack);
             if (normalTrack == null) {
-                throw new DiagramFormatException("Unknown point normal track=" + pojoPoint.NTrack + " Point=" + pojoPoint.name);
+                throw new DiagramFormatException("Unknown point normal track=" + pojoPointEnd.NTrack + " Point=" + pojoPointEnd.name);
             }
-            Track reverseTrack = trackMap.get(pojoPoint.RTrack);
+            Track reverseTrack = trackMap.get(pojoPointEnd.RTrack);
             if (reverseTrack == null) {
-                throw new DiagramFormatException("Unknown point reverse track=" + pojoPoint.RTrack + " Point=" + pojoPoint.name);
+                throw new DiagramFormatException("Unknown point reverse track=" + pojoPointEnd.RTrack + " Point=" + pojoPointEnd.name);
             }
 
-            points.add(new Point(
-                    pojoPoint.name,
+            ArrayList<Point.PointEnd> pointEnds = pointMap.get(pojoPointEnd.point);
+            if (pointEnds == null) {
+                pointEnds = new ArrayList<>();
+            }
+            pointEnds.add(new Point.PointEnd(
+                    pojoPointEnd.name,
                     normalTrack,
-                    pojoPoint.end.charAt(0),
+                    pojoPointEnd.end.charAt(0),
                     reverseTrack,
-                    pojoPoint.end.charAt(0)
+                    pojoPointEnd.end.charAt(0)
             ));
+            pointMap.put(pojoPointEnd.point, pointEnds);
+        }
+
+        ArrayList<Point> points = new ArrayList<>();
+        for (Map.Entry<String, ArrayList<Point.PointEnd>> entry : pointMap.entrySet()) {
+            points.add(
+                    new Point(entry.getKey(), entry.getValue().toArray(new Point.PointEnd[0]))
+            );
         }
 
         return points;
@@ -445,13 +457,14 @@ public class MapLoader {
         public int x;
         public int y;
 
-        public ArrayList<POJOTrack> tracks;
-        public ArrayList<POJOSignal> signals;
-        public ArrayList<POJOPoint> points;
-        public ArrayList<POJORoute> routes;
-        public ArrayList<POJOBerth> berths;
-        public ArrayList<POJORectangle> rectangles;
-        public ArrayList<POJOText> texts;
+
+        @JsonProperty(required = true) public ArrayList<POJOTrack> tracks = new ArrayList<>();
+        @JsonProperty(required = true) public ArrayList<POJOSignal> signals = new ArrayList<>();
+        @JsonProperty(required = true) public ArrayList<POJOPointEnd> points = new ArrayList<>();
+        @JsonProperty(required = true) public ArrayList<POJORoute> routes = new ArrayList<>();
+        @JsonProperty(required = true) public ArrayList<POJOBerth> berths = new ArrayList<>();
+        @JsonProperty(required = true) public ArrayList<POJORectangle> rectangles = new ArrayList<>();
+        @JsonProperty(required = true) public ArrayList<POJOText> texts = new ArrayList<>();
     }
     private static class POJOTrack {
         public String name;
@@ -478,11 +491,12 @@ public class MapLoader {
         public String offset;
     }
 
-    private static class POJOPoint {
+    private static class POJOPointEnd {
         public String name;
         public String NTrack;
         public String RTrack;
         public String end;
+        public String point;
     }
 
     private static class POJORoute {

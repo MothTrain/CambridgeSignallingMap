@@ -244,17 +244,19 @@ public class DiagramPreviewer {
         }
         if (points) {
             for (Point point: elements.getPoints().values()) {
-                int x = (point.getNormalEnd() == 'A') ? point.getNormalTrack().getAx() : point.getNormalTrack().getBx();
-                int y = (point.getNormalEnd() == 'A') ? point.getNormalTrack().getAy() : point.getNormalTrack().getBy();
+                for (Point.PointEnd pointEnd : point.getPointEnds()) {
+                    int x = (pointEnd.getNormalEnd() == 'A') ? pointEnd.getNormalTrack().getAx() : pointEnd.getNormalTrack().getBx();
+                    int y = (pointEnd.getNormalEnd() == 'A') ? pointEnd.getNormalTrack().getAy() : pointEnd.getNormalTrack().getBy();
 
-                texts.add(new Text(
-                        point.name,
-                        x - (point.name.length()/2),
-                        y-2,
-                        new Color(0, 255, 0),
-                        2,
-                        Text.ARIAL_FONT
-                ));
+                    texts.add(new Text(
+                            pointEnd.name,
+                            x - (pointEnd.name.length() / 2),
+                            y - 2,
+                            new Color(0, 255, 0),
+                            2,
+                            Text.ARIAL_FONT
+                    ));
+                }
             }
         }
         if (signals) {

@@ -38,91 +38,119 @@ public class Point {
 
 
     @NotNull
-    public String name;
+    public final String name;
+
+
 
     @NotNull
-    private Track normalTrack;
-    private char normalEnd;
-    @NotNull
-    private Track reverseTrack;
-    private char reverseEnd;
+    private final PointEnd[] pointEnds;
 
-    /**
-     * Creates a track with the following properties
-     * @param name The name of the point
-     * @param normalTrack The track that is connected when the point is normal
-     * @param normalEnd The end of the track that is associated with the point ('A' or 'B')
-     * @param reverseTrack The track that is connected when the point is reverse
-     * @param reverseEnd The end of the track that is associated with the point ('A' or 'B')
-     */
-    public Point(@NotNull String name,
-                 @NotNull Track normalTrack,
-                 char normalEnd,
-                 @NotNull Track reverseTrack,
-                 char reverseEnd) {
-
-        if (normalEnd != 'A' && normalEnd != 'B') {
-            throw new IllegalArgumentException("Normal track end must be 'A' or 'B'. End="+normalEnd +
-                    "Track="+normalTrack + " Point="+name);
-        }
-        if (reverseEnd != 'A' && reverseEnd != 'B') {
-            throw new IllegalArgumentException("Reverse track end must be 'A' or 'B'. End="+reverseEnd +
-                    "Track="+reverseTrack + " Point="+name);
-        }
-
-        int normalTrackEnd = (normalEnd=='A')? normalTrack.getA_CurrentEnd() : normalTrack.getB_CurrentEnd();
-        if (normalTrackEnd != Track.VERTICAL_END) {
-            throw new IllegalArgumentException("Normal track must have a vertical end. End="+normalEnd +
-                    " Track=" +normalTrack.name + " Point="+name);
-        }
-        int reverseTrackEnd = (reverseEnd=='A')? reverseTrack.getA_CurrentEnd() : reverseTrack.getB_CurrentEnd();
-        if (reverseTrackEnd != Track.VERTICAL_END) {
-            throw new IllegalArgumentException("reverse track must have a vertical end. End="+reverseEnd +
-                    " Track=" +reverseTrack.name + " Point="+name);
-        }
-
-        int normalX = (normalEnd=='A') ? normalTrack.getAx() : normalTrack.getBx();
-        int normalY = (normalEnd=='A') ? normalTrack.getAy() : normalTrack.getBy();
-        int reverseX = (reverseEnd=='A') ? reverseTrack.getAx() : reverseTrack.getBx();
-        int reverseY = (reverseEnd=='A') ? reverseTrack.getAy() : reverseTrack.getBy();
-
-        if (normalX != reverseX || normalY != reverseY ) {
-            throw new IllegalArgumentException("Normal track end and reverse track end must have the" +
-                    " same coordinates. Point="+name + ", Normal Track="+normalTrack.name + ", Reverse Track="+reverseTrack.name);
-        }
-
-
-        this.normalEnd = normalEnd;
-        this.reverseEnd = reverseEnd;
-
-        this.normalTrack = normalTrack;
-        this.reverseTrack = reverseTrack;
-
+    public Point(@NotNull String name, PointEnd[] pointEnds) {
+        this.pointEnds = pointEnds;
         this.name = name;
     }
 
-
-    /**
-     * Sets the state of the point
-     * @throws IllegalStateException If an invalid state is provided
-     */
     public void setState(int state) {
-        if (state == NORMAL) {
-            modifyNormalTrack(0);
-            modifyReverseTrack(REVERSE_TRACK_OFFSET, Track.HORIZONTAL_END);
-        } else if (state == REVERSE) {
-            modifyNormalTrack(NORMAL_TRACK_OFFSET);
-            modifyReverseTrack(0, Track.VERTICAL_END);
-        } else if (state == BOTH) {
-            modifyNormalTrack(0);
-            modifyReverseTrack(0, Track.VERTICAL_END);
-        } else if (state == NEITHER) {
-            modifyNormalTrack(NORMAL_TRACK_OFFSET);
-            modifyReverseTrack(REVERSE_TRACK_OFFSET, Track.HORIZONTAL_END);
-        } else {
-            throw new IllegalArgumentException("Unknown point state="+state + " Track");
+        for (PointEnd pointEnd : pointEnds) {
+            pointEnd.setState(state);
         }
     }
+
+    public @NotNull PointEnd[] getPointEnds() {
+        return pointEnds;
+    }
+
+
+    public static class PointEnd {
+
+        @NotNull
+        public final String name;
+
+        @NotNull
+        private Track normalTrack;
+        private char normalEnd;
+        @NotNull
+        private Track reverseTrack;
+        private char reverseEnd;
+
+        /**
+         * Creates a point with the following properties
+         *
+         * @param name         The name of the point
+         * @param normalTrack  The track that is connected when the point is normal
+         * @param normalEnd    The end of the track that is associated with the point ('A' or 'B')
+         * @param reverseTrack The track that is connected when the point is reverse
+         * @param reverseEnd   The end of the track that is associated with the point ('A' or 'B')
+         */
+        public PointEnd(@NotNull String name,
+                     @NotNull Track normalTrack,
+                     char normalEnd,
+                     @NotNull Track reverseTrack,
+                     char reverseEnd) {
+
+            if (normalEnd != 'A' && normalEnd != 'B') {
+                throw new IllegalArgumentException("Normal track end must be 'A' or 'B'. End=" + normalEnd +
+                        "Track=" + normalTrack + " Point=" + name);
+            }
+            if (reverseEnd != 'A' && reverseEnd != 'B') {
+                throw new IllegalArgumentException("Reverse track end must be 'A' or 'B'. End=" + reverseEnd +
+                        "Track=" + reverseTrack + " Point=" + name);
+            }
+
+            int normalTrackEnd = (normalEnd == 'A') ? normalTrack.getA_CurrentEnd() : normalTrack.getB_CurrentEnd();
+            if (normalTrackEnd != Track.VERTICAL_END) {
+                throw new IllegalArgumentException("Normal track must have a vertical end. End=" + normalEnd +
+                        " Track=" + normalTrack.name + " Point=" + name);
+            }
+            int reverseTrackEnd = (reverseEnd == 'A') ? reverseTrack.getA_CurrentEnd() : reverseTrack.getB_CurrentEnd();
+            if (reverseTrackEnd != Track.VERTICAL_END) {
+                throw new IllegalArgumentException("reverse track must have a vertical end. End=" + reverseEnd +
+                        " Track=" + reverseTrack.name + " Point=" + name);
+            }
+
+            int normalX = (normalEnd == 'A') ? normalTrack.getAx() : normalTrack.getBx();
+            int normalY = (normalEnd == 'A') ? normalTrack.getAy() : normalTrack.getBy();
+            int reverseX = (reverseEnd == 'A') ? reverseTrack.getAx() : reverseTrack.getBx();
+            int reverseY = (reverseEnd == 'A') ? reverseTrack.getAy() : reverseTrack.getBy();
+
+            if (normalX != reverseX || normalY != reverseY) {
+                throw new IllegalArgumentException("Normal track end and reverse track end must have the" +
+                        " same coordinates. Point=" + name + ", Normal Track=" + normalTrack.name + ", Reverse Track=" + reverseTrack.name);
+            }
+
+
+            this.normalEnd = normalEnd;
+            this.reverseEnd = reverseEnd;
+
+            this.normalTrack = normalTrack;
+            this.reverseTrack = reverseTrack;
+
+            this.name = name;
+        }
+
+
+        /**
+         * Sets the state of the point
+         *
+         * @throws IllegalStateException If an invalid state is provided
+         */
+        public void setState(int state) {
+            if (state == NORMAL) {
+                modifyNormalTrack(0);
+                modifyReverseTrack(REVERSE_TRACK_OFFSET, Track.HORIZONTAL_END);
+            } else if (state == REVERSE) {
+                modifyNormalTrack(NORMAL_TRACK_OFFSET);
+                modifyReverseTrack(0, Track.VERTICAL_END);
+            } else if (state == BOTH) {
+                modifyNormalTrack(0);
+                modifyReverseTrack(0, Track.VERTICAL_END);
+            } else if (state == NEITHER) {
+                modifyNormalTrack(NORMAL_TRACK_OFFSET);
+                modifyReverseTrack(REVERSE_TRACK_OFFSET, Track.HORIZONTAL_END);
+            } else {
+                throw new IllegalArgumentException("Unknown point state=" + state + " Track");
+            }
+        }
 
 
 
@@ -197,13 +225,14 @@ public class Point {
         }
     }
 
-    private void modifyReverseTrack(int offset, int endType) {
-        if (reverseEnd == 'A') {
-            reverseTrack.setA_Offset(offset);
-            reverseTrack.setA_CurrentEnd(endType);
-        } else {
-            reverseTrack.setB_Offset(offset);
-            reverseTrack.setB_CurrentEnd(endType);
+        private void modifyReverseTrack(int offset, int endType) {
+            if (reverseEnd == 'A') {
+                reverseTrack.setA_Offset(offset);
+                reverseTrack.setA_CurrentEnd(endType);
+            } else {
+                reverseTrack.setB_Offset(offset);
+                reverseTrack.setB_CurrentEnd(endType);
+            }
         }
     }
 
