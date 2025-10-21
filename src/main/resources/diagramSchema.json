@@ -58,9 +58,10 @@
                                 "name": { "type": "string" },
                                 "NTrack": { "type": "string" },
                                 "RTrack": { "type": "string" },
-                                "end": { "type": "string" }
+                                "end": { "type": "string" },
+                                "point": {"type": "string"}
                             },
-                            "required": ["name", "NTrack", "RTrack", "end"]
+                            "required": ["name", "NTrack", "RTrack", "end", "point"]
                         }
                     },
                     
