@@ -124,7 +124,7 @@
                         }
                     }
                 },
-                "required": ["name", "x", "y"]
+                "required": ["name", "x", "y", "tracks", "rectangles", "signals", "texts", "routes", "berths", "points"]
             }
         }
     },
