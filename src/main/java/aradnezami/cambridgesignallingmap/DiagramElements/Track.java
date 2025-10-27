@@ -29,7 +29,12 @@ import java.util.Set;
  * <h3>Offset</h3>
  * On top of the offset caused by a break (if applicable), the track can be further offset. This is meant
  * to be used with negative values, however positive values will also function. This is modified by
- * {@link #setA_Offset(int)} and {@link #setB_Offset(int)} <br>
+ * {@link #setA_Offset(int)} and {@link #setB_Offset(int)}
+ * <h3>Track Circuit Disabling</h3>
+ * By utilising the {@link #disableTC(Point.PointEnd)} and {@link #enableTC(Point.PointEnd)}. The track can be
+ * prevented from being drawn as occupied even when it is. This is used by {@link Point.PointEnd}s to prevent
+ * subsections of track circuits being occupied when a train will not travel over it, determined by the
+ * point's position<br>
  * <br>
  *
  * <h2>Rendering</h2>
@@ -61,6 +66,7 @@ public class Track {
     private final boolean hasTrackCircuit;
     private boolean isOccupied = false;
     private boolean isTCStateKnown = false;
+    private final Set<Point.PointEnd> TCDisabledBy = new HashSet<>();
     private final Set<Route> routesSet = new HashSet<>();
 
     /**
@@ -217,7 +223,7 @@ public class Track {
         applyOffset(points, A_Offset, B_Offset, gradient);
         scale(points, ElementCollection.scale);
 
-        if (isOccupied) {
+        if (isOccupied && TCDisabledBy.isEmpty()) {
             g2d.setColor(OCCUPIED_COLOUR);
         } else if (!routesSet.isEmpty()) {
             g2d.setColor(ROUTED_COLOUR);
@@ -264,6 +270,27 @@ public class Track {
         } else {
             this.routesSet.remove(route);
         }
+    }
+
+
+    /**
+     * Prevents this track from being drawn as occupied even if its track circuit is occupied.
+     * A {@link Point.PointEnd} is provided to allow for multiple different point ends to disable
+     * the same track
+     * @param pointEnd The point end that is disabling this track
+     */
+    public void disableTC(Point.PointEnd pointEnd) {
+        TCDisabledBy.add(pointEnd);
+    }
+
+    /**
+     * Allows this track to be drawn as occupied when its track circuit is occupied.
+     * A {@link Point.PointEnd} is provided to allow for multiple different point ends to enable
+     * the same track
+     * @param pointEnd The point end that is enabling this track
+     */
+    public void enableTC(Point.PointEnd pointEnd) {
+        TCDisabledBy.remove(pointEnd);
     }
 
 
