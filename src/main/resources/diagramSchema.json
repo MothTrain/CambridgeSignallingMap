@@ -59,7 +59,17 @@
                                 "NTrack": { "type": "string" },
                                 "RTrack": { "type": "string" },
                                 "end": { "type": "string" },
-                                "point": {"type": "string"}
+                                "point": {"type": "string"},
+                                "NDisables": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"}
+                                },
+                                "RDisables": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"}
+                                }
                             },
                             "required": ["name", "NTrack", "RTrack", "end", "point"]
                         }

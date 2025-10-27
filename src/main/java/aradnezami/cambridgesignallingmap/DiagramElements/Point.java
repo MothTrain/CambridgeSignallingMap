@@ -2,12 +2,17 @@ package aradnezami.cambridgesignallingmap.DiagramElements;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Represents a collection of point ends by holding a set of {@link Track}s and modifying their
+ * geometry to create the appearance of a point end on the diagram. The point is a pseudo-element,
+ * s such, it has no draw method and only modifies other drawable elements.
+ */
 public class Point {
     /**
      * Used to indicate the event type for a point
      */
     public static final int TYPE = 1;
-    
+
     /**
      * Represents a point in the normal (straight) position
      */
@@ -23,7 +28,7 @@ public class Point {
      * @see <a href="https://wiki.openraildata.com/index.php?title=Signalling_Nomenclature">Signalling Nomenclature</a>
      */
     public static final int NEITHER = 2;
-    
+
     /**
      * Used when the normal (NK) and reverse (RK) are both 1. IE: The point is both normal and reverse.
      * The use of this does not necessarily indicate a data feed or mapping issue as equipment tends
@@ -40,10 +45,9 @@ public class Point {
     @NotNull
     public final String name;
 
-
-
     @NotNull
     private final PointEnd[] pointEnds;
+
 
     public Point(@NotNull String name, PointEnd[] pointEnds) {
         this.pointEnds = pointEnds;
@@ -61,6 +65,11 @@ public class Point {
     }
 
 
+    /**
+     * Represents one end of a {@link Point} by holding a set of {@link Track}s and modifying their
+     * geometry to create the appearance of a point end on the diagram. The point end is a pseudo-element,
+     * as such, it has no draw method and only modifies other drawable elements.
+     */
     public static class PointEnd {
 
         @NotNull
@@ -69,9 +78,12 @@ public class Point {
         @NotNull
         private Track normalTrack;
         private char normalEnd;
+        private final Track[] normalDisables;
+
         @NotNull
         private Track reverseTrack;
         private char reverseEnd;
+        private final Track[] reverseDisables;
 
         /**
          * Creates a point with the following properties
@@ -79,14 +91,18 @@ public class Point {
          * @param name         The name of the point
          * @param normalTrack  The track that is connected when the point is normal
          * @param normalEnd    The end of the track that is associated with the point ('A' or 'B')
+         * @param normalDisables Tracks that must not show track circuit occupied when point end is normal
          * @param reverseTrack The track that is connected when the point is reverse
          * @param reverseEnd   The end of the track that is associated with the point ('A' or 'B')
+         * @param reverseDisables Tracks that must not show track circuit occupied when point end is reverse
          */
         public PointEnd(@NotNull String name,
-                     @NotNull Track normalTrack,
-                     char normalEnd,
-                     @NotNull Track reverseTrack,
-                     char reverseEnd) {
+                        @NotNull Track normalTrack,
+                        char normalEnd,
+                        @NotNull Track[] normalDisables,
+                        @NotNull Track reverseTrack,
+                        char reverseEnd,
+                        @NotNull Track[] reverseDisables) {
 
             if (normalEnd != 'A' && normalEnd != 'B') {
                 throw new IllegalArgumentException("Normal track end must be 'A' or 'B'. End=" + normalEnd +
@@ -125,12 +141,16 @@ public class Point {
             this.normalTrack = normalTrack;
             this.reverseTrack = reverseTrack;
 
+            this.normalDisables = normalDisables;
+            this.reverseDisables = reverseDisables;
+
             this.name = name;
         }
 
 
         /**
-         * Sets the state of the point
+         * Sets the state of the point. This calls on the point's tracks to change geometry
+         * and also enables or disables the relevant tracks' track circuits
          *
          * @throws IllegalStateException If an invalid state is provided
          */
@@ -138,15 +158,30 @@ public class Point {
             if (state == NORMAL) {
                 modifyNormalTrack(0);
                 modifyReverseTrack(REVERSE_TRACK_OFFSET, Track.HORIZONTAL_END);
+
+                setNormalDisableTracks(true);
+                setReverseDisableTracks(false);
+
             } else if (state == REVERSE) {
                 modifyNormalTrack(NORMAL_TRACK_OFFSET);
                 modifyReverseTrack(0, Track.VERTICAL_END);
+
+                setNormalDisableTracks(false);
+                setReverseDisableTracks(true);
+
             } else if (state == BOTH) {
                 modifyNormalTrack(0);
                 modifyReverseTrack(0, Track.VERTICAL_END);
+
+                setReverseDisableTracks(false);
+                setNormalDisableTracks(false);
+
             } else if (state == NEITHER) {
                 modifyNormalTrack(NORMAL_TRACK_OFFSET);
                 modifyReverseTrack(REVERSE_TRACK_OFFSET, Track.HORIZONTAL_END);
+
+                setReverseDisableTracks(false);
+                setNormalDisableTracks(false);
             } else {
                 throw new IllegalArgumentException("Unknown point state=" + state + " Track");
             }
@@ -154,76 +189,76 @@ public class Point {
 
 
 
-    public @NotNull Track getReverseTrack() {
-        return reverseTrack;
-    }
-    public char getReverseEnd() {
-        return reverseEnd;
-    }
-    /**
-     * Not to be used by a non diagram editor. Resets the previous reverse track to its original state
-     * and replaces it with the provided track.
-     * @throws IllegalStateException If the track's end is not vertical
-     */
-    public void setReverseTrack(@NotNull Track track, char reverseEnd) {
-        int reverseTrackEnd = (reverseEnd=='A')? track.getA_CurrentEnd() : track.getB_CurrentEnd();
-        if (reverseTrackEnd != Track.VERTICAL_END) {
-            throw new IllegalArgumentException("Reverse track must have a vertical end. End="+reverseEnd +
-                    " Track=" +track.name + " Point="+name);
+        public @NotNull Track getReverseTrack() {
+            return reverseTrack;
+        }
+        public char getReverseEnd() {
+            return reverseEnd;
+        }
+        /**
+         * Not to be used by a non diagram editor. Resets the previous reverse track to its original state
+         * and replaces it with the provided track.
+         * @throws IllegalStateException If the track's end is not vertical
+         */
+        public void setReverseTrack(@NotNull Track track, char reverseEnd) {
+            int reverseTrackEnd = (reverseEnd=='A')? track.getA_CurrentEnd() : track.getB_CurrentEnd();
+            if (reverseTrackEnd != Track.VERTICAL_END) {
+                throw new IllegalArgumentException("Reverse track must have a vertical end. End="+reverseEnd +
+                        " Track=" +track.name + " Point="+name);
+            }
+
+            if (this.reverseEnd=='A') { // Return to defaults
+                reverseTrack.setA_CurrentEnd(track.getA_DefaultEnd());
+                reverseTrack.setA_Offset(0);
+            } else {
+                reverseTrack.setB_CurrentEnd(track.getB_DefaultEnd());
+                reverseTrack.setB_Offset(0);
+            }
+
+            this.reverseEnd = reverseEnd;
+            this.reverseTrack = track;
         }
 
-        if (this.reverseEnd=='A') { // Return to defaults
-            reverseTrack.setA_CurrentEnd(track.getA_DefaultEnd());
-            reverseTrack.setA_Offset(0);
-        } else {
-            reverseTrack.setB_CurrentEnd(track.getB_DefaultEnd());
-            reverseTrack.setB_Offset(0);
+
+        public @NotNull Track getNormalTrack() {
+            return normalTrack;
+        }
+        public char getNormalEnd() {
+            return normalEnd;
+        }
+        /**
+         * Not to be used by a non diagram editor. Resets the previous normal track to its original state
+         * and replaces it with the provided track
+         * @throws IllegalArgumentException If the track's end is not vertical
+         */
+        public void setNormalTrack(@NotNull Track track, char normalEnd) {
+            int normalTrackEnd = (normalEnd=='A')? track.getA_CurrentEnd() : track.getB_CurrentEnd();
+            if (normalTrackEnd != Track.VERTICAL_END) {
+                throw new IllegalArgumentException("Normal track must have a vertical end. End="+normalEnd +
+                        " Track=" +track.name + " Point="+name);
+            }
+
+            if (this.normalEnd=='A') {
+                normalTrack.setA_CurrentEnd(reverseTrack.getA_DefaultEnd());
+                normalTrack.setA_Offset(0);
+            } else {
+                normalTrack.setB_CurrentEnd(reverseTrack.getB_DefaultEnd());
+                normalTrack.setB_Offset(0);
+            }
+
+            this.normalEnd = normalEnd;
+            this.normalTrack = track;
         }
 
-        this.reverseEnd = reverseEnd;
-        this.reverseTrack = track;
-    }
 
 
-    public @NotNull Track getNormalTrack() {
-        return normalTrack;
-    }
-    public char getNormalEnd() {
-        return normalEnd;
-    }
-    /**
-     * Not to be used by a non diagram editor. Resets the previous normal track to its original state
-     * and replaces it with the provided track
-     * @throws IllegalArgumentException If the track's end is not vertical
-     */
-    public void setNormalTrack(@NotNull Track track, char normalEnd) {
-        int normalTrackEnd = (normalEnd=='A')? track.getA_CurrentEnd() : track.getB_CurrentEnd();
-        if (normalTrackEnd != Track.VERTICAL_END) {
-            throw new IllegalArgumentException("Normal track must have a vertical end. End="+normalEnd +
-                    " Track=" +track.name + " Point="+name);
+        private void modifyNormalTrack(int offset) {
+            if (normalEnd == 'A') {
+                normalTrack.setA_Offset(offset);
+            } else {
+                normalTrack.setB_Offset(offset);
+            }
         }
-
-        if (this.normalEnd=='A') {
-            normalTrack.setA_CurrentEnd(reverseTrack.getA_DefaultEnd());
-            normalTrack.setA_Offset(0);
-        } else {
-            normalTrack.setB_CurrentEnd(reverseTrack.getB_DefaultEnd());
-            normalTrack.setB_Offset(0);
-        }
-
-        this.normalEnd = normalEnd;
-        this.normalTrack = track;
-    }
-
-
-
-    private void modifyNormalTrack(int offset) {
-        if (normalEnd == 'A') {
-            normalTrack.setA_Offset(offset);
-        } else {
-            normalTrack.setB_Offset(offset);
-        }
-    }
 
         private void modifyReverseTrack(int offset, int endType) {
             if (reverseEnd == 'A') {
@@ -232,6 +267,26 @@ public class Point {
             } else {
                 reverseTrack.setB_Offset(offset);
                 reverseTrack.setB_CurrentEnd(endType);
+            }
+        }
+
+
+        private void setNormalDisableTracks (boolean disabled) {
+            for (Track track : normalDisables) {
+                if (disabled) {
+                    track.disableTC(this);
+                } else {
+                    track.enableTC(this);
+                }
+            }
+        }
+        private void setReverseDisableTracks (boolean disabled) {
+            for (Track track : reverseDisables) {
+                if (disabled) {
+                    track.disableTC(this);
+                } else {
+                    track.enableTC(this);
+                }
             }
         }
     }
@@ -244,12 +299,12 @@ public class Point {
      * @return string representation of equipment state
      */
     public static String translateState(int state) {
-         return switch (state) {
-             case NORMAL -> "Normal";
-             case REVERSE -> "Reverse";
-             case NEITHER -> "Neither";
-             case BOTH -> "Both";
-             default -> throw new IllegalArgumentException(state + " is not a valid Point state");
+        return switch (state) {
+            case NORMAL -> "Normal";
+            case REVERSE -> "Reverse";
+            case NEITHER -> "Neither";
+            case BOTH -> "Both";
+            default -> throw new IllegalArgumentException(state + " is not a valid Point state");
         };
     }
 

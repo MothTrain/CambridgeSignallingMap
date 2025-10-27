@@ -18,7 +18,8 @@ import java.util.Map;
 /**
  * Provides method(s) for decoding diagram files. When loading files the context {@link ClassLoader}
  * is always used and all diagram .json files <b>must</b> be compliant with the diagramSchema.json
- * provided in the resources folder
+ * provided in the resources folder. Note that compliance with the diagramSchema does not necessarily
+ * mean that the diagram is valid
  */
 public class MapLoader {
 
@@ -270,16 +271,37 @@ public class MapLoader {
                 throw new DiagramFormatException("Unknown point reverse track=" + pojoPointEnd.RTrack + " Point=" + pojoPointEnd.name);
             }
 
+            ArrayList<Track> normalDisablesTrack = new ArrayList<>();
+            for (String NDisables: pojoPointEnd.NDisables) {
+                Track track = trackMap.get(NDisables);
+                if (track == null) {
+                    throw new DiagramFormatException("Unknown point normal disables track=" + NDisables + " Point=" + pojoPointEnd.name);
+                }
+                normalDisablesTrack.add(track);
+            }
+
+            ArrayList<Track> reverseDisablesTrack = new ArrayList<>();
+            for (String RDisables: pojoPointEnd.RDisables) {
+                Track track = trackMap.get(RDisables);
+                if (track == null) {
+                    throw new DiagramFormatException("Unknown point reverse disables track=" + RDisables + " Point=" + pojoPointEnd.name);
+                }
+                reverseDisablesTrack.add(track);
+            }
+
             ArrayList<Point.PointEnd> pointEnds = pointMap.get(pojoPointEnd.point);
             if (pointEnds == null) {
                 pointEnds = new ArrayList<>();
             }
+
             pointEnds.add(new Point.PointEnd(
                     pojoPointEnd.name,
                     normalTrack,
                     pojoPointEnd.end.charAt(0),
+                    normalDisablesTrack.toArray(new Track[0]),
                     reverseTrack,
-                    pojoPointEnd.end.charAt(0)
+                    pojoPointEnd.end.charAt(0),
+                    reverseDisablesTrack.toArray(new Track[0])
             ));
             pointMap.put(pojoPointEnd.point, pointEnds);
         }
@@ -497,6 +519,8 @@ public class MapLoader {
         public String RTrack;
         public String end;
         public String point;
+        public String[] NDisables = new String[0];
+        public String[] RDisables = new String[0];
     }
 
     private static class POJORoute {
