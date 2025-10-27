@@ -1,0 +1,3623 @@
+{
+   "$schema": "diagramSchema.json",
+   "datumPoints": [
+      {
+         "name": "Shepreth Branch Jn",
+         "x": 100,
+         "y": 40,
+         
+         "tracks": [
+            {
+               "name": "5111",
+               "Ax": -45,
+               "Ay": 100,
+               "Bx": -20,
+               "By": 100,
+               "TC": "5112"
+            },
+            {
+               "name": "5112",
+               "Ax": -20,
+               "Ay": 100,
+               "Bx": -5,
+               "By": 100,
+               "TC": "5112"
+            },
+            {
+               "name": "5211",
+               "Ax": -5,
+               "Ay": 100,
+               "Bx": 15,
+               "By": 100,
+               "TC": "5211"
+            },
+            {
+               "name": "5212",
+               "Ax": 15,
+               "Ay": 100,
+               "Bx": 75,
+               "By": 100,
+               "TC": "5212"
+            },
+            {
+               "name": "5213",
+               "Ax": 75,
+               "Ay": 100,
+               "Bx": 87,
+               "By": 100,
+               "TC": "5213"
+            },
+            {
+               "name": "5262",
+               "Ax": -45,
+               "Ay": 50,
+               "Bx": -15,
+               "By": 50,
+               "TC": "5262"
+            },
+            {
+               "name": "5461",
+               "Ax": -15,
+               "Ay": 50,
+               "Bx": 20,
+               "By": 50,
+               "TC": "5461"
+            },
+            {
+               "name": "5462A",
+               "Ax": 20,
+               "Ay": 50,
+               "Bx": 47,
+               "By": 50,
+               "BBreak": "NONE",
+               "TC": "5462"
+            },
+            {
+               "name": "5462B",
+               "ABreak": "NONE",
+               "Ax": 47,
+               "Ay": 50,
+               "Bx": 87,
+               "By": 90,
+               "TC": "5462"
+            },
+            {
+               "name": "5214A",
+               "ABreak": "NONE",
+               "Ax": 97,
+               "Ay": 100,
+               "Bx": 125,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5214"
+            },
+            {
+               "name": "5214B",
+               "Ax": 125,
+               "Ay": 100,
+               "ABreak": "NONE",
+               "Bx": 135,
+               "By": 100,
+               "TC": "5214"
+            },
+            {
+               "name": "5214C",
+               "Ax": 125,
+               "Ay": 100,
+               "ABreak": "NONE",
+               "Bx": 135,
+               "By": 110,
+               "TC": "5214"
+            },
+            {
+               "name": "5214D",
+               "Ax": 87,
+               "Ay": 100,
+               "Bx": 97,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5214"
+            },
+            {
+               "name": "5214E",
+               "Ax": 87,
+               "Ay": 90,
+               "Bx": 97,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5214"
+            },
+            {
+               "name": "5321A",
+               "Ax": 145,
+               "Ay": 120,
+               "ABreak": "NONE",
+               "Bx": 170,
+               "By": 120,
+               "TC": "5321"
+            },
+            {
+               "name": "5321B",
+               "Ax": 135,
+               "Ay": 120,
+               "Bx": 145,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5321"
+            },
+            {
+               "name": "5321C",
+               "Ax": 135,
+               "Ay": 110,
+               "Bx": 145,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5321"
+            },
+            {
+               "name": "5452A",
+               "Ax": 125,
+               "Ay": 80,
+               "Bx": 145,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5452"
+            },
+            {
+               "name": "5452B",
+               "Ax": 135,
+               "Ay": 100,
+               "Bx": 145,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5452"
+            },
+            {
+               "name": "5452C",
+               "ABreak": "NONE",
+               "Ax": 145,
+               "Ay": 100,
+               "Bx": 150,
+               "By": 100,
+               "TC": "5452"
+            },
+            {
+               "name": "5251",
+               "Ax": -45,
+               "Ay": 30,
+               "Bx": -20,
+               "By": 30,
+               "TC": "5253"
+            },
+            {
+               "name": "5252",
+               "Ax": -20,
+               "Ay": 30,
+               "Bx": 15,
+               "By": 30,
+               "TC": "5253"
+            },
+            {
+               "name": "5253A",
+               "Ax": 15,
+               "Ay": 30,
+               "Bx": 47,
+               "By": 30,
+               "BBreak": "NONE",
+               "TC": "5253"
+            },
+            {
+               "name": "5253B",
+               "ABreak": "NONE",
+               "Ax": 47,
+               "Ay": 30,
+               "Bx": 57,
+               "By": 40,
+               "TC": "5253"
+            },
+            {
+               "name": "5451B",
+               "Ax": 97,
+               "Ay": 80,
+               "ABreak": "NONE",
+               "Bx": 125,
+               "By": 80,
+               "TC": "5451"
+            },
+            {
+               "name": "5451A",
+               "Ax": 57,
+               "Ay": 40,
+               "Bx": 97,
+               "By": 80,
+               "BBreak": "NONE",
+               "TC": "5451"
+            },
+            {
+               "name": "5311",
+               "Ax": 150,
+               "Ay": 100,
+               "Bx": 161,
+               "By": 100,
+               "TC": "5311"
+            },
+            {
+               "name": "5312",
+               "Ax": 161,
+               "Ay": 100,
+               "Bx": 190,
+               "By": 100,
+               "TC": "5312"
+            },
+            {
+               "name": "5223",
+               "Ax": 105,
+               "Ay": 120,
+               "Bx": 135,
+               "By": 120,
+               "TC": "5223"
+            },
+            {
+               "name": "5222",
+               "Ax": 65,
+               "Ay": 120,
+               "Bx": 105,
+               "By": 120,
+               "TC": "5222"
+            },
+            {
+               "name": "5221",
+               "Ax": 45,
+               "Ay": 120,
+               "Bx": 65,
+               "By": 120,
+               "TC": "5221"
+            },
+            {
+               "name": "5122",
+               "Ax": -10,
+               "Ay": 120,
+               "Bx": 45,
+               "By": 120,
+               "TC": "5122"
+            },
+            {
+               "name": "5121",
+               "Ax": -45,
+               "Ay": 120,
+               "Bx": -10,
+               "By": 120,
+               "TC": "5121"
+            }
+         ],
+         
+         "signals": [
+            {
+               "name": "97",
+               "form": "M",
+               "x": -30,
+               "y": 90,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "99",
+               "form": "M",
+               "x": 65,
+               "y": 90,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "123",
+               "form": "M",
+               "x": 122,
+               "y": 70,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "141",
+               "form": "M",
+               "x": 185,
+               "y": 90,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "140",
+               "form": "M",
+               "x": 165,
+               "y": 120,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               
+               "name": "100",
+               "x": 60,
+               "y": 120,
+               "form": "M",
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "96",
+               "form": "M",
+               "x": -15,
+               "y": 120,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "120",
+               "form": "M",
+               "x": 15,
+               "y": 50,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "118",
+               "form": "M",
+               "x": -20,
+               "y": 50,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "117",
+               "form": "M",
+               "x": -25,
+               "y": 20,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "119",
+               "form": "M",
+               "x": 10,
+               "y": 20,
+               "orientation": "R",
+               "offset": "UP"
+            }
+         
+         ],
+         
+         "points": [
+            
+            {
+               "name": "1043A",
+               "NTrack": "5214B",
+               "RTrack": "5214C",
+               "end": "A",
+               "point": "1043",
+               "NDisables": ["5214C"],
+               "RDisables": ["5214B"]
+            },
+            {
+               "name": "1043B",
+               "NTrack": "5321B",
+               "RTrack": "5321C",
+               "end": "B",
+               "point": "1043",
+               "NDisables": ["5321C"],
+               "RDisables": ["5321B"]
+            },
+            {
+               "name": "1042",
+               "NTrack": "5214D",
+               "RTrack": "5214E",
+               "end": "B",
+               "point": "1042",
+               "NDisables": ["5214E"],
+               "RDisables": ["5214D"]
+            },
+            {
+               "name": "1044",
+               "NTrack": "5452B",
+               "RTrack": "5452A",
+               "end": "B",
+               "point": "1044",
+               "NDisables": ["5452A"],
+               "RDisables": ["5452B"]
+            }
+         ],
+         
+         "routes": [
+         ],
+         
+         "berths": [
+            {
+               "name": "0099",
+               "x": 45,
+               "y": 100
+            },
+            {
+               "name": "0123",
+               "x": 100,
+               "y": 80
+            },
+            {
+               "name": "0141",
+               "x": 165,
+               "y": 100
+            },
+            {
+               "name": "0120",
+               "x": 24,
+               "y": 50
+            },
+            {
+               "name": "0118",
+               "x": -10,
+               "y": 50
+            },
+            {
+               "name": "0119",
+               "x": -10,
+               "y": 30
+            },
+            {
+               "name": "0096",
+               "x": -5,
+               "y": 120
+            },
+            {
+               "name": "0100",
+               "x": 70,
+               "y": 120
+            }
+         ],
+         
+         "rectangles": [
+            {
+               "name": "ShelfordP1",
+               "Ax": 20,
+               "Ay": 90,
+               "Bx": 40,
+               "By": 95,
+               "colour": "PLAT"
+            },
+            {
+               "name": "ShelfordP2",
+               "Ax": 20,
+               "Ay": 125,
+               "Bx": 40,
+               "By": 130,
+               "colour": "PLAT"
+            }
+         ],
+         
+         "texts": [
+            {
+               "text": "Shepreth\nBranch Jn",
+               "x": 100,
+               "y": 57,
+               "size": 6,
+               "colour": "DEFAULT"
+            },
+            {
+               "text": "Shelford",
+               "x": 11,
+               "y": 75,
+               "size": 8,
+               "colour": "DEFAULT"
+            },
+            {
+               "text": "To Foxton\n  & ECML",
+               "x": -85,
+               "y": 33,
+               "size": 6,
+               "colour": "DEFAULT"
+            },
+            {
+               "text": "Whittlesford \nP'way & WAML",
+               "x": -93,
+               "y": 103,
+               "size": 6,
+               "colour": "DEFAULT"
+            }
+         ]
+      },
+      
+      
+      
+      
+      
+      
+      {
+         "name": "Shepreth Jn - CBG",
+         "x": 240,
+         "y": 40,
+         
+         "tracks": [
+            {
+               "name": "5313",
+               "Ax": 50,
+               "Ay": 100,
+               "Bx": 85,
+               "By": 100,
+               "TC": "5313"
+            },
+            {
+               "name": "5314",
+               "Ax": 85,
+               "Ay": 100,
+               "Bx": 120,
+               "By": 100,
+               "TC": "5314"
+            },
+            {
+               "name": "5411A",
+               "Ax": 120,
+               "Ay": 100,
+               "Bx": 130,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5411"
+            },
+            {
+               "name": "5411B",
+               "ABreak": "NONE",
+               "Ax": 130,
+               "Ay": 100,
+               "Bx": 140,
+               "By": 100,
+               "TC": "5411"
+            },
+            {
+               "name": "5411C",
+               "ABreak": "NONE",
+               "Ax": 130,
+               "Ay": 100,
+               "Bx": 140,
+               "By": 90,
+               "TC": "5411"
+            },
+            {
+               "name": "5412",
+               "Ax": 140,
+               "Ay": 100,
+               "Bx": 180,
+               "By": 100,
+               "TC": "5412"
+            },
+            {
+               "name": "5401A",
+               "Ax": 140,
+               "Ay": 90,
+               "Bx": 150,
+               "By": 80,
+               "BBreak": "NONE",
+               "TC": "5401"
+            },
+            {
+               "name": "5401B",
+               "Ax": 150,
+               "Ay": 80,
+               "ABreak": "NONE",
+               "Bx": 180,
+               "By": 80,
+               "TC": "5401"
+            },
+            
+            {
+               "name": "5322",
+               "Ax": 30,
+               "Ay": 120,
+               "Bx": 65,
+               "By": 120,
+               "TC": "5322"
+            },
+            {
+               "name": "5323",
+               "Ax": 65,
+               "Ay": 120,
+               "Bx": 100,
+               "By": 120,
+               "TC": "5323"
+            },
+            {
+               "name": "5421",
+               "Ax": 100,
+               "Ay": 120,
+               "Bx": 145,
+               "By": 120,
+               "TC": "5421"
+            }
+         ],
+         
+         "signals": [
+            {
+               "name": "143",
+               "form": "M",
+               "x": 80,
+               "y": 90,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "145",
+               "form": "M",
+               "x": 115,
+               "y": 90,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "149",
+               "form": "M",
+               "x": 175,
+               "y": 90,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "147",
+               "form": "M",
+               "x": 175,
+               "y": 70,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            
+            {
+               "name": "142",
+               "form": "M",
+               "x": 60,
+               "y": 120,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "144",
+               "form": "M",
+               "x": 95,
+               "y": 120,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "148",
+               "form": "M",
+               "x": 140,
+               "y": 120,
+               "orientation": "L",
+               "offset": "DN"
+            }
+         ],
+         
+         "points": [
+            {
+               "name": "1047",
+               "NTrack": "5411B",
+               "RTrack": "5411C",
+               "end": "A",
+               "point": "1047",
+               "NDisables": ["5411C"],
+               "RDisables": ["5411B"]
+            }
+         ],
+         
+         "berths": [
+            {
+               "name": "0143",
+               "x": 60,
+               "y": 100
+            },
+            {
+               "name": "0145",
+               "x": 95,
+               "y": 100
+            },
+            {
+               "name": "0149",
+               "x": 155,
+               "y": 100
+            },
+            {
+               "name": "0147",
+               "x": 155,
+               "y": 80
+            },
+            
+            {
+               "name": "0140",
+               "x": 35,
+               "y": 120
+            },
+            {
+               "name": "0142",
+               "x": 70,
+               "y": 120
+            },
+            {
+               "name": "0144",
+               "x": 105,
+               "y": 120
+            }
+         ],
+         
+         "texts": [
+            {
+               "text": "The \"Cupboard\"",
+               "x": 145,
+               "y": 63,
+               "size": 6,
+               "colour": "DEFAULT"
+            }
+         ],
+         "rectangles": [],
+         "routes": []
+      },
+      
+      
+      
+      
+      
+      
+      {
+         "name": "CBG stn south",
+         "x": 390,
+         "y": 40,
+         
+         "tracks": [
+            {
+               "name": "5502A",
+               "Ax": 45,
+               "Ay": 80,
+               "Bx": 50,
+               "By": 80,
+               "BBreak": "NONE",
+               "TC": "5502"
+            },
+            {
+               "name": "5502B",
+               "Ax": 50,
+               "Ay": 80,
+               "ABreak": "NONE",
+               "Bx": 60,
+               "By": 90,
+               "TC": "5502"
+            },
+            {
+               "name": "5502C",
+               "Ax": 50,
+               "Ay": 80,
+               "ABreak": "NONE",
+               "Bx": 60,
+               "By": 80,
+               "TC": "5502"
+            },
+            
+            {
+               "name": "5501",
+               "Ax": 30,
+               "Ay": 80,
+               "Bx": 45,
+               "By": 80,
+               "TC": "5502"
+            },
+            {
+               "name": "5503",
+               "Ax": 60,
+               "Ay": 80,
+               "Bx": 110,
+               "By": 80,
+               "TC": "5503"
+            },
+            {
+               "name": "5504",
+               "Ax": 110,
+               "Ay": 80,
+               "Bx": 135,
+               "By": 80,
+               "TC": "5504"
+            },
+            {
+               "name": "5511",
+               "Ax": 30,
+               "Ay": 100,
+               "Bx": 60,
+               "By": 100,
+               "TC": "5511"
+            },
+            {
+               "name": "5512A",
+               "Ax": 60,
+               "Ay": 100,
+               "Bx": 70,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5512"
+            },
+            {
+               "name": "5512B",
+               "Ax": 60,
+               "Ay": 90,
+               "Bx": 70,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5512"
+            },
+            {
+               "name": "5512C",
+               "ABreak": "NONE",
+               "Ax": 70,
+               "Ay": 100,
+               "Bx": 75,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5512"
+            },
+            {
+               "name": "5512D",
+               "ABreak": "NONE",
+               "Ax": 75,
+               "Ay": 100,
+               "Bx": 97,
+               "By": 100,
+               "TC": "5512"
+            },
+            {
+               "name": "5512E",
+               "ABreak": "NONE",
+               "Ax": 75,
+               "Ay": 100,
+               "Bx": 85,
+               "By": 110,
+               "TC": "5512"
+            },
+            {
+               "name": "5523A",
+               "Ax": 85,
+               "Ay": 110,
+               "Bx": 95,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5523"
+            },
+            {
+               "name": "5523B",
+               "Ax": 85,
+               "Ay": 120,
+               "Bx": 95,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5523"
+            },
+            {
+               "name": "5523C",
+               "ABreak": "NONE",
+               "Ax": 95,
+               "Ay": 120,
+               "Bx": 97,
+               "By": 120,
+               "TC": "5523"
+            },
+            {
+               "name": "5524A",
+               "Ax": 97,
+               "Ay": 120,
+               "Bx": 100,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5524"
+            },
+            {
+               "name": "5524B",
+               "ABreak": "NONE",
+               "Ax": 100,
+               "Ay": 120,
+               "Bx": 110,
+               "By": 110,
+               "TC": "5524"
+            },
+            {
+               "name": "5524C",
+               "ABreak": "NONE",
+               "Ax": 100,
+               "Ay": 120,
+               "Bx": 105,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5524"
+            },
+            {
+               "name": "5524D",
+               "ABreak": "NONE",
+               "Ax": 105,
+               "Ay": 120,
+               "Bx": 115,
+               "By": 120,
+               "TC": "5524"
+            },
+            {
+               "name": "5524E",
+               "ABreak": "NONE",
+               "Ax": 105,
+               "Ay": 120,
+               "Bx": 115,
+               "By": 130,
+               "TC": "5524"
+            },
+            {
+               "name": "5542A",
+               "Ax": 115,
+               "Ay": 130,
+               "Bx": 145,
+               "By": 160,
+               "BBreak": "NONE",
+               "TC": "5542"
+            },
+            {
+               "name": "5542B",
+               "ABreak": "NONE",
+               "Ax": 145,
+               "Ay": 160,
+               "Bx": 160,
+               "By": 160,
+               "TC": "5542"
+            },
+            {
+               "name": "5542C",
+               
+               "Ax": 110,
+               "Ay": 160,
+               "Bx": 145,
+               "By": 160,
+               "BBreak": "NONE",
+               "TC": "5542"
+            },
+            {
+               "name": "5543",
+               "Ax": 160,
+               "Ay": 160,
+               "Bx": 175,
+               "By": 160,
+               "TC": "5543"
+            },
+            {
+               "name": "5543TOYARD",
+               "Ax": 185,
+               "Ay": 170,
+               "Bx": 200,
+               "By": 185
+            },
+            {
+               "name": "5551A",
+               "Ax": 175,
+               "Ay": 160,
+               "Bx": 190,
+               "By": 160,
+               "TC": "5551"
+            },
+            {
+               "name": "5551B",
+               "Ax": 175,
+               "Ay": 160,
+               "Bx": 185,
+               "By": 170,
+               "BBreak": "NONE",
+               "TC": "5551"
+            },
+            {
+               "name": "5552",
+               "Ax": 190,
+               "Ay": 160,
+               "Bx": 205,
+               "By": 160,
+               "TC": "5552"
+            },
+            {
+               "name": "5553",
+               "Ax": 205,
+               "Ay": 160,
+               "Bx": 240,
+               "By": 160,
+               "TC": "5553"
+            },
+            {
+               "name": "5525AA",
+               "Ax": 115,
+               "Ay": 120,
+               "Bx": 125,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5525"
+            },
+            {
+               "name": "5525E",
+               "ABreak": "NONE",
+               "Ax": 125,
+               "Ay": 120,
+               "Bx": 135,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5525"
+            },
+            {
+               "name": "5525D",
+               "ABreak": "NONE",
+               "Ax": 125,
+               "Ay": 120,
+               "Bx": 135,
+               "By": 130,
+               "TC": "5525"
+            },
+            {
+               "name": "5528A",
+               "Ax": 135,
+               "Ay": 130,
+               "Bx": 145,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5528"
+            },
+            {
+               "name": "5528B",
+               "ABreak": "NONE",
+               "Ax": 145,
+               "Ay": 140,
+               "Bx": 205,
+               "By": 140,
+               "TC": "5528"
+            },
+            {
+               "name": "5529",
+               "Ax": 205,
+               "Ay": 140,
+               "Bx": 240,
+               "By": 140,
+               "TC": "5529"
+            },
+            {
+               "name": "5525B",
+               "ABreak": "NONE",
+               "Ax": 135,
+               "Ay": 120,
+               "Bx": 145,
+               "By": 110,
+               "TC": "5525"
+            },
+            {
+               "name": "5525C",
+               "ABreak": "NONE",
+               "Ax": 135,
+               "Ay": 120,
+               "Bx": 155,
+               "By": 120,
+               "TC": "5525"
+            },
+            {
+               "name": "5513A",
+               "Ax": 97,
+               "Ay": 100,
+               "Bx": 120,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5513"
+            },
+            {
+               "name": "5513B",
+               "Ax": 110,
+               "Ay": 110,
+               "Bx": 120,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5513"
+            },
+            {
+               "name": "5513C",
+               "ABreak": "NONE",
+               "Ax": 120,
+               "Ay": 100,
+               "Bx": 123,
+               "By": 100,
+               "TC": "5513"
+            },
+            {
+               "name": "5514A",
+               "Ax": 123,
+               "Ay": 100,
+               "Bx": 125,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5514"
+            },
+            {
+               "name": "5514B",
+               "ABreak": "NONE",
+               "Ax": 125,
+               "Ay": 100,
+               "Bx": 135,
+               "By": 90,
+               "TC": "5514"
+            },
+            {
+               "name": "5514C",
+               "ABreak": "NONE",
+               "Ax": 125,
+               "Ay": 100,
+               "Bx": 140,
+               "By": 100,
+               "TC": "5514"
+            },
+            {
+               "name": "5505A",
+               "Ax": 135,
+               "Ay": 90,
+               "Bx": 145,
+               "By": 80,
+               "BBreak": "NONE",
+               "TC": "5505"
+            },
+            {
+               "name": "5505B",
+               "Ax": 135,
+               "Ay": 80,
+               "Bx": 145,
+               "By": 80,
+               "BBreak": "NONE",
+               "TC": "5505"
+            },
+            {
+               "name": "5505C",
+               "ABreak": "NONE",
+               "Ax": 145,
+               "Ay": 80,
+               "Bx": 147,
+               "By": 80,
+               "TC": "5505"
+            },
+            {
+               "name": "5506A",
+               "Ax": 147,
+               "Ay": 80,
+               "Bx": 150,
+               "By": 80,
+               "BBreak": "NONE",
+               "TC": "5506"
+            },
+            
+            {
+               "name": "5506B",
+               "ABreak": "NONE",
+               "Ax": 150,
+               "Ay": 80,
+               "Bx": 170,
+               "By": 80,
+               "TC": "5506"
+            },
+            {
+               "name": "5507",
+               "Ax": 170,
+               "Ay": 80,
+               "Bx": 205,
+               "By": 80,
+               "TC": "5507"
+            },
+            {
+               "name": "5508",
+               "Ax": 205,
+               "Ay": 80,
+               "Bx": 235,
+               "By": 80,
+               "TC": "5507"
+            },
+            {
+               "name": "5506C",
+               "ABreak": "NONE",
+               "Ax": 150,
+               "Ay": 80,
+               "Bx": 170,
+               "By": 60,
+               "TC": "5506"
+            },
+            {
+               "name": "5509",
+               "Ax": 170,
+               "Ay": 60,
+               "Bx": 235,
+               "By": 60,
+               "TC": "5509"
+            },
+            
+            {
+               "name": "5515A",
+               "Ax": 140,
+               "Ay": 100,
+               "Bx": 155,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5515"
+            },
+            {
+               "name": "5515B",
+               "ABreak": "NONE",
+               "Ax": 155,
+               "Ay": 100,
+               "Bx": 170,
+               "By": 100,
+               "TC": "5515"
+            },
+            {
+               "name": "5515C",
+               "Ax": 145,
+               "Ay": 110,
+               "Bx": 155,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5515"
+            },
+            
+            {
+               "name": "5571",
+               "Ax": 170,
+               "Ay": 100,
+               "Bx": 205,
+               "By": 100,
+               "TC": "5571"
+            },
+            {
+               "name": "5572",
+               "Ax": 205,
+               "Ay": 100,
+               "Bx": 240,
+               "By": 100,
+               "TC": "5572"
+            },
+            
+            {
+               "name": "5581",
+               "Ax": 155,
+               "Ay": 120,
+               "Bx": 205,
+               "By": 120,
+               "TC": "5581"
+            },
+            {
+               "name": "5582",
+               "Ax": 205,
+               "Ay": 120,
+               "Bx": 240,
+               "By": 120,
+               "TC": "5582"
+            },
+            
+            {
+               "name": "5522",
+               "Ax": -5,
+               "Ay": 120,
+               "Bx": 85,
+               "By": 120,
+               "TC": "5522"
+            }
+         ],
+         
+         
+         "points": [
+            {
+               "name": "1050A",
+               "NTrack": "5502C",
+               "RTrack": "5502B",
+               "end": "A",
+               "point": "1050",
+               "NDisables": ["5502B"],
+               "RDisables": ["5502C"]
+            },
+            {
+               "name": "1050B",
+               "NTrack": "5512A",
+               "RTrack": "5512B",
+               "end": "B",
+               "point": "1050",
+               "NDisables": ["5512B"],
+               "RDisables": ["5512A"]
+            },
+            {
+               "name": "1051A",
+               "NTrack": "5512D",
+               "RTrack": "5512E",
+               "end": "A",
+               "point": "1051",
+               "NDisables": ["5512E"],
+               "RDisables": ["5512D"]
+            },
+            {
+               "name": "1051B",
+               "NTrack": "5523B",
+               "RTrack": "5523A",
+               "end": "B",
+               "point": "1051",
+               "NDisables": ["5523A"],
+               "RDisables": ["5523B"]
+            },
+            {
+               "name": "1052A",
+               "NTrack": "5524C",
+               "RTrack": "5524B",
+               "end": "A",
+               "point": "1052",
+               "NDisables": ["5524B"],
+               "RDisables": ["5524C", "5524D", "5524E"]
+            },
+            {
+               "name": "1052B",
+               "NTrack": "5513A",
+               "RTrack": "5513B",
+               "end": "B",
+               "point": "1052",
+               "NDisables": ["5513B"],
+               "RDisables": ["5513A"]
+            },
+            {
+               "name": "1058A",
+               "NTrack": "5514C",
+               "RTrack": "5514B",
+               "end": "A",
+               "point": "1058",
+               "NDisables": ["5514B"],
+               "RDisables": ["5514C"]
+            },
+            {
+               "name": "1058B",
+               "NTrack": "5505B",
+               "RTrack": "5505A",
+               "end": "B",
+               "point": "1058",
+               "NDisables": ["5505A"],
+               "RDisables": ["5505B"]
+            },
+            {
+               "name": "1060",
+               "NTrack": "5506B",
+               "RTrack": "5506C",
+               "end": "A",
+               "point": "1060",
+               "NDisables": ["5506C"],
+               "RDisables": ["5506B"]
+            },
+            {
+               "name": "1056",
+               "NTrack": "5525E",
+               "RTrack": "5525D",
+               "end": "A",
+               "point": "1056",
+               "NDisables": ["5525D"],
+               "RDisables": ["5525E", "5525B", "5525C"]
+            },
+            {
+               "name": "1059A",
+               "NTrack": "5525C",
+               "RTrack": "5525B",
+               "end": "A",
+               "point": "1059",
+               "NDisables": ["5525B"],
+               "RDisables": ["5525C"]
+            },
+            {
+               "name": "1059B",
+               "NTrack": "5515A",
+               "RTrack": "5515C",
+               "end": "B",
+               "point": "1059",
+               "NDisables": ["5515C"],
+               "RDisables": ["5515A"]
+            },
+            {
+               "name": "1053A",
+               "NTrack": "5524D",
+               "RTrack": "5524E",
+               "end": "A",
+               "point": "1053",
+               "NDisables": ["5524E"],
+               "RDisables": ["5524D"]
+            },
+            {
+               "name": "1053B",
+               "NTrack": "5542C",
+               "RTrack": "5542A",
+               "end": "B",
+               "point": "1053",
+               "NDisables": ["5542A"],
+               "RDisables": ["5542C"]
+            },
+            {
+               "name": "1065",
+               "NTrack": "5551A",
+               "RTrack": "5551B",
+               "end": "A",
+               "point": "1065",
+               "NDisables": ["5551B"],
+               "RDisables": ["5551A"]
+            }
+         ],
+         
+         "signals": [
+            {
+               "name": "150",
+               "form": "C",
+               "x": 165,
+               "y": 50,
+               "orientation": "L",
+               "offset": "UP"
+            },
+            {
+               "name": "152",
+               "form": "C",
+               "x": 165,
+               "y": 80,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "154",
+               "form": "C",
+               "x": 165,
+               "y": 90,
+               "orientation": "L",
+               "offset": "UP"
+            },
+            {
+               "name": "156",
+               "form": "C",
+               "x": 165,
+               "y": 120,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "653",
+               "form": "S",
+               "x": 114,
+               "y": 70,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "655",
+               "form": "S",
+               "x": 114,
+               "y": 90,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "161",
+               "form": "C",
+               "x": 230,
+               "y": 88,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "163",
+               "form": "C",
+               "x": 230,
+               "y": 110,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "158",
+               "form": "C",
+               "x": 200,
+               "y": 140,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "160",
+               "form": "C",
+               "x": 200,
+               "y": 150,
+               "orientation": "L",
+               "offset": "UP"
+            },
+            {
+               "name": "659",
+               "form": "S",
+               "x": 155,
+               "y": 150,
+               "orientation": "R",
+               "offset": "UP"
+            }
+         ],
+         
+         "berths": [
+            {
+               "name": "0150",
+               "x": 180,
+               "y": 60
+            },
+            {
+               "name": "1150",
+               "x": 210,
+               "y": 60
+            },
+            {
+               "name": "0152",
+               "x": 180,
+               "y": 80
+            },
+            {
+               "name": "1152",
+               "x": 210,
+               "y": 80
+            },
+            {
+               "name": "0154",
+               "x": 180,
+               "y": 100
+            },
+            {
+               "name": "0161",
+               "x": 210,
+               "y": 100
+            },
+            {
+               "name": "0156",
+               "x": 180,
+               "y": 120
+            },
+            {
+               "name": "0163",
+               "x": 210,
+               "y": 120
+            },
+            {
+               "name": "0148",
+               "x": 10,
+               "y": 120
+            },
+            {
+               "name": "0158",
+               "x": 215,
+               "y": 140
+            },
+            {
+               "name": "0160",
+               "x": 215,
+               "y": 160
+            },
+            {
+               "name": "0653",
+               "x": 90,
+               "y": 80
+            },
+            {
+               "name": "0655",
+               "x": 90,
+               "y": 100
+            }
+         ],
+         "routes": [],
+         "rectangles": [],
+         "texts": []
+      },
+      
+      
+      
+      
+      
+      
+      {
+         "name": "CBG stn north",
+         "x": 510,
+         "y": 40,
+         
+         "tracks": [
+            {
+               "name": "5573A",
+               "Ax": 120,
+               "Ay": 100,
+               "Bx": 130,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5573"
+            },
+            {
+               "name": "5573B",
+               "ABreak": "NONE",
+               "Ax": 130,
+               "Ay": 100,
+               "Bx": 150,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5573"
+            },
+            {
+               "name": "5573C",
+               "ABreak": "NONE",
+               "Ax": 150,
+               "Ay": 100,
+               "Bx": 160,
+               "By": 100,
+               "TC": "5573"
+            },
+            {
+               "name": "5573D",
+               "ABreak": "NONE",
+               "Ax": 130,
+               "Ay": 100,
+               "Bx": 140,
+               "By": 110,
+               "BOrientation": "H",
+               "BBreak": "NONE",
+               "TC": "5573"
+            },
+            {
+               "name": "5573E",
+               "ABreak": "NONE",
+               "AOrientation": "H",
+               "Ax": 140,
+               "Ay": 110,
+               "Bx": 150,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5573"
+            },
+            {
+               "name": "5574",
+               "Ax": 160,
+               "Ay": 100,
+               "Bx": 195,
+               "By": 100,
+               "TC": "5574"
+            },
+            {
+               "name": "5575",
+               "Ax": 195,
+               "Ay": 100,
+               "Bx": 230,
+               "By": 100,
+               "TC": "5575"
+            },
+            
+            {
+               "name": "5583A",
+               "Ax": 120,
+               "Ay": 120,
+               "Bx": 130,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5583"
+            },
+            {
+               "name": "5583B",
+               "ABreak": "NONE",
+               "Ax": 130,
+               "Ay": 120,
+               "Bx": 150,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5583"
+            },
+            {
+               "name": "5583C",
+               "ABreak": "NONE",
+               "Ax": 150,
+               "Ay": 120,
+               "Bx": 160,
+               "By": 120,
+               "TC": "5583"
+            },
+            {
+               "name": "5583D",
+               "ABreak": "NONE",
+               "Ax": 130,
+               "Ay": 120,
+               "Bx": 140,
+               "By": 110,
+               "BOrientation": "H",
+               "BBreak": "NONE",
+               "TC": "5583"
+            },
+            {
+               "name": "5583E",
+               "AOrientation": "H",
+               "ABreak": "NONE",
+               "Ax": 140,
+               "Ay": 110,
+               "Bx": 150,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5583"
+            },
+            {
+               "name": "5584",
+               "Ax": 160,
+               "Ay": 120,
+               "Bx": 195,
+               "By": 120,
+               "TC": "5584"
+            },
+            {
+               "name": "5585",
+               "Ax": 195,
+               "Ay": 120,
+               "Bx": 230,
+               "By": 120,
+               "TC": "5585"
+            },
+            
+            {
+               "name": "5530",
+               "Ax": 120,
+               "Ay": 140,
+               "Bx": 160,
+               "By": 140,
+               "TC": "5530"
+            },
+            {
+               "name": "5531",
+               "Ax": 160,
+               "Ay": 140,
+               "Bx": 195,
+               "By": 140,
+               "TC": "5531"
+            },
+            {
+               "name": "5554",
+               "Ax": 120,
+               "Ay": 160,
+               "Bx": 160,
+               "By": 160,
+               "TC": "5553"
+            },
+            {
+               "name": "5558",
+               "Ax": 160,
+               "Ay": 160,
+               "Bx": 195,
+               "By": 160,
+               "TC": "5558"
+            },
+            
+            {
+               "name": "5593",
+               "Ax": 165,
+               "Ay": 60,
+               "Bx": 195,
+               "By": 60,
+               "TC": "5593"
+            },
+            {
+               "name": "5594",
+               "Ax": 195,
+               "Ay": 60,
+               "Bx": 230,
+               "By": 60,
+               "TC": "5594"
+            },
+            
+            {
+               "name": "5591",
+               "Ax": 165,
+               "Ay": 80,
+               "Bx": 195,
+               "By": 80,
+               "TC": "5591"
+            },
+            {
+               "name": "5592",
+               "Ax": 195,
+               "Ay": 80,
+               "Bx": 230,
+               "By": 80,
+               "TC": "5592"
+            }
+         ],
+         "rectangles": [
+            {
+               "name": "a",
+               "Ax": 115,
+               "Ay": 50,
+               "Bx": 165,
+               "By": 95,
+               "colour": "PLAT"
+            },
+            {
+               "name": "b",
+               "Ax": 55,
+               "Ay": 85,
+               "Bx": 225,
+               "By": 95,
+               "colour": "PLAT"
+            },
+            {
+               "name": "c",
+               "Ax": 55,
+               "Ay": 48,
+               "Bx": 225,
+               "By": 55,
+               "colour": "PLAT"
+            },
+            {
+               "name": "d",
+               "Ax": 90,
+               "Ay": 145,
+               "Bx": 190,
+               "By": 155,
+               "colour": "PLAT"
+            }
+         ],
+         "signals": [
+            {
+               "name": "162",
+               "form": "C",
+               "x": 155,
+               "y": 88,
+               "orientation": "L",
+               "offset": "UP"
+            },
+            {
+               "name": "164",
+               "form": "C",
+               "x": 155,
+               "y": 110,
+               "orientation": "L",
+               "offset": "UP"
+            },
+            {
+               "name": "175",
+               "form": "C",
+               "x": 220,
+               "y": 90,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "177",
+               "form": "C",
+               "x": 220,
+               "y": 110,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "179",
+               "form": "C",
+               "x": 185,
+               "y": 140,
+               "orientation": "R",
+               "offset": "DN"
+            },
+            {
+               "name": "181",
+               "form": "C",
+               "x": 185,
+               "y": 150,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "173",
+               "form": "C",
+               "x": 220,
+               "y": 80,
+               "orientation": "R",
+               "offset": "DN"
+            },
+            {
+               "name": "171",
+               "form": "C",
+               "x": 220,
+               "y": 50,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "708",
+               "form": "S",
+               "x": 310,
+               "y": 100,
+               "orientation": "L",
+               "offset": "DN"
+            }
+         ],
+         "texts": [
+            {
+               "text": "Cambridge",
+               "x": 100,
+               "y": 23,
+               "size": 15,
+               "colour": "DEFAULT"
+            },
+            {
+               "text": "2",
+               "x": 84,
+               "y": 85,
+               "size": 5,
+               "colour": "000000"
+            },
+            {
+               "text": "3",
+               "x": 84,
+               "y": 48,
+               "size": 5,
+               "colour": "000000"
+            },
+            {
+               "text": "1",
+               "x": 84,
+               "y": 89,
+               "size": 5,
+               "colour": "000000"
+            },
+            {
+               "text": "5",
+               "x": 194,
+               "y": 85,
+               "size": 5,
+               "colour": "000000"
+            },
+            {
+               "text": "6",
+               "x": 194,
+               "y": 48,
+               "size": 5,
+               "colour": "000000"
+            },
+            {
+               "text": "4",
+               "x": 194,
+               "y": 89,
+               "size": 5,
+               "colour": "000000"
+            },
+            {
+               "text": "7",
+               "x": 139,
+               "y": 145,
+               "size": 5,
+               "colour": "000000"
+            },
+            {
+               "text": "8",
+               "x": 139,
+               "y": 149,
+               "size": 5,
+               "colour": "000000"
+            }
+         ],
+         "routes": [],
+         "berths": [
+            {
+               "name": "1171",
+               "x": 170,
+               "y": 60
+            },
+            {
+               "name": "0171",
+               "x": 200,
+               "y": 60
+            },
+            
+            {
+               "name": "1173",
+               "x": 170,
+               "y": 80
+            },
+            {
+               "name": "0173",
+               "x": 200,
+               "y": 80
+            },
+            
+            {
+               "name": "0162",
+               "x": 170,
+               "y": 100
+            },
+            {
+               "name": "0175",
+               "x": 200,
+               "y": 100
+            },
+            
+            {
+               "name": "0164",
+               "x": 170,
+               "y": 120
+            },
+            {
+               "name": "0177",
+               "x": 200,
+               "y": 120
+            },
+            
+            {
+               "name": "0179",
+               "x": 165,
+               "y": 140
+            },
+            {
+               "name": "0181",
+               "x": 165,
+               "y": 160
+            },
+            {
+               "name": "0708",
+               "x": 320,
+               "y": 100
+            }
+         ],
+         "points": [
+            {
+               "name": "1068A",
+               "NTrack": "5573B",
+               "RTrack": "5573D",
+               "end": "A",
+               "point": "1068",
+               "NDisables": ["5573D", "5573E"],
+               "RDisables": ["5573B", "5573C", "5573E"]
+            },
+            {
+               "name": "1068B",
+               "NTrack": "5583B",
+               "RTrack": "5583E",
+               "end": "B",
+               "point": "1068",
+               "NDisables": ["5583D", "5583E"],
+               "RDisables": ["5583A", "5583B", "5583D"]
+            },
+            {
+               "name": "1069A",
+               "NTrack": "5583B",
+               "RTrack": "5583D",
+               "end": "A",
+               "point": "1069",
+               "NDisables": ["5583D", "5583E"],
+               "RDisables": ["5583B","5583E","5583C"]
+            },
+            {
+               "name": "1069B",
+               "NTrack": "5573B",
+               "RTrack": "5573E",
+               "end": "B",
+               "point": "1069",
+               "NDisables": ["5573D", "5573E"],
+               "RDisables": ["5573B","5573D","5573A"]
+            }
+         ]
+      },
+      
+      
+      
+      
+      
+      
+      {
+         "name": "CBG stn north throat",
+         "x": 630,
+         "y": 40,
+         "tracks": [
+            {
+               "name": "5576B",
+               "Ax": 110,
+               "Ay": 60,
+               "Bx": 130,
+               "By": 80,
+               "BBreak": "NONE",
+               "TC": "5576"
+            },
+            {
+               "name": "5576C",
+               "Ax": 110,
+               "Ay": 80,
+               "Bx": 130,
+               "By": 80,
+               "BBreak": "NONE",
+               "TC": "5576"
+            },
+            {
+               "name": "5576D",
+               "ABreak": "NONE",
+               "Ax": 130,
+               "Ay": 80,
+               "Bx": 150,
+               "By": 100,
+               "TC": "5576"
+            },
+            {
+               "name": "5576E",
+               "Ax": 110,
+               "Ay": 100,
+               "Bx": 150,
+               "By": 100,
+               "TC": "5576"
+            }
+         ,
+            {
+               "name": "5577A",
+               "Ax": 150,
+               "Ay": 100,
+               "Bx": 170,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5577"
+            },
+            {
+               "name": "5577B",
+               "Ax": 140,
+               "Ay": 70,
+               "Bx": 170,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5577"
+            },
+            {
+               "name": "5577C",
+               "ABreak": "NONE",
+               "Ax": 170,
+               "Ay": 100,
+               "Bx": 172,
+               "By": 100,
+               "TC": "5577"
+            },
+            
+            {
+               "name": "5578A",
+               "Ax": 172,
+               "Ay": 100,
+               "Bx": 175,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5578"
+            },
+            {
+               "name": "5578B",
+               "ABreak": "NONE",
+               "Ax": 175,
+               "Ay": 100,
+               "Bx": 185,
+               "By": 110,
+               "TC": "5578"
+            },
+            {
+               "name": "5578C",
+               "ABreak": "NONE",
+               "Ax": 175,
+               "Ay": 100,
+               "Bx": 195,
+               "By": 100,
+               "TC": "5578"
+            },
+            {
+               "name": "5587A",
+               "Ax": 185,
+               "Ay": 110,
+               "Bx": 195,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5587"
+            },
+            {
+               "name": "5587B",
+               "Ax": 185,
+               "Ay": 120,
+               "Bx": 195,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5587"
+            },
+            {
+               "name": "5587C",
+               "ABreak": "NONE",
+               "Ax": 195,
+               "Ay": 120,
+               "Bx": 205,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5587"
+            },
+            {
+               "name": "5587D",
+               "ABreak": "NONE",
+               "Ax": 205,
+               "Ay": 120,
+               "Bx": 215,
+               "By": 120,
+               "TC": "5587"
+            },
+            {
+               "name": "5587E",
+               "Ax": 195,
+               "Ay": 130,
+               "Bx": 205,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5587"
+            },
+            
+            {
+               "name": "5534A",
+               "ABreak": "NONE",
+               "Ax": 185,
+               "Ay": 140,
+               "Bx": 195,
+               "By": 130,
+               "TC": "5534"
+            },
+            {
+               "name": "5534C",
+               "ABreak": "NONE",
+               "Ax": 185,
+               "Ay": 140,
+               "Bx": 195,
+               "By": 140,
+               "TC": "5534"
+            },
+            {
+               "name": "5534B",
+               "Ax": 160,
+               "Ay": 140,
+               "Bx": 185,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5534"
+            },
+            {
+               "name": "5533A",
+               "ABreak": "NONE",
+               "Ax": 140,
+               "Ay": 140,
+               "Bx": 160,
+               "By": 140,
+               "TC": "5533"
+            },
+            {
+               "name": "5533B",
+               "Ax": 130,
+               "Ay": 140,
+               "Bx": 140,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5533"
+            },
+            {
+               "name": "5533C",
+               "ABreak": "NONE",
+               "Ax": 130,
+               "Ay": 150,
+               "Bx": 140,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5533"
+            },
+            {
+               "name": "5533D",
+               "Ax": 110,
+               "Ay": 170,
+               "Bx": 130,
+               "By": 150
+            },
+            
+            {
+               "name": "5560A",
+               "ABreak": "NONE",
+               "Ax": 120,
+               "Ay": 140,
+               "Bx": 130,
+               "By": 140,
+               "TC": "5560"
+            },
+            {
+               "name": "5560B",
+               "Ax": 110,
+               "Ay": 140,
+               "Bx": 120,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5560"
+            },
+            {
+               "name": "5560C",
+               "Ax": 110,
+               "Ay": 150,
+               "Bx": 120,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5560"
+            },
+            
+            {
+               "name": "5532",
+               "Ax": 75,
+               "Ay": 140,
+               "Bx": 110,
+               "By": 140,
+               "TC": "5532"
+            },
+            {
+               "name": "5559A",
+               "Ax": 75,
+               "Ay": 160,
+               "Bx": 100,
+               "By": 160,
+               "BBreak": "NONE",
+               "TC": "5559"
+            },
+            {
+               "name": "5559B",
+               "ABreak": "NONE",
+               "Ax": 100,
+               "Ay": 160,
+               "Bx": 110,
+               "By": 150,
+               "TC": "5559"
+            },
+            
+            {
+               "name": "5586",
+               "Ax": 110,
+               "Ay": 120,
+               "Bx": 185,
+               "By": 120,
+               "TC": "5586"
+            }
+         
+         ,
+            {
+               "name": "5595B",
+               "ABreak": "NONE",
+               "Ax": 110,
+               "Ay": 40,
+               "Bx": 140,
+               "By": 70,
+               "TC": "5595"
+            },
+            {
+               "name": "5595A",
+               "ABreak": "NONE",
+               "Ax": 105,
+               "Ay": 40,
+               "Bx": 110,
+               "By": 40,
+               "BBreak": "NONE",
+               "TC": "5595"
+            },
+            {
+               "name": "5595C",
+               "ABreak": "NONE",
+               "Ax": 110,
+               "Ay": 40,
+               "Bx": 120,
+               "By": 40,
+               "BBreak": "NONE",
+               "TC": "5595"
+            },
+            {
+               "name": "5595NOTTCA",
+               "ABreak": "NONE",
+               "Ax": 95,
+               "Ay": 40,
+               "Bx": 105,
+               "By": 40,
+               "BBreak": "NONE"
+            },
+            {
+               "name": "5595NOTTCB",
+               "ABreak": "NONE",
+               "Ax": 95,
+               "Ay": 30,
+               "Bx": 105,
+               "By": 40,
+               "BBreak": "NONE"
+            },
+            {
+               "name": "5595NOTTCC",
+               "ABreak": "NONE",
+               "Ax": 120,
+               "Ay": 40,
+               "Bx": 130,
+               "By": 40,
+               "BBreak": "NONE"
+            }
+         ],
+         "rectangles": [],
+         "signals": [
+            {
+               "name": "180",
+               "form": "C",
+               "x": 210,
+               "y": 120,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "701",
+               "form": "S",
+               "x": 103,
+               "y": 30,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "706",
+               "form": "S",
+               "x": 120,
+               "y": 40,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "710",
+               "form": "S",
+               "x": 155,
+               "y": 140,
+               "orientation": "L",
+               "offset": "DN"
+            }
+         ],
+         "texts": [
+            {
+               "text": "To South\nSidings",
+               "x": 90,
+               "y": 175,
+               "size": 6,
+               "colour": "DEFAULT"
+            }
+         ],
+         "routes": [],
+         "berths": [],
+         "points": [
+            {
+               "name": "1072",
+               "NTrack": "5576C",
+               "RTrack": "5576B",
+               "end": "B",
+               "point": "1072",
+               "NDisables": ["5576B"],
+               "RDisables": ["5576C"]
+            },
+            {
+               "name": "1073",
+               "NTrack": "5576E",
+               "RTrack": "5576D",
+               "end": "B",
+               "point": "1073",
+               "NDisables": ["5576D", "5576C", "5576B"],
+               "RDisables": ["5576E"]
+            },
+            {
+               "name": "1075A",
+               "NTrack": "5595C",
+               "RTrack": "5595B",
+               "end": "A",
+               "point": "1075",
+               "NDisables": ["5595B"],
+               "RDisables": ["5595C"]
+            },
+            {
+               "name": "1075B",
+               "NTrack": "5577A",
+               "RTrack": "5577B",
+               "end": "B",
+               "point": "1075",
+               "NDisables": ["5577B"],
+               "RDisables": ["5577A"]
+            },
+            {
+               "name": "1081A",
+               "NTrack": "5578C",
+               "RTrack": "5578B",
+               "end": "A",
+               "point": "1081",
+               "NDisables": ["5578B"],
+               "RDisables": ["5578C"]
+            },
+            {
+               "name": "1081B",
+               "NTrack": "5587B",
+               "RTrack": "5587A",
+               "end": "B",
+               "point": "1081",
+               "NDisables": ["5587A"],
+               "RDisables": ["5587B"]
+            },
+            
+            {
+               "name": "1077",
+               "NTrack": "5560B",
+               "RTrack": "5560C",
+               "end": "B",
+               "point": "1077",
+               "NDisables": ["5560C"],
+               "RDisables": ["5560B"]
+            },
+            {
+               "name": "1080",
+               "NTrack": "5533B",
+               "RTrack": "5533C",
+               "end": "B",
+               "point": "1080",
+               "NDisables": ["5533C"],
+               "RDisables": ["5533B"]
+            },
+            {
+               "name": "1082A",
+               "NTrack": "5534C",
+               "RTrack": "5534A",
+               "end": "A",
+               "point": "1082",
+               "NDisables": ["5534A"],
+               "RDisables": ["5534C"]
+            },
+            {
+               "name": "1082B",
+               "NTrack": "5587C",
+               "RTrack": "5587E",
+               "end": "B",
+               "point": "1082",
+               "NDisables": ["5587E"],
+               "RDisables": ["5587C", "5587B", "5587A"]
+            }
+         ]
+      },
+      
+      
+      
+      
+      
+      
+      {
+         "name": "CBG stn north",
+         "x": 800,
+         "y": 40,
+         "tracks": [
+            {
+               "name": "5621A",
+               "Ax": 45,
+               "Ay": 120,
+               "Bx": 80,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5621"
+            },
+            {
+               "name": "5621B",
+               "ABreak": "NONE",
+               "Ax": 80,
+               "Ay": 120,
+               "Bx": 110,
+               "By": 120,
+               "TC": "5621"
+            },
+            {
+               "name": "5621C",
+               "ABreak": "NONE",
+               "Ax": 80,
+               "Ay": 120,
+               "Bx": 90,
+               "By": 130,
+               "TC": "5621"
+            },
+            {
+               "name": "5622A",
+               "Ax": 110,
+               "Ay": 120,
+               "Bx": 140,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5622"
+            },
+            {
+               "name": "5622B",
+               "Ax": 130,
+               "Ay": 130,
+               "Bx": 140,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5622"
+            },
+            {
+               "name": "5622C",
+               "ABreak": "NONE",
+               "Ax": 140,
+               "Ay": 120,
+               "Bx": 145,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5622"
+            },
+            {
+               "name": "5622D",
+               "ABreak": "NONE",
+               "Ax": 145,
+               "Ay": 120,
+               "Bx": 175,
+               "By": 120,
+               "TC": "5622"
+            },
+            {
+               "name": "5622E",
+               "ABreak": "NONE",
+               "Ax": 145,
+               "Ay": 120,
+               "Bx": 155,
+               "By": 110,
+               "TC": "5622"
+            },
+            {
+               "name": "5623A",
+               "ABreak": "NONE",
+               "Ax": 200,
+               "Ay": 120,
+               "Bx": 205,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5623"
+            },
+            {
+               "name": "5623B",
+               "ABreak": "NONE",
+               "Ax": 205,
+               "Ay": 120,
+               "Bx": 215,
+               "By": 120,
+               "TC": "5623"
+            },
+            {
+               "name": "5623C",
+               "ABreak": "NONE",
+               "Ax": 205,
+               "Ay": 120,
+               "Bx": 225,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5623"
+            },
+            {
+               "name": "5623D",
+               "ABreak": "NONE",
+               "Ax": 225,
+               "Ay": 140,
+               "Bx": 230,
+               "By": 140,
+               "TC": "5623"
+            },
+            {
+               "name": "5623E",
+               "Ax": 215,
+               "Ay": 140,
+               "Bx": 225,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5623"
+            },
+            {
+               "name": "5623F",
+               "Ax": 190,
+               "Ay": 110,
+               "Bx": 200,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5623"
+            },
+            {
+               "name": "5623G",
+               "Ax": 175,
+               "Ay": 120,
+               "Bx": 200,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5623"
+            },
+            {
+               "name": "5633C",
+               "Ax": 230,
+               "Ay": 140,
+               "Bx": 265,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5633"
+            },
+            {
+               "name": "5633B",
+               "Ax": 265,
+               "Ay": 140,
+               "Bx": 275,
+               "By": 150
+            },
+            {
+               "name": "5624",
+               "Ax": 215,
+               "Ay": 120,
+               "Bx": 230,
+               "By": 120,
+               "TC": "5624"
+            },
+            {
+               "name": "5632",
+               "Ax": 130,
+               "Ay": 140,
+               "Bx": 170,
+               "By": 140,
+               "TC": "5632"
+            },
+            {
+               "name": "5631A",
+               "Ax": 105,
+               "Ay": 140,
+               "Bx": 110,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5631"
+            },
+            {
+               "name": "5631B",
+               "ABreak": "NONE",
+               "Ax": 110,
+               "Ay": 140,
+               "Bx": 120,
+               "By": 150,
+               "BBreak": "NONE",
+               "TC": "5631"
+            },
+            
+            {
+               "name": "5631C",
+               "Ax": 120,
+               "Ay": 150,
+               "Bx": 140,
+               "By": 170
+            },
+            {
+               "name": "5631D",
+               "ABreak": "NONE",
+               "Ax": 110,
+               "Ay": 140,
+               "Bx": 120,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5631"
+            },
+            {
+               "name": "5631E",
+               "ABreak": "NONE",
+               "Ax": 120,
+               "Ay": 140,
+               "Bx": 130,
+               "By": 140,
+               "TC": "5631"
+            },
+            {
+               "name": "5631F",
+               "ABreak": "NONE",
+               "Ax": 120,
+               "Ay": 140,
+               "Bx": 130,
+               "By": 130,
+               "TC": "5631"
+            },
+            
+            {
+               "name": "5535A",
+               "ABreak": "NONE",
+               "Ax": 100,
+               "Ay": 140,
+               "Bx": 105,
+               "By": 140,
+               "TC": "5535"
+            },
+            {
+               "name": "5535B",
+               "ABreak": "NONE",
+               "Ax": 65,
+               "Ay": 140,
+               "Bx": 100,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5535"
+            },
+            {
+               "name": "5535C",
+               "Ax": 90,
+               "Ay": 130,
+               "Bx": 100,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5535"
+            },
+            {
+               "name": "5535D",
+               "ABreak": "NONE",
+               "Ax": 45,
+               "Ay": 140,
+               "Bx": 65,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5535"
+            },
+            {
+               "name": "5535E",
+               "ABreak": "NONE",
+               "Ax": 55,
+               "Ay": 150,
+               "Bx": 65,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5535"
+            },
+            {
+               "name": "5535F",
+               "Ax": 35,
+               "Ay": 170,
+               "Bx": 55,
+               "By": 150
+            },
+            {
+               "name": "5535G",
+               "Ax": 25,
+               "Ay": 140,
+               "Bx": 45,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5535"
+            },
+            {
+               "name": "5535H",
+               "ABreak": "NONE",
+               "Ax": 35,
+               "Ay": 150,
+               "Bx": 45,
+               "By": 140,
+               "BBreak": "NONE",
+               "TC": "5535"
+            },
+            {
+               "name": "5535I",
+               "Ax": 15,
+               "Ay": 170,
+               "Bx": 35,
+               "By": 150
+            },
+            
+            {
+               "name": "5611A",
+               "Ax": 25,
+               "Ay": 100,
+               "Bx": 165,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5611"
+            },
+            {
+               "name": "5611B",
+               "Ax": 155,
+               "Ay": 110,
+               "Bx": 165,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5611"
+            },
+            {
+               "name": "5611C",
+               "ABreak": "NONE",
+               "Ax": 165,
+               "Ay": 100,
+               "Bx": 168,
+               "By": 100,
+               "TC": "5611"
+            },
+            {
+               "name": "5613A",
+               "Ax": 168,
+               "Ay": 100,
+               "Bx": 170,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5613"
+            },
+            {
+               "name": "5613B",
+               "ABreak": "NONE",
+               "Ax": 170,
+               "Ay": 100,
+               "Bx": 180,
+               "By": 90,
+               "BBreak": "NONE",
+               "TC": "5613"
+            },
+            {
+               "name": "5613E",
+               "ABreak": "NONE",
+               "Ax": 180,
+               "Ay": 90,
+               "Bx": 190,
+               "By": 80,
+               "BBreak": "NONE",
+               "TC": "5613"
+            },
+            {
+               "name": "5613F",
+               "ABreak": "NONE",
+               "Ax": 190,
+               "Ay": 80,
+               "Bx": 195,
+               "By": 80,
+               "TC": "5613"
+            },
+            {
+               "name": "5602",
+               "Ax": 195,
+               "Ay": 80,
+               "Bx": 250,
+               "By": 80,
+               "TC": "5602"
+            },
+            {
+               "name": "5613G",
+               "Ax": 180,
+               "Ay": 80,
+               "Bx": 190,
+               "By": 80,
+               "BBreak": "NONE",
+               "TC": "5613"
+            },
+            {
+               "name": "5613C",
+               "ABreak": "NONE",
+               "Ax": 170,
+               "Ay": 100,
+               "Bx": 180,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5613"
+            },
+            {
+               "name": "5613D",
+               "ABreak": "NONE",
+               "Ax": 180,
+               "Ay": 100,
+               "Bx": 190,
+               "By": 110,
+               "TC": "5613"
+            },
+            {
+               "name": "5613H",
+               "ABreak": "NONE",
+               "Ax": 180,
+               "Ay": 100,
+               "Bx": 190,
+               "By": 100,
+               "TC": "5613"
+            }
+         ],
+         "rectangles": [],
+         "signals": [
+            {
+               "name": "722",
+               "form": "S",
+               "x": 125,
+               "y": 140,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "190",
+               "form": "C",
+               "x": 225,
+               "y": 120,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "188",
+               "form": "C",
+               "x": 225,
+               "y": 140,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "733",
+               "form": "S",
+               "x": 197,
+               "y": 120,
+               "orientation": "R",
+               "offset": "DN"
+            },
+            {
+               "name": "721",
+               "form": "S",
+               "x": 101,
+               "y": 140,
+               "orientation": "R",
+               "offset": "DN"
+            },
+            {
+               "name": "732",
+               "form": "S",
+               "x": 190,
+               "y": 70,
+               "orientation": "L",
+               "offset": "UP"
+            }
+         ],
+         "texts": [
+            {
+               "text": "Headshunt",
+               "x": 137,
+               "y": 142,
+               "size": 6,
+               "colour": "DEFAULT"
+            },
+            {
+               "text": "To South\nSidings",
+               "x": 0,
+               "y": 175,
+               "size": 6,
+               "colour": "DEFAULT"
+            },
+            {
+               "text": "To South\nSidings",
+               "x": -220,
+               "y": 190,
+               "size": 6,
+               "colour": "DEFAULT"
+            },
+            {
+               "text": "To North\nSidings",
+               "x": 130,
+               "y": 175,
+               "size": 6,
+               "colour": "DEFAULT"
+            },
+            {
+               "text": "To Coldham\n Ln Depot",
+               "x": 265,
+               "y": 155,
+               "size": 6,
+               "colour": "DEFAULT"
+            },
+            {
+               "text": "DN Goods Loop",
+               "x": 200,
+               "y": 63,
+               "size": 6,
+               "colour": "DEFAULT"
+            },
+            {
+               "text": "(Out of Use)",
+               "x": 205,
+               "y": 69,
+               "size": 5,
+               "colour": "DEFAULT"
+            },
+            {
+               "text": "Coldham\nLane Jn",
+               "x": 255,
+               "y": 57,
+               "size": 6,
+               "colour": "DEFAULT"
+            }
+         ],
+         "routes": [],
+         "berths": [
+            {
+               "name": "0180",
+               "x": 55,
+               "y": 120
+            },
+            {
+               "name": "0188",
+               "x": 240,
+               "y": 140
+            },
+            {
+               "name": "0190",
+               "x": 240,
+               "y": 120
+            }
+         ],
+         "points": [
+            {
+               "name": "1085A",
+               "NTrack": "5621B",
+               "RTrack": "5621C",
+               "end": "A",
+               "point": "1085",
+               "NDisables": ["5621C"],
+               "RDisables": ["5621B"]
+            },
+            {
+               "name": "1085B",
+               "NTrack": "5535B",
+               "RTrack": "5535C",
+               "end": "B",
+               "point": "1085",
+               "NDisables": ["5535C"],
+               "RDisables": ["5535B", "5535E", "5535D", "5535H", "5535G"]
+            },
+            {
+               "name": "1084",
+               "NTrack": "5535D",
+               "RTrack": "5535E",
+               "end": "B",
+               "point": "1084",
+               "NDisables": ["5535E"],
+               "RDisables": ["5535D", "5535H", "5535G"]
+            },
+            {
+               "name": "1083",
+               "NTrack": "5535G",
+               "RTrack": "5535H",
+               "end": "B",
+               "point": "1083",
+               "NDisables": ["5535H"],
+               "RDisables": ["5535G"]
+            },
+            {
+               "name": "1086",
+               "NTrack": "5631D",
+               "RTrack": "5631B",
+               "end": "A",
+               "point": "1086",
+               "NDisables": ["5631B"],
+               "RDisables": ["5631D", "5631E", "5631F"]
+            },
+            {
+               "name": "1090A",
+               "NTrack": "5631E",
+               "RTrack": "5631F",
+               "end": "A",
+               "point": "1090",
+               "NDisables": ["5631F"],
+               "RDisables": ["5631E"]
+            },
+            {
+               "name": "1090B",
+               "NTrack": "5622A",
+               "RTrack": "5622B",
+               "end": "B",
+               "point": "1090",
+               "NDisables": ["5622B"],
+               "RDisables": ["5622A"]
+            },
+            {
+               "name": "1091A",
+               "NTrack": "5622D",
+               "RTrack": "5622E",
+               "end": "A",
+               "point": "1091",
+               "NDisables": ["5622E"],
+               "RDisables": ["5622D"]
+            },
+            {
+               "name": "1094A",
+               "NTrack": "5623B",
+               "RTrack": "5623C",
+               "end": "A",
+               "point": "1094",
+               "NDisables": ["5623C", "5623E"],
+               "RDisables": ["5623B"]
+            },
+            {
+               "name": "1091B",
+               "NTrack": "5611A",
+               "RTrack": "5611B",
+               "end": "B",
+               "point": "1091",
+               "NDisables": ["5611B"],
+               "RDisables": ["5611A"]
+            },
+            {
+               "name": "1094B",
+               "NTrack": "5623E",
+               "RTrack": "5623C",
+               "end": "B",
+               "point": "1094",
+               "NDisables": ["5623C", "5623D"],
+               "RDisables": ["5623E"]
+            },
+            {
+               "name": "1092A",
+               "NTrack": "5613C",
+               "RTrack": "5613B",
+               "end": "A",
+               "point": "1092",
+               "NDisables": ["5613B", "5613E", "5613G", "5613F"],
+               "RDisables": ["5613C", "5613D"]
+            },
+            {
+               "name": "1092B",
+               "NTrack": "5613G",
+               "RTrack": "5613E",
+               "end": "B",
+               "point": "1092",
+               "NDisables": ["5613E"],
+               "RDisables": ["5613G"]
+            },
+            {
+               "name": "1093A",
+               "NTrack": "5613H",
+               "RTrack": "5613D",
+               "end": "A",
+               "point": "1093",
+               "NDisables": ["5613D"],
+               "RDisables": ["5613H"]
+            },
+            {
+               "name": "1093B",
+               "NTrack": "5623G",
+               "RTrack": "5623F",
+               "end": "B",
+               "point": "1093",
+               "NDisables": ["5623F"],
+               "RDisables": ["5623G"]
+            }
+         ]
+      }
+   ,
+      
+      
+      
+      
+      {
+         "name": "Coldham LN JN",
+         "x": 950,
+         "y": 40,
+         "tracks": [
+            {
+               "name": "5614",
+               "Ax": 40,
+               "Ay": 100,
+               "Bx": 100,
+               "By": 100,
+               "TC": "5614"
+            },
+            {
+               "name": "5615A",
+               "Ax": 100,
+               "Ay": 100,
+               "Bx": 105,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5615"
+            },
+            {
+               "name": "5615B",
+               "ABreak": "NONE",
+               "Ax": 105,
+               "Ay": 100,
+               "Bx": 115,
+               "By": 110,
+               "TC": "5615"
+            },
+            {
+               "name": "5615C",
+               "ABreak": "NONE",
+               "Ax": 105,
+               "Ay": 100,
+               "Bx": 115,
+               "By": 100,
+               "TC": "5615"
+            },
+            
+            {
+               "name": "5616A",
+               "Ax": 115,
+               "Ay": 100,
+               "Bx": 125,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5616"
+            },
+            {
+               "name": "5616B",
+               "ABreak": "NONE",
+               "Ax": 105,
+               "Ay": 80,
+               "Bx": 125,
+               "By": 100,
+               "BBreak": "NONE",
+               "TC": "5616"
+            },
+            {
+               "name": "5616C",
+               "ABreak": "NONE",
+               "Ax": 105,
+               "Ay": 80,
+               "Bx": 115,
+               "By": 80,
+               "TC": "5616"
+            },
+            {
+               "name": "5616D",
+               "Ax": 100,
+               "Ay": 80,
+               "Bx": 105,
+               "By": 80,
+               "BBreak": "NONE",
+               "TC": "5616"
+            },
+            {
+               "name": "5616E",
+               "ABreak": "NONE",
+               "Ax": 125,
+               "Ay": 100,
+               "Bx": 160,
+               "By": 100,
+               "TC": "5616"
+            },
+            
+            {
+               "name": "5617",
+               "Ax": 160,
+               "Ay": 100,
+               "Bx": 210,
+               "By": 100,
+               "TC": "5616"
+            },
+            {
+               "name": "5625",
+               "Ax": 80,
+               "Ay": 120,
+               "Bx": 115,
+               "By": 120,
+               "TC": "5625"
+            },
+            {
+               "name": "5626A",
+               "Ax": 115,
+               "Ay": 120,
+               "Bx": 125,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5626"
+            },
+            {
+               "name": "5626B",
+               "Ax": 115,
+               "Ay": 110,
+               "Bx": 125,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5626"
+            },
+            {
+               "name": "5626C",
+               "ABreak": "NONE",
+               "Ax": 125,
+               "Ay": 120,
+               "Bx": 130,
+               "By": 120,
+               "TC": "5626"
+            },
+            {
+               "name": "5627A",
+               "Ax": 130,
+               "Ay": 120,
+               "Bx": 135,
+               "By": 120,
+               "BBreak": "NONE",
+               "TC": "5627"
+            },
+            {
+               "name": "5627B",
+               "ABreak": "NONE",
+               "Ax": 135,
+               "Ay": 120,
+               "Bx": 145,
+               "By": 120,
+               "TC": "5627"
+            },
+            {
+               "name": "5627C",
+               "ABreak": "NONE",
+               "Ax": 135,
+               "Ay": 120,
+               "Bx": 145,
+               "By": 130,
+               "TC": "5627"
+            },
+            {
+               "name": "31A",
+               "Ax": 145,
+               "Ay": 130,
+               "Bx": 165,
+               "By": 150,
+               "BBreak": "NONE",
+               "TC": "31"
+            },
+            {
+               "name": "31B",
+               "ABreak": "NONE",
+               "Ax": 165,
+               "Ay": 150,
+               "Bx": 170,
+               "By": 150,
+               "TC": "31"
+            },
+            {
+               "name": "32",
+               "Ax": 170,
+               "Ay": 150,
+               "Bx": 185,
+               "By": 150,
+               "TC": "32"
+            },
+            {
+               "name": "33",
+               "Ax": 185,
+               "Ay": 150,
+               "Bx": 220,
+               "By": 150
+            },
+            {
+               "name": "5628",
+               "Ax": 145,
+               "Ay": 120,
+               "Bx": 160,
+               "By": 120,
+               "TC": "5628"
+            },
+            {
+               "name": "5629",
+               "Ax": 160,
+               "Ay": 120,
+               "Bx": 210,
+               "By": 120,
+               "TC": "5628"
+            }
+         ],
+         "rectangles": [],
+         "signals": [
+            {
+               "name": "750",
+               "form": "S",
+               "x": 155,
+               "y": 100,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "210",
+               "form": "M",
+               "x": 155,
+               "y": 120,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "195",
+               "form": "M",
+               "x": 95,
+               "y": 90,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "193",
+               "form": "M",
+               "x": 95,
+               "y": 70,
+               "orientation": "R",
+               "offset": "UP"
+            },
+            {
+               "name": "200",
+               "form": "M",
+               "x": 180,
+               "y": 150,
+               "orientation": "L",
+               "offset": "DN"
+            },
+            {
+               "name": "211",
+               "form": "C",
+               "x": 195,
+               "y": 90,
+               "orientation": "R",
+               "offset": "UP"
+            }
+         ],
+         "texts": [
+            {
+               "text": "To Dullingham\n  & Ipswich",
+               "x": 223,
+               "y": 142,
+               "size": 6,
+               "colour": "DEFAULT"
+            },
+            {
+               "text": "To Cambridge \n North & Ely",
+               "x": 215,
+               "y": 103,
+               "size": 6,
+               "colour": "DEFAULT"
+            }
+         ],
+         "routes": [],
+         "berths": [
+            {
+               "name": "0195",
+               "x": 75,
+               "y": 100
+            },
+            {
+               "name": "0193",
+               "x": 75,
+               "y": 80
+            },
+            {
+               "name": "1193",
+               "x": 50,
+               "y": 80
+            },
+            {
+               "name": "0210",
+               "x": 165,
+               "y": 120
+            },
+            {
+               "name": "0200",
+               "x": 190,
+               "y": 150
+            },
+            {
+               "name": "0750",
+               "x": 175,
+               "y": 100
+            },
+            {
+               "name": "0211",
+               "x": 175,
+               "y": 100
+            }
+         ],
+         "points": [
+            {
+               "name": "1105A",
+               "NTrack": "5615C",
+               "RTrack": "5615B",
+               "end": "A",
+               "point": "1105",
+               "NDisables": ["5615B"],
+               "RDisables": ["5615C"]
+            },
+            {
+               "name": "1105B",
+               "NTrack": "5626A",
+               "RTrack": "5626B",
+               "end": "B",
+               "point": "1105",
+               "NDisables": ["5626B"],
+               "RDisables": ["5626A"]
+            },
+            {
+               "name": "1104A",
+               "NTrack": "5616C",
+               "RTrack": "5616B",
+               "end": "A",
+               "point": "1104",
+               "NDisables": ["5616D", "5616B"],
+               "RDisables": ["5616C"]
+            },
+            {
+               "name": "1104B",
+               "NTrack": "5616A",
+               "RTrack": "5616B",
+               "end": "B",
+               "point": "1104",
+               "NDisables": ["5616C", "5616B"],
+               "RDisables": ["5616A"]
+            },
+            {
+               "name": "1106",
+               "NTrack": "5627B",
+               "RTrack": "5627C",
+               "end": "A",
+               "point": "1106",
+               "NDisables": ["5627C"],
+               "RDisables": ["5627B"]
+            }
+         ]
+      }
+   ]
+}
