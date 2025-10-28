@@ -1,8 +1,8 @@
 package aradnezami.cambridgesignallingmap;
 
-import aradnezami.cambridgesignallingmap.DiagramElements.Point;
-import aradnezami.cambridgesignallingmap.DiagramElements.Rectangle;
-import aradnezami.cambridgesignallingmap.DiagramElements.*;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.*;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.Point;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.Rectangle;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jetbrains.annotations.NotNull;

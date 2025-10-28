@@ -1,8 +1,8 @@
 package aradnezami.cambridgesignallingmap.NRFeed;
 
-import aradnezami.cambridgesignallingmap.DiagramElements.Point;
-import aradnezami.cambridgesignallingmap.DiagramElements.Signal;
-import aradnezami.cambridgesignallingmap.DiagramElements.TrackCircuit;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.Point;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.Signal;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.TrackCircuit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,9 +1,9 @@
 package aradnezami.cambridgesignallingmap.NRFeed;
 
-import aradnezami.cambridgesignallingmap.DiagramElements.Point;
-import aradnezami.cambridgesignallingmap.DiagramElements.Route;
-import aradnezami.cambridgesignallingmap.DiagramElements.Signal;
-import aradnezami.cambridgesignallingmap.DiagramElements.TrackCircuit;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.Point;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.Route;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.Signal;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.TrackCircuit;
 import org.intellij.lang.annotations.MagicConstant;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,14 +35,14 @@ public class Event {
 
     /**
      * The type of signalling equipment which the event applies to.
-     * Eg: {@link aradnezami.cambridgesignallingmap.DiagramElements.TrackCircuit#TYPE TrackCircuit.TYPE},
+     * Eg: {@link TrackCircuit#TYPE TrackCircuit.TYPE},
      * or null if the message is C and not S class
      */
     @Nullable @MagicConstant
     public final Integer S_Type;
     /**
      * The new state of the signalling equipment.
-     * Eg: {@link aradnezami.cambridgesignallingmap.DiagramElements.TrackCircuit#OCCUPIED TrackCircuit.OCCUPIED},
+     * Eg: {@link TrackCircuit#OCCUPIED TrackCircuit.OCCUPIED},
      * or null if the message is C and not S class
      */
     @Nullable @MagicConstant

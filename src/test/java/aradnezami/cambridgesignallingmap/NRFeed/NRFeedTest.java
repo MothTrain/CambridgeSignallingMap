@@ -1,7 +1,7 @@
 package aradnezami.cambridgesignallingmap.NRFeed;
 
-import aradnezami.cambridgesignallingmap.DiagramElements.Point;
-import aradnezami.cambridgesignallingmap.DiagramElements.Signal;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.Point;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.Signal;
 import aradnezami.cambridgesignallingmap.NRFeed.Client.NRFeedClient;
 import aradnezami.cambridgesignallingmap.NRFeed.Client.NRFeedException;
 import org.junit.jupiter.api.BeforeEach;

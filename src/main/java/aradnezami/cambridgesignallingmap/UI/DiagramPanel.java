@@ -1,7 +1,7 @@
-package aradnezami.cambridgesignallingmap;
+package aradnezami.cambridgesignallingmap.UI;
 
-import aradnezami.cambridgesignallingmap.DiagramElements.Point;
-import aradnezami.cambridgesignallingmap.DiagramElements.*;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.*;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.Point;
 import org.intellij.lang.annotations.MagicConstant;
 
 import javax.swing.*;
@@ -44,6 +44,8 @@ public class DiagramPanel extends JScrollPane {
         });
         getHorizontalScrollBar().setUnitIncrement(20);
         getVerticalScrollBar().setUnitIncrement(20);
+
+        setBorder(BorderFactory.createEmptyBorder());
     }
 
     /**
@@ -55,7 +57,7 @@ public class DiagramPanel extends JScrollPane {
      * @return True if a berth with the corresponding name was found, false otherwise
      * @throws IllegalArgumentException If the train describer was not 0 or 4 characters
      * 
-     * @see Berth#setDescriber(String) 
+     * @see Berth#setDescriber(String)
      */
     public boolean setBerth(String berthName, String description) {
         Berth berth = elementCollection.getBerth(berthName);
@@ -71,7 +73,7 @@ public class DiagramPanel extends JScrollPane {
      * the given state. If no signal with the given name is found, no action is
      * taken and false is returned
      * @param name Name of the signal
-     * @param state New state of the signal. Allowed values: {@link Signal#ON}, 
+     * @param state New state of the signal. Allowed values: {@link Signal#ON},
      * {@link Signal#MAIN_OFF}, {@link Signal#SHUNT_OFF}, {@link Signal#BOTH_OFF}
      * @return True if a signal with the corresponding name was found, false otherwise
      * @throws IllegalArgumentException If the state was not valid for the type of

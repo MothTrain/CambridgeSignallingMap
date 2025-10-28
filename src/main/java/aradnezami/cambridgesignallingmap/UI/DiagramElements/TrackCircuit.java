@@ -1,4 +1,4 @@
-package aradnezami.cambridgesignallingmap.DiagramElements;
+package aradnezami.cambridgesignallingmap.UI.DiagramElements;
 
 import org.jetbrains.annotations.NotNull;
 

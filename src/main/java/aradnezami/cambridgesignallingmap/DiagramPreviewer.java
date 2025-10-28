@@ -1,7 +1,8 @@
 package aradnezami.cambridgesignallingmap;
 
-import aradnezami.cambridgesignallingmap.DiagramElements.Point;
-import aradnezami.cambridgesignallingmap.DiagramElements.*;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.*;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.Point;
+import aradnezami.cambridgesignallingmap.UI.DiagramPanel;
 
 import javax.swing.*;
 import java.awt.*;

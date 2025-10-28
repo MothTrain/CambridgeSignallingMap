@@ -1,6 +1,9 @@
 package aradnezami.cambridgesignallingmap.NRFeed;
 
-import aradnezami.cambridgesignallingmap.DiagramElements.*;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.Point;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.Route;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.Signal;
+import aradnezami.cambridgesignallingmap.UI.DiagramElements.TrackCircuit;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -114,6 +117,7 @@ public class SClassDecoder {
                 MappingReference key = new MappingReference(address, bit);
                 String[] mapping = equipmentMap.get(key);
                 if (mapping == null) { continue; }
+                if (mapping.length <= 2) { continue; } // unmapped
 
                 boolean bitState = getBitFromByte(equipmentBytes[address], bit);
                 try { events.add(decodeChange(mapping, bitState));}

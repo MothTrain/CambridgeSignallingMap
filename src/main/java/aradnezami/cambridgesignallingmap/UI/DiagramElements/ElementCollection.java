@@ -1,4 +1,4 @@
-package aradnezami.cambridgesignallingmap.DiagramElements;
+package aradnezami.cambridgesignallingmap.UI.DiagramElements;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -41,7 +41,7 @@ public class ElementCollection {
     private final @NotNull HashMap<String, Route> routes;
     private final @NotNull HashMap<String, TrackCircuit> trackCircuits;
 
-    public static double scale = 1;
+    public static double scale = 1.8;
 
     /**
      * Creates an element collection with the following Elements
@@ -126,7 +126,6 @@ public class ElementCollection {
         g2d.setRenderingHint(
                 RenderingHints.KEY_FRACTIONALMETRICS,
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-
         for (Rectangle rectangle : rectangles.values()) {
             rectangle.draw(g2d);
         }

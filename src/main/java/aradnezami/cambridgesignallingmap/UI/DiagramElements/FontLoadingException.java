@@ -1,4 +1,4 @@
-package aradnezami.cambridgesignallingmap.DiagramElements;
+package aradnezami.cambridgesignallingmap.UI.DiagramElements;
 
 public class FontLoadingException extends RuntimeException {
     public FontLoadingException(String message) {
