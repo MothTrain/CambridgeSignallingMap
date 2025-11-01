@@ -14,7 +14,7 @@ package aradnezami.cambridgesignallingmap.NRFeed.Client;
  * It is recommended that users of this exception provide the underlying cause exception.
  */
 public class NRFeedException extends RuntimeException {
-    final String displayMessage;
+    public final String displayMessage;
 
 
     public NRFeedException(String message, String displayMessage) {
