@@ -48,6 +48,12 @@ public class LiveDiagramMenuBar extends JMenuBar {
         attribution.addActionListener((ActionEvent e) -> {AttributionDialogue.display(getRootPane());});
     }
 
+    public void setConnectionMenuEnabled(boolean enable) {
+        disconnectAndClose.setEnabled(enable);
+        resetState.setEnabled(enable);
+        changeSource.setEnabled(enable);
+    }
+
 
     public void addDisconnectAndCloseListener(ActionListener actionListener) {
         disconnectAndClose.addActionListener(actionListener);

@@ -22,19 +22,19 @@ public class ConnectionDialogue {
     /**
      * User closed the dialogue window without answering. Should be treated as a {@link #QUIT_CHOSEN}
      */
-    private static final int DIALOGUE_CLOSED = JOptionPane.CLOSED_OPTION;
+    public static final int DIALOGUE_CLOSED = JOptionPane.CLOSED_OPTION;
     /**
      * User has chosen to directly to connect the NR servers
      */
-    private static final int DIRECT_CHOSEN = 0;
+    public static final int DIRECT_CHOSEN = 0;
     /**
      * User has chosen to connect via the data server
      */
-    private static final int DATA_SERVER_CHOSEN = 1;
+    public static final int DATA_SERVER_CHOSEN = 1;
     /**
      * User has chosen to close the program
      */
-    private static final int QUIT_CHOSEN = 2;
+    public static final int QUIT_CHOSEN = 2;
 
 
 
@@ -72,7 +72,7 @@ public class ConnectionDialogue {
         return JOptionPane.showOptionDialog(
                 parent,
                 "A connection error occurred:\n" + e.displayMessage + "\n Chose a new connection source",
-                "Change Source",
+                "Connection Error",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.ERROR_MESSAGE,
                 null,
@@ -89,7 +89,7 @@ public class ConnectionDialogue {
         return JOptionPane.showOptionDialog(
                 parent,
                 "An error occurred:\n" + stackTrace + "\n Chose a new connection source",
-                "Change Source",
+                "Error",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.ERROR_MESSAGE,
                 null,
