@@ -88,6 +88,10 @@ public class PythonNRClient implements NRFeedClient {
                 throw new NRFeedException("Null returned whilst polling for event",
                     "A connection error occurred whilst waiting for a message from the data feed. \nEnsure that you have an internet connection and -secondarily- that your authentication details are correct.");
             }
+            if (msg.split(":")[0].equals("MSG")) {
+                throwInfoMessage(msg);
+                return pollNREvent(); // If the info message throws no exception
+            }
 
             return msg;
         } catch (IOException e) {
@@ -150,6 +154,34 @@ public class PythonNRClient implements NRFeedClient {
             throw new NRFeedException("Error whilst starting client. Check the path is correct",
                     e,
                     "An internal error occurred while trying to connect. This should not happen. Please report this as a bug, along with the contents of \"More info\"");
+        }
+    }
+
+
+    /**
+     * Uses the given info message from the feed to throw a relevant descriptive {@link NRFeedException}.
+     * If the info message is non-fatal, this method will return normally without throwing any exceptions.
+     * An info message is a message from the feed that starts with "MSG:" and is specified in MSGlist.txt
+     * @param msg The info message from the feed
+     */
+    private static void throwInfoMessage(String msg) {
+        String[] parsedMsg = msg.split(":");
+
+        if (parsedMsg.length < 2 || (parsedMsg.length < 3 && parsedMsg[1].equals("-3"))) {
+            throw new NRFeedException("Incorrectly formatted info message had less than 2 sections",
+                    "A malformed message was recieved from the feed");
+        }
+
+        switch (parsedMsg[1]) {
+            case "-1": throw new NRFeedException("Could not connect to NR servers",
+                    "Could not to connect to the feed. Ensure that your authentication details are" +
+                            " correct and you have an internet connection");
+            case "-2": throw new NRFeedException("Recieved a message not from the TD topic",
+                    "A malformed message was recieved from the feed");
+            case "-3": throw new NRFeedException("Recieved a stomp error frame from NR feed: " + parsedMsg[2],
+                    "An error was recieved from the feed. The error is as follows: " + parsedMsg[2]);
+            case "-4": throw new NRFeedException("Disconnected from the feed",
+                    "The feed disconnected check your internet connection");
         }
     }
 }
