@@ -591,7 +591,8 @@ Address,Bit Index,Type,ID,Type(2),Address(2),Bit(2)
 73,5,B,554,,,
 73,6,B,556,,,
 73,7,,,,,
-74,1,DGK,211,DGK,74,0
+74,0,DGK,211,SOFFK,74,1
+74,1,SOFFK,211,DGK,74,0
 74,2,,,,,
 74,3,DGK,212,,,
 74,4,DGK,214,,,

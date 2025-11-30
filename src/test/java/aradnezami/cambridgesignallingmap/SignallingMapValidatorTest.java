@@ -85,7 +85,8 @@ public class SignallingMapValidatorTest {
     }
     
     private  void ensureCorrectTypesUsed(String[] mapping) {
-        String[] validTypes = {"DGK", "RGK", "OFFK", "NK", "RK", "T", "B", "RM", "RS", "RC", "PLACEHOLD"};
+        String[] validTypes = {"DGK", "RGK", "OFFK", "SOFFK", "NK", "RK", "T", "B", "RM", "RS", "RC", "PLACEHOLD"};
+        String[] backreferencableTypes = {"NK", "RK", "DGK", "SOFFK", ""};
         
         if (mapping.length < 4) {return;}
         assertTrue(contains(validTypes, mapping[TYPE]), lineErrorMessage("Invalid equipment type used.", mapping));
@@ -93,14 +94,14 @@ public class SignallingMapValidatorTest {
         if (mapping.length != 7) {return;}
         
         boolean isValidFlag = contains(validTypes, mapping[BACK_TYPE]);
-        if (mapping[BACK_TYPE].isEmpty() && (mapping[TYPE].equals("NK") || mapping[TYPE].equals("RK")) ) {
+        if (mapping[BACK_TYPE].isEmpty() && (contains(backreferencableTypes, mapping[BACK_TYPE])) ) {
             isValidFlag = true;
         }
         assertTrue(isValidFlag, lineErrorMessage("Invalid equipment type for backreference.", mapping));
     }
     
     private  void ensureBackreferencesValid(String[] mappings) {
-        final String[] backreferenceableTypes = {"NK", "RK"};
+        final String[] backreferenceableTypes = {"NK", "RK", "DGK", "SOFFK"};
         
         HashMap<String, String[]> map = new HashMap<>() {{
             

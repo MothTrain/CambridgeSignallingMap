@@ -18,7 +18,7 @@ class SClassDecoderTest {
 
     @BeforeEach
     void setupSClassDecoder() throws FileNotFoundException {
-        sClassDecoder = new SClassDecoder("SignallingEquipmentMap.csv") {};
+        sClassDecoder = new SClassDecoder("TestSignallingEquipmentMap.csv") {};
 
         for (int i=0; i<256; i++) {
             sClassDecoder.SClassChange(-1L, i, 0);
@@ -321,7 +321,7 @@ class SClassDecoderTest {
     @Test
     void reset() {
         try {
-            sClassDecoder = new SClassDecoder("SignallingEquipmentMap.csv"); // We want an instance with nothing updated
+            sClassDecoder = new SClassDecoder("TestSignallingEquipmentMap.csv"); // We want an instance with nothing updated
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

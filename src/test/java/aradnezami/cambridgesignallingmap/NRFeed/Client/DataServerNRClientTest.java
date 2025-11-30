@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
@@ -14,7 +15,6 @@ import java.net.Socket;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class DataServerNRClientTest {
@@ -22,6 +22,8 @@ class DataServerNRClientTest {
 
     @Mock
     private InputStream inputStream;
+    @Mock
+    private ByteArrayOutputStream outputStream;
     @Mock
     private Socket socket;
 
@@ -39,7 +41,10 @@ class DataServerNRClientTest {
 
         try {
             when(socket.getInputStream()).thenReturn(inputStream);
-        } catch (IOException ignored) {}
+            when(socket.getOutputStream()).thenReturn(outputStream);
+        } catch (IOException e) {
+            fail(e);
+        }
         client = new DataServerNRClient(socket);
 
         assertEquals(expected, client.pollNREvent());
@@ -57,6 +62,7 @@ class DataServerNRClientTest {
             when(inputStream.readNBytes(any(), anyInt(), anyInt())).thenThrow(new IOException());
 
             when(socket.getInputStream()).thenReturn(inputStream);
+            when(socket.getOutputStream()).thenReturn(outputStream);
         } catch (IOException ignored) {}
         client = new DataServerNRClient(socket);
 
@@ -67,6 +73,7 @@ class DataServerNRClientTest {
     void disconnect() {
         try {
             when(socket.getInputStream()).thenReturn(inputStream);
+            when(socket.getOutputStream()).thenReturn(outputStream);
         } catch (IOException ignored) {}
         client = new DataServerNRClient(socket);
 
@@ -81,6 +88,7 @@ class DataServerNRClientTest {
         when(socket.isConnected()).thenReturn(true);
         try {
             when(socket.getInputStream()).thenReturn(inputStream);
+            when(socket.getOutputStream()).thenReturn(outputStream);
         } catch (IOException ignored) {}
 
         client = new DataServerNRClient(socket);
