@@ -36,7 +36,7 @@ public class NRFeed {
      * @param client NRFeedClient to be used
      * @param decoder SClassDecoder to be used
      */
-    NRFeed(NRFeedClient client, SClassDecoder decoder) {
+    public NRFeed(NRFeedClient client, SClassDecoder decoder) {
         this.decoder = decoder;
         this.client = client;
     }
