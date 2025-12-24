@@ -42,3 +42,4 @@ build/
 /src/main/resources/SqlSecrets.txt
 src/main/java/aradnezami/cambridgesignallingmap/DataServerReplayer.java
 /src/main/java/aradnezami/cambridgesignallingmap/SQLReplayerClient.java
+/src/main/resources/DataServerSecrets.txt
