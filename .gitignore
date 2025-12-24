@@ -34,7 +34,6 @@ build/
 ### Mac OS ###
 .DS_Store
 /EventLogs.log
-/.idea/
 
 
 /src/main/java/aradnezami/cambridgesignallingmap/NRFeed/Client/PythonCommunications/secrets.json
