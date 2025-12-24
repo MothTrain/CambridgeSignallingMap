@@ -43,8 +43,6 @@ DGK and RGK refer to main signals and OFFKs refer to shunt signals (including su
 In the interlockings titled "SSI" (solid state interlocking) or "Std Indication", signal types behave as such: <br>
 DGKs and RGKs are not present. OFFK refers to all signals, including signals which have both a main and shunt aspect,
 which will from hereon be referred to as compound signals.
-In cases where a compound signal is referred to by one OFFK indication, a main route from the signal can be
-backreferenced to determine if the shunt or main aspect is off
 
 ## Back-referencing 
 Sometimes we get more than one bit of information for one piece of equipment. This applies to other equipment types 
@@ -69,8 +67,3 @@ bytes, or if the RK is first. In this case you will have to manually specify the
 ### Compound Signals
 In PIIU interlockings, where a compound signal has a DGK for the main aspect and SOFFK for the shunt aspect,
 the SOFFK and DGK **must** backreference each-other.
-
-In SSI and Std indication interlockings, where the 2 aspects of a compound signal is represented by a 
-single OFFK, the OFFK may backreference an RM (but not vice versa) that whose entry is from the same signal. If the
-main route is set when the signal clears, then the main aspect is considered off. Otherwise, the shunt aspect
-is considered to be off.
